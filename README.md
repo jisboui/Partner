@@ -1,2 +1,2 @@
-# Vue Argon Dashboard 2 PRO
+# Dopawin Partner
 a private repo to version control dopawin partner project.
