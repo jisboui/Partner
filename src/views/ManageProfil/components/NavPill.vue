@@ -1,5 +1,5 @@
-
-  <!-- <div class="nav-wrapper position-relative end-0">
+<template>
+<div class="nav-wrapper position-relative end-0">
     <ul class="nav nav-pills nav-fill p-1" role="tablist">
       <li class="nav-item">
         <a
@@ -42,8 +42,8 @@
         >
       </li>
     </ul>
-  </div> -->
-
+  </div> 
+</template>
 
 <script>
 import setNavPills from "@/assets/js/nav-pills.js";

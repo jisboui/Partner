@@ -1,34 +1,36 @@
+<template>
+  <div id="surveyCreator" />
+</template>
+
 <script>
-import 'survey-core/defaultV2.min.css';
-import { Model } from 'survey-core';
-import { Survey } from 'survey-vue3-ui'; // Add this line
+import { SurveyCreator } from "survey-creator-knockout";
+import "survey-core/defaultV2.min.css";
+import "survey-creator-core/survey-creator-core.min.css";
+
+const creatorOptions = {
+  showLogicTab: true,
+  isAutoSave: true
+};
 
 export default {
-  name : 'Sondage',
-  components: {
-    Survey // Add this line
+  name: "survey-creator",
+  mounted() {
+    const creator = new SurveyCreator(creatorOptions);
+    creator.render("surveyCreator");
+    this.$store.state.showSidenav = false;
+    this.$store.state.showNavbar = false;
+    this.$store.state.showFooter = false;
   },
-  setup() {
-    const surveyJson = {
-      elements: [{
-        name: "FirstName",
-        title: "Enter your first name:",
-        type: "text"
-      }, {
-        name: "LastName",
-        title: "Enter your last name:",
-        type: "text"
-      }]
-    };
-    const survey = new Model(surveyJson);
-
-    return {
-      survey
-    };
+  beforeUnmount() {
+    this.$store.state.showSidenav = true;
+    this.$store.state.showNavbar = true;
+    this.$store.state.showFooter = true;
   }
-}
+};
 </script>
-
-<template>
- <Survey :model="survey" /> <!-- Change this line -->
-</template>
+<style scoped>
+#surveyCreator {
+  height: 100vh;
+  width: 100vw;
+}
+</style>

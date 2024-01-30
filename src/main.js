@@ -13,7 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import { createApp } from "vue";
-import { SurveyVue } from 'survey-vue3-ui'; // Import SurveyVue instead of surveyPlugin
 import App from "./App.vue";
 import store from "./store";
 import router from "./router";
@@ -24,7 +23,6 @@ import VueSweetalert2 from "vue-sweetalert2";
 import ArgonDashboard from "./argon-dashboard";
 
 const appInstance = createApp(App);
-appInstance.component('Survey', SurveyVue); // Register SurveyVue as a global component
 appInstance.use(store);
 appInstance.use(router);
 appInstance.use(VueTilt);
