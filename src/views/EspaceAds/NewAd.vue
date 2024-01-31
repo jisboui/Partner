@@ -211,15 +211,15 @@
                     >
                       2. Ad video
                     </button>
-                   <!--  <button
+                    <button
                       class="multisteps-form__progress-btn"
                       type="button"
                       title="Socials"
                       :class="activeStep >= 2 ? activeClass : ''"
                       @click="activeStep = 2"
                     >
-                      3. Socials
-                    </button> -->
+                      3. Logo
+                    </button>
                     <!-- <button
                       class="multisteps-form__progress-btn"
                       type="button"
@@ -251,12 +251,12 @@
           </div>
         </div>
       </div>
-    </template>
+</template>
    
   <script>
     import ProductInfo from "./components/ProductInfo.vue"; 
     import Media from "./components/Media.vue";
-   /* import Socials from "./components/Socials.vue"; */
+   import Socials from "./components/Socials.vue";
   /* import Pricing from "./components/Pricing.vue"; */
   const body = document.getElementsByTagName("body")[0];
   
@@ -266,7 +266,7 @@
     components: {
        ProductInfo,
       Media,
-      /*  Socials,*/
+       Socials,
       /* Pricing, */
     },
     data() {
@@ -274,7 +274,7 @@
         showMenu: false,
         activeClass: "js-active position-relative",
         activeStep: 0,
-        formSteps: 1,
+        formSteps: 2,
       };
     },
     mounted() {

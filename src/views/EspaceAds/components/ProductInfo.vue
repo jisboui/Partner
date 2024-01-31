@@ -7,7 +7,7 @@
     <div class="multisteps-form__content">
       <div class="mt-3 row">
         <div class="col-12 col-sm-6">
-          <label>Name</label>
+          <label>Titre</label>
           <input
             class="multisteps-form__input form-control"
             type="text"

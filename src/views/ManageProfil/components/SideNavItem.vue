@@ -41,7 +41,7 @@
               },
             ]"
             :action="{
-              route: '/campaign/manage-profil#basic-info',
+              route: '/manageprofil/manage-profil#basic-info',
               tooltip: 'Edit Profile',
             }"
           />

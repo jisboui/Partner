@@ -3,7 +3,7 @@
     class="p-3 bg-white card multisteps-form__panel border-radius-xl"
     data-animation="FadeIn"
   >
-    <h5 class="font-weight-bolder">Média</h5>
+    <h5 class="font-weight-bolder">Vidéo de l'Ad</h5>
     <div class="multisteps-form__content">
       <div class="mt-3 row">
         <div class="col-12">

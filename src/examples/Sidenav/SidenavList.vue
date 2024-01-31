@@ -122,16 +122,16 @@
       </li> 
       <li class="nav-item">
         <sidenav-item
-                    :to="{ name: 'ManageProfil' }"
+                    :to="{ name: 'Sondage' }"
                     mini-icon="E"
-                    text="Espace profil"
+                    text="Espace Sondage"
                   />
       </li>
       <li class="nav-item">
         <sidenav-item
-                    :to="{ name: 'Sondage' }"
+                    :to="{ name: 'ManageProfil' }"
                     mini-icon="E"
-                    text="Espace Sondage"
+                    text="Espace profil"
                   />
       </li>
 <!--       <li class="nav-item">
