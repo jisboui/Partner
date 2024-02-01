@@ -8,8 +8,10 @@ import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  /* showLogicTab: true, */
+  isAutoSave: true,
+  showJSONEditorTab: false,
+  showPropertyGrid: false,
 };
 
 const defaultJson = {
@@ -45,15 +47,13 @@ export default {
       // );
     };
     creator.render("surveyCreator");
-    this.$store.state.showSidenav = false;
-    this.$store.state.showNavbar = false;
-    this.$store.state.showFooter = false;
+    creator.onShowingProperty.add(function(sender, options) {
+      if (options.obj.getType() === "page" && (options.property.name === "title" || options.property.name === "description")) {
+        options.canShow = false;
+      }
+    });
   },
-  beforeUnmount() {
-    this.$store.state.showSidenav = true;
-    this.$store.state.showNavbar = true;
-    this.$store.state.showFooter = true;
-  }
+ 
 };
 
 // If you use a web service:

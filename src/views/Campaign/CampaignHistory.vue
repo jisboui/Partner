@@ -189,23 +189,27 @@
   <div class="py-4 container-fluid">
     <section class="py-3">
       <div class="row">
-        <div   id="pastcampaign" class="text-left col-md-8">
+        <div id="currentCampaign" class="text-left col-md-8">
           <h5>Consulter une campagne</h5>
-          <p>
-            Consulter vos campagnes en cours.
-          </p>
+          <p>Consulter vos campagnes en cours.</p>
         </div>
-        <div class="mt-4 col-md-4 mt-md-0 ml-auto">
-            <div class="text-center card-body">
-              <a href="#currentCampaign"> 
-                <button
-                  class="mb-0 btn bg-gradient-success"
-                  
-                >
-                Aller consulter mes campagnes précédentes
-                </button>
-              </a>
-            </div>
+        <div
+          class="mt-4 col-md-4 mt-md-0 ml-auto d-flex justify-content-center"
+        >
+          <div class="text-center card-body">
+            <a href="#beingvalidated">
+              <button class="mb-0 btn bg-gradient-success">
+                Consulter mes campagnes en cours de validation
+              </button>
+            </a>
+          </div>
+          <div class="text-center card-body">
+            <a href="#pastCampaign">
+              <button class="mb-0 btn bg-gradient-success">
+                Consulter mes campagnes précédentes
+              </button>
+            </a>
+          </div>
         </div>
       </div>
       <div class="mt-2 row mt-lg-4">
@@ -221,10 +225,8 @@
               {
                 label: 'campagne en cours, aucune option disponible',
                 route: 'javascript:;',
-                
               },
-              ]"
-              
+            ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
@@ -239,10 +241,8 @@
               {
                 label: 'campagne en cours, aucune option disponible',
                 route: 'javascript:;',
-                
               },
-              ]"
-              
+            ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
@@ -257,10 +257,8 @@
               {
                 label: 'campagne en cours, aucune option disponible',
                 route: 'javascript:;',
-                
               },
-              ]"
-              
+            ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
@@ -275,10 +273,8 @@
               {
                 label: 'campagne en cours, aucune option disponible',
                 route: 'javascript:;',
-                
               },
-              ]"
-              
+            ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
@@ -293,49 +289,192 @@
               {
                 label: 'campagne en cours, aucune option disponible',
                 route: 'javascript:;',
-                
               },
-              ]"
-              
+            ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
-        <router-link to="/campaign/add-campaign">
+          <router-link to="/campaign/add-campaign">
             <placeholder-card
               :title="{ text: 'Nouvelle campagne', variant: 'h5' }"
             />
-        </router-link>
+          </router-link>
+        </div>
       </div>
+    </section>
+  </div>
+
+  <div class="py-4 container-fluid">
+    <section class="py-3">
+      <div class="row">
+        <div id="beingvalidated" class="text-left col-md-8">
+          <br />
+          <p>Consulter les campagnes en cours de validation</p>
+        </div>
+        <div
+          class="mt-4 col-md-4 mt-md-0 ml-auto d-flex justify-content-center"
+        >
+          <div class="text-center card-body">
+            <a href="#pastCampaign">
+              <button class="mb-0 btn bg-gradient-success">
+                Consulter mes campagnes précédentes
+              </button>
+            </a>
+          </div>
+          <div class="text-center card-body">
+            <a href="#currentCampaign">
+              <button class="mb-0 btn bg-gradient-success">
+                Revenir vers mes campagnes en cours
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-2 row mt-lg-4">
+        <div class="mb-4 col-lg-4 col-md-6">
+          <complex-project-card
+            :logo="slackLogo"
+            title="Laptop Victus HP"
+            description="GoBowi"
+            date-time="02.03.22"
+            terminated="en cours, terminera le"
+            :members="[team3, team4, team2, team3, team4]"
+            :dropdown="[
+              {
+                label: 'modifier',
+                route: 'javascript:;',
+              },
+              {
+                label:'supprimer',
+                route: 'javascript:;',
+              }
+            ]"
+          />
+        </div>
+        <div class="mb-4 col-lg-4 col-md-6">
+          <complex-project-card
+            :logo="spotifyLogo"
+            title="Msi Gaming Laptop"
+            description="DimaWin"
+            date-time="22.11.21"
+            terminated="en cours, terminera le"
+            :members="[team4, team3, team2]"
+            :dropdown="[
+              {
+                label: 'modifier',
+                route: 'javascript:;',
+              },
+              {
+                label:'supprimer',
+                route: 'javascript:;',
+              }
+            ]"
+          />
+        </div>
+        <div class="mb-4 col-lg-4 col-md-6">
+          <complex-project-card
+            :logo="xdLogo"
+            title="Lenovo Legion"
+            description="QuizUp"
+            date-time="06.03.20"
+            terminated="en cours, terminera le"
+            :members="[team4, team2, team3, team4]"
+            :dropdown="[
+              {
+                label: 'modifier',
+                route: 'javascript:;',
+              },
+              {
+                label:'supprimer',
+                route: 'javascript:;',
+              }
+            ]"
+          />
+        </div>
+        <div class="mb-4 col-lg-4 col-md-6">
+          <complex-project-card
+            :logo="asanaLogo"
+            title="Hp Omen"
+            description="HitSoumek"
+            date-time="14.03.24"
+            terminated="en cours, terminera le"
+            :members="[team3, team4, team2, team3, team4, team2]"
+            :dropdown="[
+              {
+                label: 'modifier',
+                route: 'javascript:;',
+              },
+              {
+                label:'supprimer',
+                route: 'javascript:;',
+              }
+            ]"
+          />
+        </div>
+        <div class="mb-4 col-lg-4 col-md-6">
+          <complex-project-card
+            :logo="invisionLogo"
+            title="Nvidea Geforce"
+            description="QuizUp"
+            date-time="16.01.22"
+            terminated="en cours, terminera le"
+            :members="[team4, team3, team2, team4]"
+            :dropdown="[
+              {
+                label: 'modifier',
+                route: 'javascript:;',
+              },
+              {
+                label:'supprimer',
+                route: 'javascript:;',
+              }
+              
+            ]"
+          />
+        </div>
+        <div class="mb-4 col-lg-4 col-md-6">
+          <router-link to="/campaign/add-campaign">
+            <placeholder-card
+              :title="{ text: 'Nouvelle campagne', variant: 'h5' }"
+            />
+          </router-link>
+        </div>
       </div>
     </section>
   </div>
 
   <div class="py container-fluid">
-  <section class="py-3">
-    <div class="row">
-        <div class="text-left col-md-8">
-        <br />
+    <section class="py-3">
+      <div class="row">
+        <div div id="pastCampaign" class="text-left col-md-8">
+          <br />
           <p>
             Consulter l'historique et les données de vos campagnes précédentes.
           </p>
         </div>
-        <div class="mt-4 col-md-4 mt-md-0 ml-auto">
-            <div class="text-center card-body">
-              <a href="#pastcampaign"> 
-                <button
-                  class="mb-0 btn bg-gradient-success"
-                  
-                >
-                  Revenir vers mes campagnes en cours
-                </button>
-              </a>
-            </div>
+        <div
+          class="mt-4 col-md-4 mt-md-0 ml-auto d-flex justify-content-center"
+        >
+          <div class="text-center card-body">
+            <a href="#beingvalidated">
+              <button class="mb-0 btn bg-gradient-success">
+                Revenir vers mes campagnes en cours de validation
+              </button>
+            </a>
+          </div>
+          <div class="text-center card-body">
+            <a href="#currentCampaign">
+              <button class="mb-0 btn bg-gradient-success">
+                Revenir vers mes campagnes en cours
+              </button>
+            </a>
+          </div>
         </div>
-        <div class="mt-4 col-md-4 mt-md-0 ml-auto">
-        </div>
+        <div class="mt-4 col-md-4 mt-md-0 ml-auto"></div>
       </div>
-  <div class="mt-2 row mt-lg-4"  id="currentCampaign">
-    <div class="mb-4 col-lg-4 col-md-6">
+
+      <div class="mt-2 row mt-lg-4">
+        <div class="mb-4 col-lg-4 col-md-6">
           <complex-project-card
             :logo="slackLogo"
             title="Laptop Victus HP"
@@ -348,14 +487,7 @@
                 label: 'Comparer',
                 route: 'javascript:;',
               },
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label: 'supprimer',
-                route: 'javascript:;',
-              },
+              
               {
                 label: 'plus de données (pro +)',
                 route: 'javascript:;',
@@ -376,14 +508,7 @@
                 label: 'Comparer',
                 route: 'javascript:;',
               },
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label: 'supprimer',
-                route: 'javascript:;',
-              },
+              
               {
                 label: 'plus de données (pro +)',
                 route: 'javascript:;',
@@ -404,14 +529,7 @@
                 label: 'Comparer',
                 route: 'javascript:;',
               },
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label: 'supprimer',
-                route: 'javascript:;',
-              },
+              
               {
                 label: 'plus de données (pro +)',
                 route: 'javascript:;',
@@ -432,14 +550,7 @@
                 label: 'Comparer',
                 route: 'javascript:;',
               },
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label: 'supprimer',
-                route: 'javascript:;',
-              },
+              
               {
                 label: 'plus de données (pro +)',
                 route: 'javascript:;',
@@ -460,14 +571,7 @@
                 label: 'Comparer',
                 route: 'javascript:;',
               },
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label: 'supprimer',
-                route: 'javascript:;',
-              },
+              
               {
                 label: 'plus de données (pro +)',
                 route: 'javascript:;',
@@ -475,8 +579,15 @@
             ]"
           />
         </div>
-  </div>
-</section>
+        <div class="mb-4 col-lg-4 col-md-6">
+          <router-link to="/campaign/add-campaign">
+            <placeholder-card
+              :title="{ text: 'Nouvelle campagne', variant: 'h5' }"
+            />
+          </router-link>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
