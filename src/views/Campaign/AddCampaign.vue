@@ -20,30 +20,29 @@
           <br /><br />
           <div class="row">
             <div class="col-6">
-              <label for="games" style="order: -1">Choisir le jeu</label>
+              <label for="games">Choisir le jeu</label>
               <select
-                id="choices-category"
+                id="games"
                 class="form-control"
                 name="choices-category"
+                v-model="selectedGame"
               >
-                <option value="Choice 1" selected="">DimaWin</option>
-                <option value="Choice 2">HitSoumek</option>
-                <option value="Choice 3">QuizUp</option>
-                <option value="Choice 4">GoBowi</option>
+                <option value="" selected disabled>Select a game</option>
+                <option value="Choice 1">QuizUp</option>
+                <option value="Choice 2">GoBowi</option>
+                <option value="Choice 3">DimaWin</option>
+                <option value="Choice 4">HitSoumek</option>
                 <option value="Choice 5">Others</option>
               </select>
             </div>
             <div class="col-6">
-              <label for="games">Choisir un cadeau</label>
-              <select
-                id="choices-category"
-                class="form-control"
-                name="choices-category"
-              >
-                <option value="volvo">Laptop Victus HP</option>
-                <option value="saab">Msi Gaming Laptop</option>
-                <option value="opel">Nvidea Geforce</option>
-                <option value="opel">Lenovo Legion</option>
+              <label for="product">Choisir un cadeau</label>
+              <select id="product" class="form-control" name="choices-category">
+                <option value="" selected disabled>Select a gift</option>
+                <option value="Choice 1">Laptop Victus HP</option>
+                <option value="Choice 2">Msi Gaming Laptop</option>
+                <option value="Choice 3">Nvidea Geforce</option>
+                <option value="Choice 4">Lenovo Legion</option>
               </select>
             </div>
           </div>
@@ -72,11 +71,28 @@
             </div>
           </div>
           <br /><br />
+
+          <div v-if="selectedGame === 'Choice 2'">
+            <label class="mt-4 form-label"
+              >Ajouter les éléments graphique à afficher à l'intérieur de GoBowi
+              (pro+)</label
+            >
+            <form
+              id="dropzone1"
+              action="/file-upload"
+              class="form-control dropzone"
+            >
+              <div class="fallback">
+                <input name="file" type="file" multiple />
+              </div>
+            </form>
+          </div>
+          <div v-if="selectedGame === 'Choice 1'">
           <label class="mt-4 form-label"
-            >Ajouter les éléments graphique (pro+)</label
+            >Ajouter le fichier.csv pour les questions de QuiUp (pro+)</label
           >
           <form
-            id="dropzone"
+            id="dropzone2"
             action="/file-upload"
             class="form-control dropzone"
           >
@@ -84,6 +100,7 @@
               <input name="file" type="file" multiple />
             </div>
           </form>
+          </div>
 
           <!-- <div class="mt-4 row">
               <div class="col-12 col-md-6">
@@ -157,13 +174,39 @@ export default {
   },
   data() {
     return {
+      selectedGame: "",
       date: "",
       endDate: "",
       config: {
         allowInput: true,
       },
+      dropzone1Created: false,
+    dropzone2Created: false,
     };
   },
+  watch: {
+  selectedGame() {
+    this.$nextTick(() => {
+      const dropzone1Element = document.getElementById('dropzone1');
+      const dropzone2Element = document.getElementById('dropzone2');
+
+      if (this.selectedGame === 'Choice 1' && dropzone1Element && !this.dropzone1Created) {
+        new Dropzone(dropzone1Element, {
+          url: "/file/post",
+          addRemoveLinks: true,
+        });
+        this.dropzone1Created = true;
+      }
+      if (this.selectedGame === 'Choice 2' && dropzone2Element && !this.dropzone2Created) {
+        new Dropzone(dropzone2Element, {
+          url: "/file/post",
+          addRemoveLinks: true,
+        });
+        this.dropzone2Created = true;
+      }
+    });
+  },
+},
   mounted() {
     if (document.getElementById("editor")) {
       new Quill("#editor", {
@@ -200,12 +243,16 @@ export default {
         false
       );
     }
-    Dropzone.autoDiscover = false;
-    var drop = document.getElementById("dropzone");
-    new Dropzone(drop, {
+    /* var drop1 = document.getElementById("dropzone1");
+    var drop2 = document.getElementById("dropzone2");
+    new Dropzone(drop1, {
       url: "/file/post",
       addRemoveLinks: true,
     });
+    new Dropzone(drop2, {
+      url: "/file/post",
+      addRemoveLinks: true,
+    }); */
   },
 };
 </script>

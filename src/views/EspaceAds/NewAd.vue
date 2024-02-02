@@ -200,7 +200,7 @@
                       :class="activeStep >= 0 ? activeClass : ''"
                       @click="activeStep = 0"
                     >
-                      <span>1. Ad title</span>
+                      <span>1. Titre de l'Ad</span>
                     </button>
                     <button
                       class="multisteps-form__progress-btn"
@@ -209,9 +209,9 @@
                       :class="activeStep >= 1 ? activeClass : ''"
                       @click="activeStep = 1"
                     >
-                      2. Ad video
+                      2. Vidéo/Image de l'Ad
                     </button>
-                    <button
+                    <!-- <button
                       class="multisteps-form__progress-btn"
                       type="button"
                       title="Socials"
@@ -219,7 +219,7 @@
                       @click="activeStep = 2"
                     >
                       3. Logo
-                    </button>
+                    </button> -->
                     <!-- <button
                       class="multisteps-form__progress-btn"
                       type="button"
@@ -241,7 +241,7 @@
                     <!--single form panel-->
                     <media :class="activeStep === 1 ? activeClass : ''" />
                     <!--single form panel-->
-                    <socials :class="activeStep === 2 ? activeClass : ''" />
+                    <!--<socials :class="activeStep === 2 ? activeClass : ''" />-->
                     <!--single form panel-->
                     <!-- <pricing :class="activeStep === 3 ? activeClass : ''" /> -->
                   </form>
@@ -256,7 +256,7 @@
   <script>
     import ProductInfo from "./components/ProductInfo.vue"; 
     import Media from "./components/Media.vue";
-   import Socials from "./components/Socials.vue";
+   /* import Socials from "./components/Socials.vue"; */
   /* import Pricing from "./components/Pricing.vue"; */
   const body = document.getElementsByTagName("body")[0];
   
@@ -266,7 +266,7 @@
     components: {
        ProductInfo,
       Media,
-       Socials,
+       /* Socials, */
       /* Pricing, */
     },
     data() {
@@ -274,7 +274,7 @@
         showMenu: false,
         activeClass: "js-active position-relative",
         activeStep: 0,
-        formSteps: 2,
+        formSteps: 1,
       };
     },
     mounted() {

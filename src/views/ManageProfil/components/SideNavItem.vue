@@ -1,15 +1,20 @@
 <template>
   <div id="profile" class="card card-body mt-4">
     <div class="row justify-content-center align-items-center">
-      <div class="col-sm-auto col-4">
-        <argon-avatar
-          :img="img"
-          alt="team-3"
-          size="xl"
-          shadow="sm"
-          border-radius="lg"
-        />
-      </div>
+      <div class="d-flex justify-content-center align-items-center">
+    <div class="col-sm-auto col-4 mx-auto" v-for="(image, index) in images" :key="index">
+      <p>{{ paragraphs[index] }}</p>
+      <argon-avatar
+        :img="image"
+        alt="team-3"
+        size="xl"
+        shadow="sm"
+        border-radius="lg"
+        @click="triggerFileInput(index)"
+      />
+      <input type="file" @change="onFileChange($event, index)" :ref="`fileInput${index}`" style="display: none;">
+    </div>
+  </div>
       <div class="row justify-content-center align-items-center">
         <div
           class="h-100 d-flex flex-column justify-content-center align-items-center"
@@ -679,10 +684,12 @@ import ArgonBadge from "@/components/ArgonBadge.vue";
 import ArgonAvatar from "@/components/ArgonAvatar.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
 import img from "../../../assets/img/team-3.jpg";
-import img1 from "../../../assets/img/small-logos/logo-slack.svg";
-import img2 from "../../../assets/img/small-logos/logo-spotify.svg";
-import img3 from "../../../assets/img/small-logos/logo-atlassian.svg";
-import img4 from "../../../assets/img/small-logos/logo-asana.svg";
+/* import img1 from "../../../assets/img/small-logos/logo-slack.svg";
+import img2 from "../../../assets/img/small-logos/logo-spotify.svg"; */
+import img1 from "../../../assets/img/couleur.jpg";
+import img2 from "../../../assets/img/noir.png";
+/* import img3 from "../../../assets/img/small-logos/logo-atlassian.svg";
+import img4 from "../../../assets/img/small-logos/logo-asana.svg"; */
 import ProfileInfoCard from "@/views/pages/profile/components/ProfileInfoCard.vue";
 
 export default {
@@ -697,12 +704,27 @@ export default {
   },
   data() {
     return {
-      img,
-      img1,
-      img2,
-      img3,
-      img4,
+      images: [img1, img2, img],
+      paragraphs: ['logo en couleur : ', 'logo en noir : ', 'logo en blanc : '], // initial paragraphs
+      /* img3,
+      img4, */
     };
+  },
+  methods: {
+    triggerFileInput(index) {
+      this.$refs[`fileInput${index}`][0].click();
+    },
+    onFileChange(e, index) {
+      const file = e.target.files[0];
+      this.createImage(file, index);
+    },
+    createImage(file, index) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    this.images[index] = e.target.result;
+  };
+  reader.readAsDataURL(file);
+},
   },
   mounted() {
     if (document.getElementById("choices-gender")) {

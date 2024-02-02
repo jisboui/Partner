@@ -3,11 +3,11 @@
     class="p-3 bg-white card multisteps-form__panel border-radius-xl"
     data-animation="FadeIn"
   >
-    <h5 class="font-weight-bolder">Vidéo de l'Ad</h5>
+    <h5 class="font-weight-bolder">Média de l'Ad</h5>
     <div class="multisteps-form__content">
       <div class="mt-3 row">
         <div class="col-12">
-          <label>Choisissez une vidéo Ad depuis votre appareil</label>
+          <label>Choisissez une vidéo ou image de l'Ad depuis votre appareil</label>
           <form
             id="dropzone"
             action="/file-upload"

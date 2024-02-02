@@ -14,12 +14,11 @@
                 </div>
                 <div class="my-auto mt-4 ms-auto mt-lg-0">
                   <div class="my-auto ms-auto">
-                    <a
-                      href="./new-prod"
+                    <router-link 
+                      to="./new-prod"
                       class="mb-0 btn bg-gradient-success btn-sm"
-                      target="_blank"
-                      >+&nbsp; New Product</a
-                    >
+                      >+&nbsp; Nouveau produit 
+                    </router-link>
                     <button
                       type="button"
                       class="mx-1 mb-0 btn btn-outline-success btn-sm"
@@ -108,7 +107,7 @@
                       <th>Product</th>
                       <th>Category</th>
                       <!-- <th>Price</th> -->
-                      <th>ID</th>
+                      <th>Description</th>
                       <!-- <th>Quantity</th> -->
                       <!-- <th>Status</th> -->
                       <th>Action</th>
@@ -136,7 +135,7 @@
                       </td>
                       <td class="text-sm">Clothing</td>
            <!--            <td class="text-sm">$1,321</td> -->
-                      <td class="text-sm">243598234</td>
+                      <td class="text-sm">description quelconque  </td>
                 <!--       <td class="text-sm">0</td>
          -->              <td>
                         <!-- <span class="badge badge-danger badge-sm"
@@ -189,7 +188,7 @@
                       </td>
                       <td class="text-sm">Electronics</td>
            <!--            <td class="text-sm">$1,869</td> -->
-                      <td class="text-sm">877712</td>
+                      <td class="text-sm">description quelconque  </td>
                 <!--       <td class="text-sm">0</td>
          -->              <td>
                         <!-- <span class="badge badge-danger badge-sm"
@@ -241,7 +240,7 @@
                       </td>
                       <td class="text-sm">Furniture</td>
            <!--            <td class="text-sm">$99</td>
-   -->                    <td class="text-sm">0134729</td>
+   -->                    <td class="text-sm">description quelconque </td>
                 <!--       <td class="text-sm">978</td>
        -->                <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -291,7 +290,7 @@
                       </td>
                       <td class="text-sm">Furniture</td>
            <!--            <td class="text-sm">$2,999</td> -->
-                      <td class="text-sm">113213</td>
+                      <td class="text-sm">description quelconque  </td>
                 <!--       <td class="text-sm">0</td>
          -->              <td>
                         <!-- <span class="badge badge-danger badge-sm"
@@ -343,7 +342,7 @@
                       </td>
                       <td class="text-sm">Clothing</td>
            <!--            <td class="text-sm">$869</td>
-  -->                     <td class="text-sm">634729</td>
+  -->                     <td class="text-sm">description quelconque </td>
                 <!--       <td class="text-sm">725</td>
        -->                <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -393,7 +392,7 @@
                       </td>
                       <td class="text-sm">Clothing</td>
            <!--            <td class="text-sm">$1,869</td> -->
-                      <td class="text-sm">634729</td>
+                      <td class="text-sm">description quelconque  </td>
                 <!--       <td class="text-sm">725</td>
        -->                <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -444,7 +443,7 @@
                       </td>
                       <td class="text-sm">Shoes</td>
            <!--            <td class="text-sm">$869</td>
-  -->                     <td class="text-sm">634729</td>
+  -->                     <td class="text-sm">description quelconque </td>
                 <!--       <td class="text-sm">725</td>
        -->                <td>
                         <!-- <span class="badge badge-success badge-sm">In Stock</span> -->
@@ -495,7 +494,7 @@
                       </td>
                       <td class="text-sm">Clothing</td>
            <!--            <td class="text-sm">$1,199</td> -->
-                      <td class="text-sm">00121399</td>
+                      <td class="text-sm">description quelconque  </td>
                 <!--       <td class="text-sm">51293</td>
      -->                  <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -546,7 +545,7 @@
                       </td>
                       <td class="text-sm">Furniture</td>
            <!--            <td class="text-sm">$1,900</td> -->
-                      <td class="text-sm">434729</td>
+                      <td class="text-sm">4347description quelconque  </td>
                 <!--       <td class="text-sm">1100191321</td> -->
                       <td>
                         <!-- <span class="badge badge-success badge-sm">In Stock</span> -->
@@ -596,7 +595,7 @@
                       </td>
                       <td class="text-sm">Clothing</td>
            <!--            <td class="text-sm">$149</td>
-  -->                     <td class="text-sm">928341</td>
+  -->                     <td class="text-sm">description quelconque </td>
                 <!--       <td class="text-sm">0</td>
          -->              <td>
                         <!-- <span class="badge badge-danger badge-sm"
@@ -649,7 +648,7 @@
                       </td>
                       <td class="text-sm">Furniture</td>
            <!--            <td class="text-sm">$2,099</td> -->
-                      <td class="text-sm">9912834</td>
+                      <td class="text-sm">description quelconque </td>
                 <!--       <td class="text-sm">32</td>
         -->               <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -699,7 +698,7 @@
                       </td>
                       <td class="text-sm">Furniture</td>
            <!--            <td class="text-sm">$2,999</td> -->
-                      <td class="text-sm">561151</td>
+                      <td class="text-sm">description quelconque  </td>
                 <!--       <td class="text-sm">22</td>
         -->               <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -750,7 +749,7 @@
                       </td>
                       <td class="text-sm">Shoes</td>
            <!--            <td class="text-sm">$869</td>
-  -->                     <td class="text-sm">634729</td>
+  -->                     <td class="text-sm">description quelconque </td>
                 <!--       <td class="text-sm">725</td>
        -->                <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -800,7 +799,7 @@
                       </td>
                       <td class="text-sm">Designer</td>
            <!--            <td class="text-sm">$999</td>
-  -->                     <td class="text-sm">01827391</td>
+  -->                     <td class="text-sm">description quelconque</td>
                 <!--       <td class="text-sm">0</td>
          -->              <td>
                         <!-- <span class="badge badge-danger badge-sm"
@@ -853,7 +852,7 @@
                       </td>
                       <td class="text-sm">Shoes</td>
            <!--            <td class="text-sm">$869</td>
-  -->                     <td class="text-sm">634729</td>
+  -->                     <td class="text-sm">description quelconque </td>
                 <!--       <td class="text-sm">725</td>
        -->                <td>
                         <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
@@ -889,7 +888,7 @@
                       <th>Product</th>
                       <th>Category</th>
                       <!-- <th>Price</th> -->
-                      <th>ID</th>
+                      <th>Description</th>
                       <!-- <th>Quantity</th> -->
                       <!-- <th>Status</th> -->
                       <th>Action</th>
