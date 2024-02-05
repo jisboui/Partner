@@ -6,8 +6,8 @@
           <h6 class="mb-0">Nouvelle campagne</h6>
           <p class="mb-0 text-sm">Créer une nouvelle campagne</p>
           <hr class="my-3 horizontal dark" />
-          <label for="projectName" class="form-label">Nom de la campagne</label>
-          <input id="projectName" type="text" class="form-control" />
+          <!-- <label for="projectName" class="form-label">Nom de la campagne</label>
+          <input id="projectName" type="text" class="form-control" />-->
           <!-- <label class="mt-4">Description de la campagne</label>
           <p class="text-xs form-text text-muted ms-1">
             Il s'agit d'une description que les utilisateurs peuvent lire sur la
@@ -17,7 +17,7 @@
             <p>écrivez la description de la campagne ici</p>
             <p><br /></p>
           </div> -->
-          <br /><br />
+          <br />
           <div class="row">
             <div class="col-6">
               <label for="games">Choisir le jeu</label>

@@ -127,7 +127,7 @@
                             checked
                           />
                         </div> -->
-                        <img class="w-10 ms-3" :src="img1" alt="hoodie" />
+                        <img class="w-20 ms-3" :src="img1" alt="hoodie" />
                         <h6 class="my-auto ms-3">Publicité offre Artfin</h6>
                       </div>
                     </td>
@@ -135,7 +135,7 @@
    -->
                     <!--            <td class="text-sm">$1,321</td> -->
                     <td class="text-sm">
-                      pub sur l'offre n°45 de Artfin qui se porte sur kedhe
+                      pub sur l'offre n°45 de Artfin qui se porte sur ..
                     </td>
                     <!--       <td class="text-sm">0</td>
        -->
@@ -181,16 +181,16 @@
                             checked
                           />
                         </div> -->
-                        <img class="w-10 ms-3" :src="img2" alt="mac" />
+                        <img class="w-20 ms-3" :src="img2" alt="mac" />
                         <h6 class="my-auto ms-3">
-                          Pub arrivée de nouvelle édition de parfum
+                          Annonce d'arriver produit
                         </h6>
                       </div>
                     </td>
                     <!--  <td class="text-sm">Electronics</td>
    -->
                     <!--            <td class="text-sm">$1,869</td> -->
-                    <td class="text-sm">kedhe kedhe</td>
+                    <td class="text-sm">Pub sur l'arrivée de nouvelle édition de parfum</td>
                     <!--       <td class="text-sm">0</td>
        -->
                     <td>
@@ -234,7 +234,7 @@
                             type="checkbox"
                           />
                         </div>-->
-                        <img class="w-10 ms-3" :src="img3" alt="metro-chair" />
+                        <img class="w-20 ms-3" :src="img3" alt="metro-chair" />
                         <h6 class="my-auto ms-3">Annoce local</h6>
                       </div>
                     </td>
@@ -286,16 +286,16 @@
                             type="checkbox"
                           />
                         </div>-->
-                        <img class="w-10 ms-3" :src="img4" alt="alchimia" />
+                        <img class="w-20 ms-3" :src="img4" alt="alchimia" />
                         <h6 class="my-auto ms-3">
-                          Image pub pour produit Oriental épicé
+                          Pub produit Oriental épicé
                         </h6>
                       </div>
                     </td>
                     <!-- <td class="text-sm">Furniture</td>
    -->
                     <!--            <td class="text-sm">$2,999</td> -->
-                    <td class="text-sm">kedhe</td>
+                    <td class="text-sm">Image pub pour produit Oriental épicé</td>
                     <!--       <td class="text-sm">0</td>
        -->
                     <td>
@@ -339,9 +339,9 @@
                             type="checkbox"
                           />
                         </div> -->
-                        <img class="w-10 ms-3" :src="img5" alt="fendi" />
+                        <img class="w-20 ms-3" :src="img5" alt="fendi" />
                         <h6 class="my-auto ms-3">
-                          Image pub pour produit Floral Fruité
+                          Pub produit Floral Fruité
                         </h6>
                       </div>
                     </td>
@@ -349,7 +349,7 @@
    -->
                     <!--            <td class="text-sm">$869</td>
 -->
-                    <td class="text-sm">kedhe</td>
+                    <td class="text-sm">Image pub pour produit Floral Fruité</td>
                     <!--       <td class="text-sm">725</td>
      -->
                     <td>
