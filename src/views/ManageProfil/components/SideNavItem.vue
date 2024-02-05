@@ -263,45 +263,45 @@
       <h5 class="mb-0">Choisir mon abonnement</h5>
       <argon-badge color="success" class="ms-auto">Abonnement actuel : Standard</argon-badge>
     </div>
-    <div class="card-body">
+    <div class="card-body ">
       <div class="d-flex">
-        <p class="my-auto">Standard</p>
-        <p class="text-secondary text-sm ms-auto my-auto me-3">
-          Vous pouvez juste créer une campagne
+        <p class="my-auto" style="display: inline-block; min-width: 120px; text-align: center; box-sizing: border-box;">Standard</p>
+        <p class="text-secondary text-sm ms-5  my-auto me-3">
+          Vous pouvez seulement créer une campagne
         </p>
         <argon-button
           color="dark"
           variant="outline"
           size="sm"
-          class="mb-0"
+          class="mb-0 ms-auto"
           type="button"
           >Choisir</argon-button
         >
       </div>
       <hr class="horizontal dark" />
       <div class="d-flex">
-        <p class="my-auto">Pro</p>
-        <p class="text-secondary text-sm ms-auto my-auto me-3">Vous pouvez ajouter les éléments graphiques ainsi que vos propres video ads</p>
+        <p class="my-auto " style="display: inline-block; min-width: 120px; text-align: center; box-sizing: border-box;">Pro   </p>
+        <p class="text-secondary text-sm ms-5  my-auto me-3">Vous pouvez personnaliser les jeux en ajoutant les éléments graphiques ou questions Quiz ainsi qu'afficher vos propres videos ads</p>
         <argon-button
           color="dark"
           variant="outline"
           size="sm"
-          class="mb-0"
+          class="mb-0 ms-auto"
           type="button"
           >Choisir</argon-button
         >
       </div>
       <hr class="horizontal dark" />
       <div class="d-flex">
-        <p class="my-auto">Ultimate</p>
-        <p class="text-secondary text-sm ms-auto my-auto me-3">
-          vous pouvez ...
+        <p class="my-auto " style="display: inline-block; min-width: 120px; text-align: center; box-sizing: border-box;">Ultimate</p>
+        <p class="text-secondary text-sm ms-5  my-auto me-3">
+          Vous pouvez ...
         </p>
         <argon-button
           color="dark"
           variant="outline"
           size="sm"
-          class="mb-0"
+          class="mb-0 ms-auto"
           type="button"
           >Choisir</argon-button
         >
