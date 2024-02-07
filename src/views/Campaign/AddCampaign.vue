@@ -376,13 +376,25 @@ export default {
   mounted() {
     var drop1 = document.getElementById("dropzone1");
     var drop2 = document.getElementById("dropzone2");
-    new Dropzone(drop1, {
+    var myDropzone =new Dropzone(drop1, {
+      url: "/file/post",
+      maxFiles: 1,
+      acceptedFiles: 'image/*',
+      addRemoveLinks: true,
+    });
+    var myDropzone2 =new Dropzone(drop2, {
       url: "/file/post",
       addRemoveLinks: true,
     });
-    new Dropzone(drop2, {
-      url: "/file/post",
-      addRemoveLinks: true,
+    myDropzone.on("addedfile", function() {
+      if (this.files.length > 1) {
+        this.removeFile(this.files[0]);
+      }
+    });
+    myDropzone2.on("addedfile", function() {
+      if (this.files.length > 1) {
+        this.removeFile(this.files[0]);
+      }
     });
   },
 };

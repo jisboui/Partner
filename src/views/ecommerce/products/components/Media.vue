@@ -54,9 +54,16 @@ export default {
   mounted() {
     Dropzone.autoDiscover = false;
     var drop = document.getElementById("dropzone");
-    new Dropzone(drop, {
+    var myDropzone = new Dropzone(drop, {
       url: "/file/post",
+      maxFiles: 1,
+      acceptedFiles: 'image/*',
       addRemoveLinks: true,
+    });
+    myDropzone.on("addedfile", function() {
+      if (this.files.length > 1) {
+        this.removeFile(this.files[0]);
+      }
     });
   },
 };
