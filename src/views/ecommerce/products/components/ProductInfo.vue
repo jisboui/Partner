@@ -59,7 +59,7 @@
           >
             <option value="English">English</option>
             <option value="French">French</option>
-            <option value="Spanish">Spanish</option>
+            <option value="Arabic">العربية</option>
           </select>
         </div>
         <div class="mt-4 col-sm-6 mt-sm-0">
