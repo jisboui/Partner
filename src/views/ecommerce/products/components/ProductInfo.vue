@@ -13,17 +13,18 @@
             type="text"
             placeholder="ex : Laptop Victus HP"
           />
-        
-        <!-- <div class="mt-3 col-12 col-sm-6 mt-sm-0">
-          <label>Weight</label>
-          <input
-            class="multisteps-form__input form-control"
-            type="text"
-            placeholder="eg. 42"
-          />
-        </div> -->
-        <br>
-        <label class="col-12 col-sm-6">Category</label>
+          <!-- <div class="mt-3 col-12 col-sm-6 mt-sm-0">
+            <label>Weight</label>
+            <input
+              class="multisteps-form__input form-control"
+              type="text"
+              placeholder="eg. 42"
+            />
+          </div> -->
+        </div>
+          <br />
+        <div class="col-12 col-sm-6">
+          <label class="col-12 col-sm-6">Category</label>
           <select
             id="choices-category"
             class="form-control"
@@ -37,17 +38,31 @@
           </select>
         </div>
       </div>
+
       <div class="row">
         <div class="col-sm-6">
           <label class="mt-4">Description</label>
-          <p class="text-xs form-text text-muted ms-1 d-inline">Il s'agit d'une description sur le
-            produit que les utilisateurs pourront lire, alors faites-la bien!</p>
+          <p class="text-xs form-text text-muted ms-1 d-inline">
+            Il s'agit d'une description sur le produit que les utilisateurs
+            pourront lire, alors faites-la bien!
+          </p>
           <div id="edit-description" class="h-50">
             <p>écrivez la description de votre produit ici</p>
           </div>
         </div>
         <div class="mt-4 col-sm-6 mt-sm-0">
-          
+          <label class="mt-4">Language</label>
+          <select
+            id="choices-language"
+            class="form-control"
+            name="choices-language"
+          >
+            <option value="English">English</option>
+            <option value="French">French</option>
+            <option value="Spanish">Spanish</option>
+          </select>
+        </div>
+        <div class="mt-4 col-sm-6 mt-sm-0">
           <!-- <label>Sizes</label>
           <select id="choices-sizes" class="form-control" name="choices-sizes">
             <option value="Choice 1" selected="">Medium</option>
@@ -97,22 +112,26 @@ export default {
     }
     if (document.getElementById("choices-category")) {
       var element = document.getElementById("choices-category");
-      this.choicesInstances.push(new Choices(element, {
-        searchEnabled: false,
-        allowHTML: true,
-      }));
+      this.choicesInstances.push(
+        new Choices(element, {
+          searchEnabled: false,
+          allowHTML: true,
+        })
+      );
     }
 
     if (document.getElementById("choices-sizes")) {
       let element = document.getElementById("choices-sizes");
-      this.choicesInstances.push(new Choices(element, {
-        searchEnabled: false,
-        allowHTML: true,
-      }));
+      this.choicesInstances.push(
+        new Choices(element, {
+          searchEnabled: false,
+          allowHTML: true,
+        })
+      );
     }
   },
   beforeUnmount() {
-    this.choicesInstances.forEach(instance => instance.destroy());
+    this.choicesInstances.forEach((instance) => instance.destroy());
   },
 };
 </script>

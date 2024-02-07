@@ -72,7 +72,7 @@
           </div>
           <br /><br />
 
-          <div v-if="selectedGame === 'Choice 2'">
+          <div v-show="selectedGame === 'Choice 2'">
             <label class="mt-4 form-label"
               >Ajouter les éléments graphique à afficher à l'intérieur de GoBowi
               (pro+)</label
@@ -87,7 +87,7 @@
               </div>
             </form>
           </div>
-          <div v-if="selectedGame === 'Choice 1'">
+          <div v-show="selectedGame === 'Choice 1'">
           <label class="mt-4 form-label"
             >Ajouter le fichier.csv pour les questions de QuiUp (pro+)</label
           >
@@ -155,7 +155,7 @@
             to="/campaign/campaign-history"
             >
             <button
-                  class="mb-0 btn bg-gradient-success"
+                  class="m-0 btn bg-gradient-success ms-2"
                   @click="showSwal('success-message')"
                 >
                 Créer une campagne
@@ -171,9 +171,6 @@
 <script>
 import flatPickr from "vue-flatpickr-component";
 import Dropzone from "dropzone";
-import Choices from "choices.js";
-import Quill from "quill";
-
 export default {
   name: "AddCampaign",
   components: {
@@ -187,12 +184,10 @@ export default {
       config: {
         allowInput: true,
       },
-      dropzone1Created: false,
-    dropzone2Created: false,
     };
   },
-  methods: {
-  showSwal(type) {
+  methods : {
+    showSwal(type) {
       if (type === "basic") {
         this.$swal({
           title: "Any fool can use a computer",
@@ -201,8 +196,8 @@ export default {
       } else if (type === "success-message") {
         this.$swal({
           icon: "success",
-          title: "Campagne en cours de validation",
-          text: "Veuillez attendre la validation de votre campagne par l'administrateur, vous receverez un mail de confirmation ^_^",
+          title: "Campagne en cours de validation...",
+          text: "Veuillez attendre la validation de votre campagne par l'administrateur, vous receverez un mail de confirmation une fois la campagne validée.",
           type: type,
         });
       } else if (type === "custom-html") {
@@ -378,66 +373,8 @@ export default {
       }
     },
   },
-  watch: {
-  selectedGame() {
-    this.$nextTick(() => {
-      const dropzone1Element = document.getElementById('dropzone1');
-      const dropzone2Element = document.getElementById('dropzone2');
-
-      if (this.selectedGame === 'Choice 1' && dropzone1Element && !this.dropzone1Created) {
-        new Dropzone(dropzone1Element, {
-          url: "/file/post",
-          addRemoveLinks: true,
-        });
-        this.dropzone1Created = true;
-      }
-      if (this.selectedGame === 'Choice 2' && dropzone2Element && !this.dropzone2Created) {
-        new Dropzone(dropzone2Element, {
-          url: "/file/post",
-          addRemoveLinks: true,
-        });
-        this.dropzone2Created = true;
-      }
-    });
-  },
-},
   mounted() {
-    if (document.getElementById("editor")) {
-      new Quill("#editor", {
-        theme: "snow", // Specify theme in configuration
-      });
-    }
-
-    if (document.getElementById("choices-multiple-remove-button")) {
-      var element = document.getElementById("choices-multiple-remove-button");
-      const example = new Choices(element, {
-        removeItemButton: true,
-        allowHTML: true,
-      });
-
-      example.setChoices(
-        [
-          {
-            value: "One",
-            label: "Label One",
-            disabled: true,
-          },
-          {
-            value: "Two",
-            label: "Label Two",
-            selected: true,
-          },
-          {
-            value: "Three",
-            label: "Label Three",
-          },
-        ],
-        "value",
-        "label",
-        false
-      );
-    }
-    /* var drop1 = document.getElementById("dropzone1");
+    var drop1 = document.getElementById("dropzone1");
     var drop2 = document.getElementById("dropzone2");
     new Dropzone(drop1, {
       url: "/file/post",
@@ -446,7 +383,7 @@ export default {
     new Dropzone(drop2, {
       url: "/file/post",
       addRemoveLinks: true,
-    }); */
+    });
   },
 };
 </script>
