@@ -3,7 +3,7 @@
     class="p-3 bg-white card multisteps-form__panel border-radius-xl"
     data-animation="FadeIn"
   >
-    <h5 class="font-weight-bolder">Socials</h5>
+    <h5 class="font-weight-bolder">Socials (les liens de publication des différents Réseaux sociaux?)</h5>
     <div class="multisteps-form__content">
       <div class="mt-3 row">
         <div class="col-12">

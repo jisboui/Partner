@@ -87,14 +87,14 @@
                         </div>
                       </div>
                     </div>
-                    <button
+                   <!--  <button
                       class="mt-1 mb-0 btn btn-outline-success btn-sm export mt-sm-0"
                       data-type="csv"
                       type="button"
                       name="button"
                     >
                       Export
-                    </button>
+                    </button> -->
                   </div>
                 </div>
               </div>
@@ -545,7 +545,7 @@
                       </td>
                       <td class="text-sm">Furniture</td>
            <!--            <td class="text-sm">$1,900</td> -->
-                      <td class="text-sm">4347description quelconque  </td>
+                      <td class="text-sm">description quelconque  </td>
                 <!--       <td class="text-sm">1100191321</td> -->
                       <td>
                         <!-- <span class="badge badge-success badge-sm">In Stock</span> -->
@@ -901,9 +901,9 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import { DataTable } from "simple-datatables"; 
   import setTooltip from "@/assets/js/tooltip.js";
   
@@ -936,7 +936,7 @@
             perPage: 7,
           });
     
-          document.querySelectorAll(".export").forEach((el) => {
+          /* document.querySelectorAll(".export").forEach((el) => {
             el.addEventListener("click", () => {
               var type = el.dataset.type;
     
@@ -951,7 +951,7 @@
     
               this.dataTableSearch.export(data);
             });
-          });
+          }); */
         }
         setTooltip(this.$store.state.bootstrap);
       },

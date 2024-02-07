@@ -106,14 +106,14 @@
               <sidenav-item
                 :to="{ name: 'BibAds' }"
                 mini-icon="B"
-                text="Bibliothèque ads"
+                text="Bibliothèque Ads"
               />
               </li>
               <li class="nav-item">
               <sidenav-item
                 :to="{ name: 'NewAd' }"
                 mini-icon="A"
-                text="Ajouter un ad"
+                text="Nouvelle Ad"
               />
               </li>
             </ul>

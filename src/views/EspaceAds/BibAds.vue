@@ -89,14 +89,14 @@
                       </div>
                     </div>
                   </div>
-                  <button
+                  <!-- <button
                     class="mt-1 mb-0 btn btn-outline-success btn-sm export mt-sm-0"
                     data-type="csv"
                     type="button"
                     name="button"
                   >
                     Export
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -446,7 +446,7 @@ export default {
           perPage: 7,
         });
 
-        document.querySelectorAll(".export").forEach((el) => {
+        /* document.querySelectorAll(".export").forEach((el) => {
           el.addEventListener("click", () => {
             var type = el.dataset.type;
 
@@ -461,7 +461,7 @@ export default {
 
             this.dataTableSearch.export(data);
           });
-        });
+        }); */
       }
       setTooltip(this.$store.state.bootstrap);
     },

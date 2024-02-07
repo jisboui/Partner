@@ -9,7 +9,7 @@
     <div class="shadow-lg card">
       <div class="pt-3 pb-0 bg-transparent card-header">
         <div class="float-start">
-          <h5 class="mt-3 mb-0">Argon Configurator</h5>
+          <h5 class="mt-3 mb-0">Configurator</h5>
           <p>See our dashboard options.</p>
         </div>
         <div class="mt-4 float-end" @click="toggleConfigurator">
@@ -22,7 +22,7 @@
       <hr class="my-1 horizontal dark" />
       <div class="pt-0 card-body pt-sm-3">
         <!-- Sidebar Backgrounds -->
-        <div>
+        <!-- <div>
           <h6 class="mb-0">Sidebar Colors</h6>
         </div>
         <div class="switch-trigger background-color">
@@ -61,7 +61,7 @@
               @click="sidebarColor('danger')"
             ></span>
           </div>
-        </div>
+        </div> -->
         <!-- Sidenav Type -->
         <div class="mt-3">
           <h6 class="mb-0">Sidenav Type</h6>
