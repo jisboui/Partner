@@ -274,7 +274,7 @@ export default {
     this.minNav;
   },
   beforeUpdate() {
-    this.toggleNavigationOnMobile();
+    /* this.toggleNavigationOnMobile();  */
   },
   methods: {
     ...mapMutations(["navbarMinimize", "toggleConfigurator"]),

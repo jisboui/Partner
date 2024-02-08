@@ -283,9 +283,7 @@
     },
     beforeMount() {
       this.$store.state.layout = "custom";
-      this.$store.state.showNavbar = false;
       this.$store.state.showFooter = true;
-      this.$store.state.hideConfigButton = true;
     },
     beforeUnmount() {
       this.$store.state.isAbsolute = false;

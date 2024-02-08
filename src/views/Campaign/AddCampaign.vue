@@ -384,6 +384,7 @@ export default {
     });
     var myDropzone2 =new Dropzone(drop2, {
       url: "/file/post",
+      acceptedFiles: '.csv',
       addRemoveLinks: true,
     });
     myDropzone.on("addedfile", function() {
