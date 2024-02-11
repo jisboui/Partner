@@ -190,7 +190,7 @@
     <section class="py-3">
       <div class="row">
         <div id="currentCampaign" class="text-left col-md-8">
-          <h5>Consulter mes campagnes</h5>
+          <h4>Consulter mes campagnes</h4>
           <br>
           <p>Consulter vos campagnes en cours.</p>
         </div>

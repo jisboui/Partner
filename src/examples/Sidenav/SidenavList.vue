@@ -39,7 +39,7 @@
               <li class="nav-item">
                 <sidenav-item
                   :to="{ name: 'AddCampaign' }"
-                  mini-icon="C"
+                  mini-icon="NC"
                   text="Créer une nouvelle campagne"
                 />
               </li>
@@ -48,6 +48,13 @@
                   :to="{ name: 'CampaignHistory' }"
                   mini-icon="Co"
                   text="Consulter mes campagnes"
+                />
+              </li>
+              <li class="nav-item">
+                <sidenav-item
+                  :to="{ name: 'DiscountVoucher' }"
+                  mini-icon="BR"
+                  text="Bons de réductions"
                 />
               </li>
             </ul>
@@ -68,22 +75,22 @@
               <li class="nav-item">
                 <sidenav-item
                   :to="{ name: 'ProductList' }"
-                  mini-icon="P"
+                  mini-icon="BP"
                   text="Bibliothèque produits"
                 />
               </li>
               <li class="nav-item">
                 <sidenav-item
                   :to="{ name: 'NewProd' }"
-                  mini-icon="N"
+                  mini-icon="NP"
                   text="Nouveau produit"
                 />
               </li>
               <li class="nav-item">
                 <sidenav-item
                   :to="{ name: 'EditProd' }"
-                  mini-icon="M"
-                  text="modifier un produit"
+                  mini-icon="MP"
+                  text="Modifier un produit"
                 />
               </li>
               </ul>
@@ -105,14 +112,14 @@
               <li class="nav-item">
               <sidenav-item
                 :to="{ name: 'BibAds' }"
-                mini-icon="B"
+                mini-icon="BA"
                 text="Bibliothèque Ads"
               />
               </li>
               <li class="nav-item">
               <sidenav-item
                 :to="{ name: 'NewAd' }"
-                mini-icon="A"
+                mini-icon="NA"
                 text="Nouvelle Ad"
               />
               </li>
@@ -123,14 +130,14 @@
       <li class="nav-item">
         <sidenav-item
                     :to="{ name: 'Sondage' }"
-                    mini-icon="E"
+                    mini-icon="ES"
                     text="Espace Sondage"
                   />
       </li>
       <li class="nav-item">
         <sidenav-item
                     :to="{ name: 'ManageProfil' }"
-                    mini-icon="E"
+                    mini-icon="EP"
                     text="Espace profil"
                   />
       </li>

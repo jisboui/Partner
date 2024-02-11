@@ -62,6 +62,8 @@ import EditProd from "../views/Produits/EditProd.vue";
 import NewAd from "../views/EspaceAds/NewAd.vue";
 import BibAds from "../views/EspaceAds/BibAds.vue";
 import Sondage from "../views/Survey/Sondage.vue";
+import DiscountVoucher from "../views/DiscountVoucher/DiscountVoucher.vue";
+import dvDetails from "../views/DiscountVoucher/dvDetails.vue";
 const routes = [
   {
     path: "/",
@@ -384,6 +386,16 @@ const routes = [
     path: "/survey/sondage",
     name: "Sondage", 
     component: Sondage
+  },
+  {
+    path: "/DiscountVoucher/discount-voucher",
+    name: "DiscountVoucher", 
+    component: DiscountVoucher
+  },
+  {
+    path: "/DiscountVoucher/dv-details",
+    name: "dvDetails", 
+    component: dvDetails
   },
 
 ];

@@ -398,5 +398,8 @@ export default {
       }
     });
   },
+  beforeMount() {
+    this.$store.state.layout = "custom2";
+  },  
 };
 </script>

@@ -5,10 +5,19 @@
     :style="{
       'background-image': 'url(' + image + ')',
       'background-position-y': '50%'
+    
     }"
   >
     <span class="mask bg-success opacity-6"></span>
   </div>
+<div v-else-if="layout === 'custom2'"
+    class="position-absolute w-100 h-100 top-0"
+    :style="{
+      'background-image': 'url(' + image2 + ')',
+      'background-position-y': '50%'
+    }">
+    <span class="mask bg-success opacity-6"></span>
+</div>
   <div
     v-show="layout === 'default'"
     class="min-height-300 position-absolute w-100"
@@ -50,6 +59,7 @@ import SidenavList from "./SidenavList.vue";
 import logo from "@/assets/img/dopawin.png";
 import logoWhite from "@/assets/img/dopawin.png";
 import image from "@/assets/img/profile-layout-header.jpg";
+import image2 from "@/assets/img/campaign-layout.jpeg";
 
 import { mapState } from "vuex";
 export default {
@@ -61,7 +71,8 @@ export default {
     return {
       logo,
       logoWhite,
-      image
+      image,
+      image2
     };
   },
   computed: {
