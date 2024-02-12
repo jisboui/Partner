@@ -1,8 +1,8 @@
 <template>
-  <br> 
-  <br><br>
-    <div class="card shadow-lg mx-4 card-profile-bottom">
-      <!-- <div class="card-body p-3">
+  <br />
+  <br /><br />
+  <div class="card shadow-lg mx-4 card-profile-bottom">
+    <!-- <div class="card-body p-3">
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
@@ -185,42 +185,42 @@
           </div>
         </div>
       </div> -->
-    </div>
-    <div class="py-4 container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="multisteps-form">
-            <div class="row">
-              <div class="mx-auto mt-4 mb-3 col-12 col-lg-8 mb-sm-5">
-                <div class="multisteps-form__progress">
-                  <button
-                    class="multisteps-form__progress-btn js-active"
-                    type="button"
-                    title="Product Info"
-                    :class="activeStep >= 0 ? activeClass : ''"
-                    @click="activeStep = 0"
-                  >
-                    <span>1. Product Info</span>
-                  </button>
-                  <button
-                    class="multisteps-form__progress-btn"
-                    type="button"
-                    title="Media"
-                    :class="activeStep >= 1 ? activeClass : ''"
-                    @click="activeStep = 1"
-                  >
-                    2. Media
-                  </button>
-                  <button
-                    class="multisteps-form__progress-btn"
-                    type="button"
-                    title="Socials"
-                    :class="activeStep >= 2 ? activeClass : ''"
-                    @click="activeStep = 2"
-                  >
-                    3. Socials
-                  </button>
-                  <!-- <button
+  </div>
+  <div class="py-4 container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="multisteps-form">
+          <div class="row">
+            <div class="mx-auto mt-4 mb-3 col-12 col-lg-8 mb-sm-5">
+              <div class="multisteps-form__progress">
+                <button
+                  class="multisteps-form__progress-btn js-active"
+                  type="button"
+                  title="Product Info"
+                  :class="activeStep >= 0 ? activeClass : ''"
+                  @click="activeStep = 0"
+                >
+                  <span>1. Product Info</span>
+                </button>
+                <button
+                  class="multisteps-form__progress-btn"
+                  type="button"
+                  title="Media"
+                  :class="activeStep >= 1 ? activeClass : ''"
+                  @click="activeStep = 1"
+                >
+                  2. Media
+                </button>
+                <button
+                  class="multisteps-form__progress-btn"
+                  type="button"
+                  title="Socials"
+                  :class="activeStep >= 2 ? activeClass : ''"
+                  @click="activeStep = 2"
+                >
+                  3. Socials
+                </button>
+                <!-- <button
                     class="multisteps-form__progress-btn"
                     type="button"
                     title="Pricing"
@@ -229,36 +229,35 @@
                   >
                     4. Pricing
                   </button> -->
-                </div>
               </div>
             </div>
-            <!--form panels-->
-            <div class="row">
-              <div class="m-auto col-12 col-lg-8">
-                <form class="mb-8 multisteps-form__form">
-                  <!--single form panel-->
-                  <product-info :class="activeStep === 0 ? activeClass : ''" />
-                  <!--single form panel-->
-                  <media :class="activeStep === 1 ? activeClass : ''" />
-                  <!--single form panel-->
-                  <socials :class="activeStep === 2 ? activeClass : ''" />
-                  <!--single form panel-->
-                  <!-- <pricing :class="activeStep === 3 ? activeClass : ''" /> -->
-                </form>
-              </div>
+          </div>
+          <!--form panels-->
+          <div class="row">
+            <div class="m-auto col-12 col-lg-8">
+              <form class="mb-8 multisteps-form__form">
+                <!--single form panel-->
+                <product-info :class="activeStep === 0 ? activeClass : ''" />
+                <!--single form panel-->
+                <media :class="activeStep === 1 ? activeClass : ''" />
+                <!--single form panel-->
+                <socials :class="activeStep === 2 ? activeClass : ''" />
+                <!--single form panel-->
+                <!-- <pricing :class="activeStep === 3 ? activeClass : ''" /> -->
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </template>
- 
+  </div>
+</template>
+
 <script>
 import ProductInfo from "@/views/ecommerce/products/components/ProductInfo.vue";
-  import Media from "@/views/ecommerce/products/components/Media.vue";
-  import Socials from "@/views/ecommerce/products/components/Socials.vue";
+import Media from "@/views/ecommerce/products/components/Media.vue";
+import Socials from "@/views/ecommerce/products/components/Socials.vue";
 /* import Pricing from "@/views/ecommerce/products/components/Pricing.vue"; */
-const body = document.getElementsByTagName("body")[0];
 
 /*import setNavPills from "@/assets/js/nav-pills.js"; */
 export default {
@@ -277,38 +276,25 @@ export default {
       formSteps: 2,
     };
   },
-  mounted() {
-    this.$store.state.isAbsolute = true; 
-    /* setNavPills();  */ 
-  },
   beforeMount() {
     this.$store.state.layout = "custom";
-    this.$store.state.showFooter = true;
-  },
-  beforeUnmount() {
-    this.$store.state.isAbsolute = false;
-    this.$store.state.layout = "default";
-    this.$store.state.showNavbar = true;
-    this.$store.state.showFooter = true;
-    this.$store.state.hideConfigButton = false;
-    body.classList.remove("new-product");
   },
   methods: {
     nextStep() {
-    if (this.activeStep < this.formSteps) {
-      // If not at the last step, move to the next step
-      this.activeStep += 1;
-    } else {
-      // If at the last step, navigate to a different path
-      this.$router.push('/produits/product-list'); 
-    }
-  },
+      if (this.activeStep < this.formSteps) {
+        // If not at the last step, move to the next step
+        this.activeStep += 1;
+      } else {
+        // If at the last step, navigate to a different path
+        this.$router.push("/produits/product-list");
+      }
+    },
     prevStep() {
-  if (this.activeStep > 0) {
-    this.activeStep -= 1;
-  }
-  event.preventDefault(); // this line to prevent form submission
-}
+      if (this.activeStep > 0) {
+        this.activeStep -= 1;
+      }
+      event.preventDefault(); // this line to prevent form submission
+    },
   },
 };
 </script>

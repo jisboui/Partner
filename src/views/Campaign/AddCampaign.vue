@@ -70,8 +70,7 @@
               </select>
             </div>
           </div>
-          <br /><br />
-
+          <br />
           <div v-show="selectedGame === 'Choice 2'">
             <label class="mt-4 form-label"
               >Ajouter les éléments graphique à afficher à l'intérieur de GoBowi
@@ -88,47 +87,54 @@
             </form>
           </div>
           <div v-show="selectedGame === 'Choice 1'">
-          <label class="mt-4 form-label"
-            >Ajouter le fichier.csv pour les questions de QuiUp (pro+)</label
-          >
-          <form
-            id="dropzone2"
-            action="/file-upload"
-            class="form-control dropzone"
-          >
-            <div class="fallback">
-              <input name="file" type="file" multiple />
-            </div>
-          </form>
+            <label class="mt-4 form-label"
+              >Ajouter le fichier.csv pour les questions de QuiUp (pro+)</label
+            >
+            <form
+              id="dropzone2"
+              action="/file-upload"
+              class="form-control dropzone"
+            >
+              <div class="fallback">
+                <input name="file" type="file" multiple />
+              </div>
+            </form>
           </div>
 
-          <!-- <div class="mt-4 row">
-              <div class="col-12 col-md-6">
-                <div class="form-group">
-                  <label> Private Project </label>
-                  <p class="text-xs form-text text-muted ms-1">
-                    If you are available for hire outside of the current
-                    situation, you can encourage others to hire you.
-                  </p>
-                  <div class="form-check form-switch ms-1">
-                    <input
-                      id="flexSwitchCheckDefault"
-                      class="form-check-input"
-                      type="checkbox"
-                      onclick="notify(this)"
-                      data-type="warning"
-                      data-content="Once a project is made private, you cannot revert it to a public project."
-                      data-title="Warning"
-                      data-icon="ni ni-bell-55"
+          <div class="mt-3 row">
+            <div class="text-center col-lg-1 col-md-2 col-sm-3 col-4 position-relative">
+              <a href="javascript:;" @click="toggleDiv" class="avatar avatar-lg border-1 rounded-circle bg-gradient-success">
+                <i class="text-white fas fa-plus"></i>
+              </a>
+              <p class="mb-0 text-sm mt-2 position-absolute w-100 text-center" style="top: 50%; left: 150%; transform: translate(-50%, -50%);">Ajouter un bon de réduction</p>
+            </div>
+          </div>
+          <br />
+
+           <div id="myDiv" v-show="showDiv" class="container" style="display: flex; justify-content: center; align-items: center;">
+              <div class="card">
+                <div class="main">
+                  <div class="co-img">
+                    <img
+                      src="https://scontent.fnbe1-2.fna.fbcdn.net/v/t39.30808-6/273207779_281563397405455_6026609381950187436_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=9WqjAmUBLWsAX_NkJM1&_nc_ht=scontent.fnbe1-2.fna&oh=00_AfA6qhovC-bEm09eAmf_MAkl55ucOzLSyMlp98oO1cvDlw&oe=65C9F461"
+                      alt=""
                     />
-                    <label
-                      class="form-check-label"
-                      for="flexSwitchCheckDefault"
-                    ></label>
+                  </div>
+                  <div class="vertical"></div>
+                  <div class="content">
+                    <h2>Artfin Oriental épicé</h2>
+                    <h1><input type="text" v-model="couponValue" class="editable-input"> <span>Bon de réduction</span></h1>
+                    Valable jusqu'au <input type="text" value="30 avril 2025" class="long-input" />
                   </div>
                 </div>
+                <div class="copy-button">
+                  <input id="copyvalue" type="text" readonly value="QR code" />
+                  <button class="copybtn">COPY</button>
+                </div>
+                <br />
               </div>
-            </div> -->
+           </div>
+           <br />
 
           <!-- <label class="mt-4 form-label">Project Tags</label>
             <select
@@ -160,7 +166,7 @@
                 >
                 Créer une campagne
                 </button>
-          </router-link>
+            </router-link>
           </div>
         </div>
       </div>
@@ -184,9 +190,14 @@ export default {
       config: {
         allowInput: true,
       },
+      couponValue: '10%',
+      showDiv: false,
     };
   },
   methods : {
+    toggleDiv() {
+      this.showDiv = !this.showDiv;
+    },
     showSwal(type) {
       if (type === "basic") {
         this.$swal({
@@ -403,3 +414,167 @@ export default {
   },  
 };
 </script>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+#myDiv {
+  .editable-input {
+  background: none;
+  font-size: 1em;
+  font-weight: 1000;
+  width: 70px;
+}
+.long-input {
+  width: 120px; /* Adjust this value to suit your needs */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #6bcc8b;
+}
+.qr-img {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.card {
+  width: 500px;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+  background-color: beige;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.main,
+.copy-button {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  align-items: center;
+}
+.card::after {
+  position: absolute;
+  content: "";
+  height: 40px;
+  right: -20px;
+  border-radius: 40px;
+  z-index: 1;
+  top: 70px;
+  background-color: white;
+  width: 40px;
+}
+
+.card::before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  left: -20px;
+  border-radius: 40px;
+  z-index: 1;
+  top: 70px;
+  background-color: white;
+  width: 40px;
+}
+
+.co-img img {
+  width: 100px;
+  height: 100px;
+}
+.vertical {
+  border-left: 5px dotted black;
+  height: 100px;
+  position: absolute;
+  left: 35%;
+}
+
+.content h1 {
+  font-size: 35px;
+  margin-left: -20px;
+  color: #565656;
+}
+
+.content h1 span {
+  font-size: 18px;
+}
+.content h2 {
+  font-size: 18px;
+  margin-left: -20px;
+  color: #565656;
+  text-transform: uppercase;
+}
+
+.content p {
+  font-size: 16px;
+  color: #696969;
+  margin-left: -20px;
+}
+
+.copy-button {
+  margin: 12px 0 -5px 0;
+  height: 45px;
+  border-radius: 4px;
+  padding: 0 5px;
+  border: 1px solid #e1e1e1;
+}
+
+.copy-button input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.copy-button button {
+  padding: 5px 20px;
+  background-color: #6bcc8b;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+@media (max-width: 600px) {
+  
+
+  .content h1 {
+    font-size: 25px; /* reduce the font size on small screens */
+  }
+
+  .content h2 {
+    font-size: 14px; 
+  }
+
+  .content p {
+    font-size: 12px; 
+  }
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+}
+</style>
+

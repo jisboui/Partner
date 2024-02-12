@@ -22,7 +22,7 @@
             />
           </div> -->
         </div>
-          <br />
+        <br />
         <div class="col-12 col-sm-6">
           <label class="col-12 col-sm-6">Category</label>
           <select
@@ -39,8 +39,8 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-6">
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
           <label class="mt-4">Description</label>
           <p class="text-xs form-text text-muted ms-1 d-inline">
             Il s'agit d'une description sur le produit que les utilisateurs
@@ -119,7 +119,7 @@ export default {
         })
       );
     }
-
+    /* 
     if (document.getElementById("choices-sizes")) {
       let element = document.getElementById("choices-sizes");
       this.choicesInstances.push(
@@ -128,7 +128,7 @@ export default {
           allowHTML: true,
         })
       );
-    }
+    } */
   },
   beforeUnmount() {
     this.choicesInstances.forEach((instance) => instance.destroy());

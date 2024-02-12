@@ -11,7 +11,7 @@
         <div class="vertical"></div>
         <div class="content">
           <h2>Artfin Oriental épicé</h2>
-          <h1>10% <span>Coupon</span></h1>
+          <h1>10% <span>Bon de réduction</span></h1>
           <p>Valable jusqu'au 30 avril 2025</p>
         </div>
       </div>
