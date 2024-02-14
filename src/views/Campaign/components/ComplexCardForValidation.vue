@@ -21,30 +21,24 @@
                 </div> -->
           </div>
           <div class="ms-2">
-              <ul class="list-group">
-                <li
-                  v-for="({ action }, index) of actions"
-                  :key="index"
-                  class="list-group-item border-0 d-flex p-4 mb-0 bg-white-100 border-radius-lg"
-                >
-                    <div class="ms-auto">
-                        <a
-                        class="btn btn-link text-danger text-gradient px-3 mb-0"
-                        :href="action[0].route"
-                        >
-                        <i class="far fa-trash-alt me-2" aria-hidden="true"></i>
-                        {{ action[0].label }}
-                        </a>
-                        <a
-                        class="btn btn-link text-dark px-3 mb-0"
-                        :href="action[1].route"
-                        >
-                        <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true" ></i>
-                        {{ action[1].label }}
-                        </a>
-                    </div>
-                </li>
-              </ul>
+            <ul class="list-group d-flex flex-row">
+              <li
+                v-for="(action, index) in actions"
+                :key="index"
+                class="list-group-item border-0 d-flex p-4 mb-0 bg-white-100 border-radius-lg me-2"
+              >
+                <div class="ms-">
+                  <a
+                    class="btn btn-link px-3 mb-0"
+                    :class="action.class"
+                    :href="action.route"
+                  >
+                    <i :class="action.icon + ' me-2'" aria-hidden="true"></i>
+                    {{ action.label }}
+                  </a>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
         <p class="mt-3 text-sm">
@@ -69,48 +63,50 @@
     </div>
 </template>
   
-  <script>
-  export default {
-    name: "ComplexProjectCard",
-    props: {
-      logo: {
+<script>
+export default {
+  name: "ComplexProjectCard",
+  props: {
+    logo: {
         type: String,
         default: "",
       },
-      title: {
-        type: String,
-        default: "",
-      },
-      description: {
-        type: String,
-        default: "",
-      },
-      dateTime: {
-        type: String,
-        default: "",
-      },
-      terminated: {
-        type: String,
-        default: "",
-      },
-      /* members: {
-        type: Array,
-        default: () => [],
-      }, */
-      actions: {
-        type: Array,
-        action: {
-          type: Array,
-          route: String,
-          label: String,
-        },
-      },
+    title: {
+      type: String,
+      default: "",
     },
-    data() {
+    description: {
+      type: String,
+      default: "",
+    },
+    dateTime: {
+      type: String,
+      default: "",
+    },
+    terminated: {
+      type: String,
+      default: "",
+    },
+    /* members: {
+      type: Array,
+      default: () => [],
+    }, */
+    actions: {
+      type: Array,
+      default: () => [],
+      validator: (actions) => {
+        return actions.every(action => {
+          return Object.prototype.hasOwnProperty.call(action, 'label') && 
+                Object.prototype.hasOwnProperty.call(action, 'route');
+          });
+        },
+    },
+  },
+  data() {
       return {
         showMenu: false,
       };
     },
-  };
-  </script>
+};
+</script>
   

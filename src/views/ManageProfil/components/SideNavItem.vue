@@ -3,6 +3,7 @@
     <div class="row justify-content-center align-items-center">
       <div class="d-flex justify-content-center align-items-center">
     <div class="col-sm-auto col-4 mx-auto" v-for="(image, index) in images" :key="index">
+    <br/>
       <p>{{ paragraphs[index] }}</p>
       <argon-avatar
         :img="image"
@@ -19,12 +20,13 @@
         <div
           class="h-100 d-flex flex-column justify-content-center align-items-center"
         >
+        <br/><br/>
           <h5 class="mb-1 font-weight-bolder text-center">Artfin</h5>
           <p class="mb-0 font-weight-bold text-sm text-center">Parfum brand</p>
         </div>
         <div class="mt-4 col mt-md-0">
           <profile-info-card
-            title="Profile Information"
+            title="Profile"
             description="Where decisions are scentsational. Opt for the fragrance that paints your moments with aromatic brilliance. In the world of Artfin, the choice is the essence of luxury."
             :info="{
               mobile: '+216 35 234 123',
@@ -208,6 +210,60 @@
       </div>
     </div>
   </div>
+  <div id="2fa" class="card mt-4">
+    <div class="card-header d-flex">
+      <h5 class="mb-0">Choisir mon abonnement</h5>
+      <argon-badge color="success" class="ms-auto">Abonnement actuel : Standard</argon-badge>
+    </div>
+    <div class="card-body ">
+      <div class="d-flex">
+        <p class="my-auto" style="display: inline-block; min-width: 69px; text-align: center; box-sizing: border-box;">Standard</p>
+        <p class="text-secondary text-sm ms-5  my-auto me-3">
+          Idéal pour les start-ups et les entreprises explorant Dopawin pour la première fois.
+          Accès aux fonctionnalités essentielles pour démarrer votre parcours de marketing gamifié.
+        </p>
+        <argon-button
+          color="dark"
+          variant="outline"
+          size="sm"
+          class="mb-0 ms-auto"
+          type="button"
+          >Choisir</argon-button
+        >
+      </div>
+      <hr class="horizontal dark" />
+      <div class="d-flex">
+        <p class="my-auto " style="display: inline-block; min-width: 69px; text-align: center; box-sizing: border-box;">Pro</p>
+        <p class="text-secondary text-sm ms-5  my-auto me-3">
+          Rehaussez la présence de votre marque avec des fonctionnalités améliorées et des analyses avancées.
+          Parfait pour les entreprises recherchant une stratégie marketing B2B plus complète.
+        </p>
+        <argon-button
+          color="dark"
+          variant="outline"
+          size="sm"
+          class="mb-0 ms-auto"
+          type="button"
+          >Choisir</argon-button
+        >
+      </div>
+      <hr class="horizontal dark" />
+      <div class="d-flex">
+        <p class="my-auto " style="display: inline-block; min-width: 69px; text-align: center; box-sizing: border-box;">Ultimate</p>
+        <p class="text-secondary text-sm ms-5  my-auto me-3">
+          Libérez le plein potentiel de Dopawin avec des fonctionnalités premium et un support personnalisé adapté aux marques établies prêtes à révolutionner leur approche marketing B2B.
+        </p>
+        <argon-button
+          color="dark"
+          variant="outline"
+          size="sm"
+          class="mb-0 ms-auto"
+          type="button"
+          >Choisir</argon-button
+        >
+      </div>
+    </div>
+  </div>
   <div id="password" class="card mt-4">
     <div class="card-header">
       <h5>Changer de mot de passe</h5>
@@ -256,56 +312,6 @@
         size="sm"
         >Mettre à jour le mot de passe</argon-button
       >
-    </div>
-  </div>
-  <div id="2fa" class="card mt-4">
-    <div class="card-header d-flex">
-      <h5 class="mb-0">Choisir mon abonnement</h5>
-      <argon-badge color="success" class="ms-auto">Abonnement actuel : Standard</argon-badge>
-    </div>
-    <div class="card-body ">
-      <div class="d-flex">
-        <p class="my-auto" style="display: inline-block; min-width: 120px; text-align: center; box-sizing: border-box;">Standard</p>
-        <p class="text-secondary text-sm ms-5  my-auto me-3">
-          Vous pouvez seulement créer une campagne
-        </p>
-        <argon-button
-          color="dark"
-          variant="outline"
-          size="sm"
-          class="mb-0 ms-auto"
-          type="button"
-          >Choisir</argon-button
-        >
-      </div>
-      <hr class="horizontal dark" />
-      <div class="d-flex">
-        <p class="my-auto " style="display: inline-block; min-width: 120px; text-align: center; box-sizing: border-box;">Pro   </p>
-        <p class="text-secondary text-sm ms-5  my-auto me-3">Vous pouvez personnaliser les jeux en ajoutant les éléments graphiques ou questions Quiz ainsi qu'afficher vos propres videos ads</p>
-        <argon-button
-          color="dark"
-          variant="outline"
-          size="sm"
-          class="mb-0 ms-auto"
-          type="button"
-          >Choisir</argon-button
-        >
-      </div>
-      <hr class="horizontal dark" />
-      <div class="d-flex">
-        <p class="my-auto " style="display: inline-block; min-width: 120px; text-align: center; box-sizing: border-box;">Ultimate</p>
-        <p class="text-secondary text-sm ms-5  my-auto me-3">
-          Vous pouvez ...
-        </p>
-        <argon-button
-          color="dark"
-          variant="outline"
-          size="sm"
-          class="mb-0 ms-auto"
-          type="button"
-          >Choisir</argon-button
-        >
-      </div>
     </div>
   </div>
   <!-- <div id="accounts" class="card mt-4">
@@ -677,7 +683,7 @@
 </template>
 
 <script>
-import * as Choices from "choices.js";
+/* import * as Choices from "choices.js"; */
 import ArgonButton from "@/components/ArgonButton.vue";
 /* import ArgonSwitch from "@/components/ArgonSwitch.vue"; */
 import ArgonBadge from "@/components/ArgonBadge.vue";
@@ -705,7 +711,7 @@ export default {
   data() {
     return {
       images: [img1, img2, img],
-      paragraphs: ['logo en couleur : ', 'logo en noir : ', 'logo en blanc : '], // initial paragraphs
+      paragraphs: ['logo en couleur : ', 'logo en noir : ', 'logo en blanc : '],
       /* img3,
       img4, */
     };
@@ -719,14 +725,14 @@ export default {
       this.createImage(file, index);
     },
     createImage(file, index) {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    this.images[index] = e.target.result;
-  };
-  reader.readAsDataURL(file);
-},
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.images[index] = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
   },
-  mounted() {
+  /* mounted() {
     if (document.getElementById("choices-gender")) {
       var gender = document.getElementById("choices-gender");
       new Choices(gender, { allowHTML: true });
@@ -820,6 +826,6 @@ export default {
         allowHTML: true,
       });
     }
-  },
+  }, */
 };
 </script>

@@ -27,7 +27,7 @@
                 name="choices-category"
                 v-model="selectedGame"
             >
-                <option :value="title" selected disabled>{{ title }}</option>
+                <option value="" selected disabled>Select a game</option>
                 <option value="Choice 1">QuizUp</option>
                 <option value="Choice 2">GoBowi</option>
                 <option value="Choice 3">DimaWin</option>
@@ -184,9 +184,6 @@ components: {
 },
 data() {
     return {
-    title: '',
-    description: '',
-    dateTime: '',
     selectedGift: '',
     selectedGame: "",
     date: "",
@@ -197,14 +194,6 @@ data() {
     couponValue: '10%',
     showDiv: false,
     };
-},
-created() {
-    console.log(this.$route.params);
-  if (this.$route.params.title) {
-    this.title = this.$route.params.title;
-    this.description = this.$route.params.description;
-    this.dateTime = this.$route.params.dateTime;
-  }
 },
 methods : {
     updateSelectedGift(event) {
@@ -429,6 +418,7 @@ beforeMount() {
 },  
 };
 </script>
+
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 

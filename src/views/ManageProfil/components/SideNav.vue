@@ -21,16 +21,7 @@
           <span class="text-sm">Info de base</span>
         </a>
       </li>
-      <li class="nav-item pt-2">
-        <a
-          class="nav-link text-body d-flex align-items-center"
-          data-scroll
-          href="#password"
-        >
-          <i class="ni ni-atom me-2 text-dark opacity-6"></i>
-          <span class="text-sm">Changer de mot de passe</span>
-        </a>
-      </li>
+      
       <li class="nav-item pt-2">
         <a
           class="nav-link text-body d-flex align-items-center"
@@ -39,6 +30,16 @@
         >
           <i class="ni ni-ui-04 me-2 text-dark opacity-6"></i>
           <span class="text-sm">choisir mon abonnement</span>
+        </a>
+      </li>
+      <li class="nav-item pt-2">
+        <a
+          class="nav-link text-body d-flex align-items-center"
+          data-scroll
+          href="#password"
+        >
+          <i class="ni ni-atom me-2 text-dark opacity-6"></i>
+          <span class="text-sm">Changer de mot de passe</span>
         </a>
       </li>
       <!-- <li class="nav-item pt-2">

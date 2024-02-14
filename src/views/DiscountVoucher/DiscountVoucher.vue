@@ -363,8 +363,12 @@
               :members="[team3, team4, team2, team3, team4]"
               :dropdown="[
                 {
-                    label : 'Bon de réduction',
+                    label : 'Consulter le bon de réduction',
                     route : '/DiscountVoucher/dv-details',
+                },
+                {
+                  label : 'Modifier/Supprimer bon de réduction',
+                  route : '/Campaign/edit-campaign'
                 }
               ]"
             />
@@ -379,8 +383,12 @@
               :members="[team4, team3, team2]"
               :dropdown="[
                 {
-                    label : 'Bon de réduction',
+                    label : 'Consulter le bon de réduction',
                     route : '/DiscountVoucher/dv-details',
+                },
+                {
+                  label : 'Modifier/Supprimer bon de réduction',
+                  route : '/Campaign/edit-campaign'
                 }
               ]"
             />
@@ -395,8 +403,12 @@
               :members="[team4, team2, team3, team4]"
               :dropdown="[
                 {
-                    label : 'Bon de réduction',
+                    label : 'Consulter le bon de réduction',
                     route : '/DiscountVoucher/dv-details',
+                },
+                {
+                  label : 'Modifier/Supprimer bon de réduction',
+                  route : '/Campaign/edit-campaign'
                 }
               ]"
             />
@@ -411,8 +423,12 @@
               :members="[team3, team4, team2, team3, team4, team2]"
               :dropdown="[
                 {
-                    label : 'Bon de réduction',
+                    label : 'Consulter le bon de réduction',
                     route : '/DiscountVoucher/dv-details',
+                },
+                {
+                  label : 'Modifier/Supprimer bon de réduction',
+                  route : '/Campaign/edit-campaign'
                 }
               ]"
             />
@@ -427,8 +443,12 @@
               :members="[team4, team3, team2, team4]"
               :dropdown="[
                 {
-                    label : 'Bon de réduction',
+                    label : 'Consulter le bon de réduction',
                     route : '/DiscountVoucher/dv-details',
+                },
+                {
+                  label : 'Modifier/Supprimer bon de réduction',
+                  route : '/Campaign/edit-campaign'
                 }
                 
               ]"

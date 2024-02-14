@@ -341,12 +341,8 @@
             terminated="en cours de validation, prévu pour débuter le"
             :members="[team3, team4, team2, team3, team4]"
             :actions="[
-            {
-              action: [
-                { label: 'Supprimer', route: 'javascript:;' },
-                { label: 'Modifier', route: 'javascript:;' },
-              ],
-            }
+              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
             ]"
           />
         </div>
@@ -359,12 +355,8 @@
             terminated="en cours de validation, prévu pour débuter le"
             :members="[team4, team3, team2]"
             :actions="[
-            {
-              action: [
-                { label: 'Supprimer', route: 'javascript:;' },
-                { label: 'Modifier', route: 'javascript:;' },
-              ],
-            }
+              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
             ]"
           />
         </div>
@@ -377,12 +369,8 @@
             terminated="en cours de validation, prévu pour débuter le"
             :members="[team4, team2, team3, team4]"
             :actions="[
-            {
-              action: [
-                { label: 'Supprimer', route: 'javascript:;' },
-                { label: 'Modifier', route: 'javascript:;' },
-              ],
-            }
+              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
             ]"
           />
         </div>
@@ -395,12 +383,8 @@
             terminated="en cours de validation, prévu pour débuter le"
             :members="[team3, team4, team2, team3, team4, team2]"
             :actions="[
-            {
-              action: [
-                { label: 'Supprimer', route: 'javascript:;' },
-                { label: 'Modifier', route: 'javascript:;' },
-              ],
-            }
+              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
             ]"
           />
         </div>
@@ -413,12 +397,8 @@
             terminated="en cours de validation, prévu pour débuter le"
             :members="[team4, team3, team2, team4]"
             :actions="[
-            {
-              action: [
-                { label: 'Supprimer', route: 'javascript:;' },
-                { label: 'Modifier', route: 'javascript:;' },
-              ],
-            }
+              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
             ]"
           />
         </div>
