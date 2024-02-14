@@ -28,7 +28,7 @@
           <label class="mt-4">Description</label>
           <p class="text-xs form-text text-muted ms-1 d-inline">(optional)</p>
           <div id="edit-description" class="h-50">
-            <!-- <p>Some initial <strong>bold</strong> text</p> -->
+            <p>écrivez la description de votre Ad ici</p>
           </div>
         </div>
         <!-- <div class="mt-4 col-sm-6 mt-sm-0">

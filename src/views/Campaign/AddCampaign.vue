@@ -37,9 +37,9 @@
             </div>
             <div class="col-6">
               <label for="product">Choisir un cadeau</label>
-              <select id="product" class="form-control" name="choices-category">
+              <select id="product" class="form-control" name="choices-category" @change="updateSelectedGift">
                 <option value="" selected disabled>Select a gift</option>
-                <option value="Choice 1">Laptop Victus HP</option>
+                <option value="Choice 1">Eau de Parfum Number 60 Unisex</option>
                 <option value="Choice 2">Msi Gaming Laptop</option>
                 <option value="Choice 3">Nvidea Geforce</option>
                 <option value="Choice 4">Lenovo Legion</option>
@@ -111,7 +111,7 @@
           </div>
           <br />
 
-           <div id="myDiv" v-show="showDiv" class="container" style="display: flex; justify-content: center; align-items: center;">
+           <div id="DV" v-show="showDiv" class="container" style="display: flex; justify-content: center; align-items: center;">
               <div class="card">
                 <div class="main">
                   <div class="co-img">
@@ -122,9 +122,9 @@
                   </div>
                   <div class="vertical"></div>
                   <div class="content">
-                    <h2>Artfin Oriental épicé</h2>
+                    <h2>{{ selectedGift }}</h2>
                     <h1><input type="text" v-model="couponValue" class="editable-input"> <span>Bon de réduction</span></h1>
-                    Valable jusqu'au <input type="text" value="30 avril 2025" class="long-input" />
+                    <p>Valable jusqu'au <input type="text" value="30 avril 2025" class="long-input" /></p> 
                   </div>
                 </div>
                 <div class="copy-button">
@@ -184,6 +184,7 @@ export default {
   },
   data() {
     return {
+      selectedGift: '',
       selectedGame: "",
       date: "",
       endDate: "",
@@ -195,6 +196,9 @@ export default {
     };
   },
   methods : {
+    updateSelectedGift(event) {
+    this.selectedGift = event.target.options[event.target.selectedIndex].text;
+  },
     toggleDiv() {
       this.showDiv = !this.showDiv;
     },
@@ -417,15 +421,16 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-#myDiv {
-  .editable-input {
+#DV {
+.editable-input {
   background: none;
   font-size: 1em;
   font-weight: 1000;
-  width: 70px;
+  width: 78px;
 }
+
 .long-input {
-  width: 120px; /* Adjust this value to suit your needs */
+  width: 110px; /* Adjust this value to suit your needs */
 }
 * {
   margin: 0;
@@ -506,6 +511,7 @@ export default {
   font-size: 35px;
   margin-left: -20px;
   color: #565656;
+  padding-left: 100px; 
 }
 
 .content h1 span {
@@ -516,12 +522,14 @@ export default {
   margin-left: -20px;
   color: #565656;
   text-transform: uppercase;
+  padding-left: 100px; 
 }
 
 .content p {
   font-size: 16px;
   color: #696969;
   margin-left: -20px;
+  padding-left: 100px; 
 }
 
 .copy-button {
@@ -546,6 +554,8 @@ export default {
   color: #fff;
   border: 1px solid transparent;
 }
+
+/* for mobile */
 .mobile-only {
   display: none;
 }
@@ -553,19 +563,25 @@ export default {
 .desktop-only {
   display: block;
 }
-@media (max-width: 600px) {
-  
 
+@media (max-width: 600px) {
+
+  .editable-input {
+  width: 58px;
+}
+  
   .content h1 {
-    font-size: 25px; /* reduce the font size on small screens */
+    font-size: 25px;
+    padding-left: 30px; /* reduce the font size on small screens */
   }
 
   .content h2 {
-    font-size: 14px; 
+    font-size: 14px;
+    padding-left: 30px; 
   }
 
   .content p {
-    font-size: 12px; 
+    padding-left: 30px; 
   }
   .mobile-only {
     display: block;
@@ -574,6 +590,20 @@ export default {
   .desktop-only {
     display: none;
   }
+  .card {
+  height: 230px;
+  }
+  .co-img img {
+  width: 100px;
+  height: 150px;
+  padding-right: 15px;
+}
+.vertical {
+  border-left: 5px dotted black;
+  height: 100px;
+  position: absolute;
+  left: 45%;
+}
 }
 }
 </style>

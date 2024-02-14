@@ -191,7 +191,7 @@
         <div class="row">
           <div id="currentCampaign" class="text-left col-md-8">
             <h4>Consulter mes bons de réductions </h4>
-            <h6>Cliquer sur <i class="text-lg fa fa-ellipsis-v"></i> pour consulter le bon de réduction de la campagne </h6>
+            <h6>Cliquer sur <i class="text-lg fa fa-ellipsis-v"></i> pour consulter ou valider le bon de réduction de la campagne </h6>
             <br>
             <p>Pour les campagnes en cours.</p>
           </div>
@@ -225,8 +225,12 @@
               :members="[team3, team4, team2, team3, team4]"
               :dropdown="[
                 {
-                  label: 'Bon de réduction',
+                  label: 'Consulter le Bon de réduction',
                   route: '/DiscountVoucher/dv-details',
+                },
+                {
+                  label: 'Valider le Bon de réduction',
+                  route: '/DiscountVoucher/dv-validation',
                 },
               ]"
             />
@@ -241,8 +245,12 @@
               :members="[team4, team3, team2]"
               :dropdown="[
                 {
-                  label: 'Bon de réduction',
+                  label: 'Consulter le Bon de réduction',
                   route: '/DiscountVoucher/dv-details',
+                },
+                {
+                  label: 'Valider le Bon de réduction',
+                  route: '/DiscountVoucher/dv-validation',
                 },
               ]"
             />
@@ -257,8 +265,12 @@
               :members="[team4, team2, team3, team4]"
               :dropdown="[
                 {
-                  label: 'Bon de réduction',
+                  label: 'Consulter le Bon de réduction',
                   route: '/DiscountVoucher/dv-details',
+                },
+                {
+                  label: 'Valider le Bon de réduction',
+                  route: '/DiscountVoucher/dv-validation',
                 },
               ]"
             />
@@ -273,8 +285,12 @@
               :members="[team3, team4, team2, team3, team4, team2]"
               :dropdown="[
                 {
-                  label: 'Bon de réduction',
+                  label: 'Consulter le Bon de réduction',
                   route: '/DiscountVoucher/dv-details',
+                },
+                {
+                  label: 'Valider le Bon de réduction',
+                  route: '/DiscountVoucher/dv-validation',
                 },
               ]"
             />
@@ -289,8 +305,12 @@
               :members="[team4, team3, team2, team4]"
               :dropdown="[
                 {
-                  label: 'Bon de réduction',
+                  label: 'Consulter le Bon de réduction',
                   route: '/DiscountVoucher/dv-details',
+                },
+                {
+                  label: 'Valider le Bon de réduction',
+                  route: '/DiscountVoucher/dv-validation',
                 },
               ]"
             />

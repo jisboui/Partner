@@ -64,6 +64,9 @@ import BibAds from "../views/EspaceAds/BibAds.vue";
 import Sondage from "../views/Survey/Sondage.vue";
 import DiscountVoucher from "../views/DiscountVoucher/DiscountVoucher.vue";
 import dvDetails from "../views/DiscountVoucher/dvDetails.vue";
+import dvValidation from "../views/DiscountVoucher/dvValidation.vue";
+import editCampaign from "../views/Campaign/editCampaign.vue";
+
 const routes = [
   {
     path: "/",
@@ -397,6 +400,17 @@ const routes = [
     name: "dvDetails", 
     component: dvDetails
   },
+  {
+    path: "/DiscountVoucher/dv-validation",
+    name: "dvValidation", 
+    component: dvValidation
+  },
+  {
+    path: "/campaign/edit-campaign",
+    name: "editCampaign", 
+    component: editCampaign
+  }
+
 
 ];
 

@@ -333,103 +333,92 @@
       </div>
       <div class="mt-2 row mt-lg-4">
         <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
+          <ComplexCardForValidation
             :logo="slackLogo"
             title="Laptop Victus HP"
             description="GoBowi"
             date-time="02.03.22"
-            terminated="en cours, terminera le"
+            terminated="en cours de validation, prévu pour débuter le"
             :members="[team3, team4, team2, team3, team4]"
-            :dropdown="[
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label:'supprimer',
-                route: 'javascript:;',
-              }
+            :actions="[
+            {
+              action: [
+                { label: 'Supprimer', route: 'javascript:;' },
+                { label: 'Modifier', route: 'javascript:;' },
+              ],
+            }
             ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
+          <ComplexCardForValidation
             :logo="spotifyLogo"
             title="Msi Gaming Laptop"
             description="DimaWin"
             date-time="22.11.21"
-            terminated="en cours, terminera le"
+            terminated="en cours de validation, prévu pour débuter le"
             :members="[team4, team3, team2]"
-            :dropdown="[
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label:'supprimer',
-                route: 'javascript:;',
-              }
+            :actions="[
+            {
+              action: [
+                { label: 'Supprimer', route: 'javascript:;' },
+                { label: 'Modifier', route: 'javascript:;' },
+              ],
+            }
             ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
+          <ComplexCardForValidation
             :logo="xdLogo"
             title="Lenovo Legion"
             description="QuizUp"
             date-time="06.03.20"
-            terminated="en cours, terminera le"
+            terminated="en cours de validation, prévu pour débuter le"
             :members="[team4, team2, team3, team4]"
-            :dropdown="[
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label:'supprimer',
-                route: 'javascript:;',
-              }
+            :actions="[
+            {
+              action: [
+                { label: 'Supprimer', route: 'javascript:;' },
+                { label: 'Modifier', route: 'javascript:;' },
+              ],
+            }
             ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
+          <ComplexCardForValidation
             :logo="asanaLogo"
             title="Hp Omen"
             description="HitSoumek"
             date-time="14.03.24"
-            terminated="en cours, terminera le"
+            terminated="en cours de validation, prévu pour débuter le"
             :members="[team3, team4, team2, team3, team4, team2]"
-            :dropdown="[
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label:'supprimer',
-                route: 'javascript:;',
-              }
+            :actions="[
+            {
+              action: [
+                { label: 'Supprimer', route: 'javascript:;' },
+                { label: 'Modifier', route: 'javascript:;' },
+              ],
+            }
             ]"
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
+          <ComplexCardForValidation
             :logo="invisionLogo"
             title="Nvidea Geforce"
             description="QuizUp"
             date-time="16.01.22"
-            terminated="en cours, terminera le"
+            terminated="en cours de validation, prévu pour débuter le"
             :members="[team4, team3, team2, team4]"
-            :dropdown="[
-              {
-                label: 'modifier',
-                route: 'javascript:;',
-              },
-              {
-                label:'supprimer',
-                route: 'javascript:;',
-              }
-              
+            :actions="[
+            {
+              action: [
+                { label: 'Supprimer', route: 'javascript:;' },
+                { label: 'Modifier', route: 'javascript:;' },
+              ],
+            }
             ]"
           />
         </div>
@@ -607,11 +596,13 @@ import asanaLogo from "@/assets/img/small-logos/dell.jpg";
 import ComplexProjectCard from "./components/ComplexProjectCard.vue";
 import PlaceholderCard from "@/examples/Cards/PlaceholderCard.vue";
 import setNavPills from "@/assets/js/nav-pills.js";
+import ComplexCardForValidation from "./components/ComplexCardForValidation.vue";
 
 export default {
   name: "CampaignHistory",
   components: {
     ComplexProjectCard,
+    ComplexCardForValidation,
     PlaceholderCard,
   },
   data() {

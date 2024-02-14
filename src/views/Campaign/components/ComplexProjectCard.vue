@@ -7,7 +7,7 @@
         </div>
         <div class="my-auto ms-3">
           <h6>{{ title }}</h6>
-          <div class="avatar-group">
+          <!-- <div class="avatar-group">
             <a
               v-for="(member, index) of members"
               :key="index"
@@ -18,7 +18,7 @@
             >
               <img alt="Image placeholder" :src="member" />
             </a>
-          </div>
+          </div> -->
         </div>
         <div class="ms-auto">
           <div class="dropdown">
@@ -62,7 +62,9 @@
         </div>
         <div class="col-6 text-end">
           <h6 class="mb-0 text-sm">{{ dateTime }}</h6>
-          <p class="mb-0 text-sm text-secondary font-weight-bold">{{ terminated }}</p>
+          <p class="mb-0 text-sm text-secondary font-weight-bold">
+            {{ terminated }}
+          </p>
         </div>
       </div>
     </div>
