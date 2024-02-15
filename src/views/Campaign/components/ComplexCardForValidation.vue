@@ -31,7 +31,7 @@
                   <a
                     class="btn btn-link px-3 mb-0"
                     :class="action.class"
-                    :href="action.route"
+                    @click="action.action()"
                   >
                     <i :class="action.icon + ' me-2'" aria-hidden="true"></i>
                     {{ action.label }}

@@ -339,10 +339,9 @@
             description="GoBowi"
             date-time="02.03.22"
             terminated="en cours de validation, prévu pour débuter le"
-            :members="[team3, team4, team2, team3, team4]"
             :actions="[
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Laptop Victus HP', 'GoBowi', '02.03.22')  },
             ]"
           />
         </div>
@@ -353,10 +352,9 @@
             description="DimaWin"
             date-time="22.11.21"
             terminated="en cours de validation, prévu pour débuter le"
-            :members="[team4, team3, team2]"
             :actions="[
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Msi Gaming Laptop', 'DimaWin', '02.03.22')  },
             ]"
           />
         </div>
@@ -367,10 +365,9 @@
             description="QuizUp"
             date-time="06.03.20"
             terminated="en cours de validation, prévu pour débuter le"
-            :members="[team4, team2, team3, team4]"
             :actions="[
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Lenovo Legion', 'QuizUp', '02.03.22')  },
             ]"
           />
         </div>
@@ -381,10 +378,9 @@
             description="HitSoumek"
             date-time="14.03.24"
             terminated="en cours de validation, prévu pour débuter le"
-            :members="[team3, team4, team2, team3, team4, team2]"
             :actions="[
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Hp Omen', 'HitSoumek', '02.03.22')  },
             ]"
           />
         </div>
@@ -395,10 +391,9 @@
             description="QuizUp"
             date-time="16.01.22"
             terminated="en cours de validation, prévu pour débuter le"
-            :members="[team4, team3, team2, team4]"
             :actions="[
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Nvidea Geforce', 'QuizUp', '02.03.22')  },
             ]"
           />
         </div>
@@ -601,6 +596,11 @@ export default {
     };
   },
   methods: {
+    editCampaign(title, description, dateTime) {
+    this.$router.push({ name: 'editCampaign', params: { title, 
+    description, 
+    dateTime } });
+  },
     callShowSwal() {
       this.$refs.sweetAlertsRef.showSwal("auto-close");
     },
