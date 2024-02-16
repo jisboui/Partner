@@ -24,7 +24,7 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form"   @submit.prevent="loginn">
                     <div class="mb-3">
                       <argon-input
                         id="email"
@@ -32,6 +32,8 @@
                         placeholder="Email"
                         name="email"
                         size="lg"
+                        :value="user.email"
+                        @input="user.email = $event.target.value"
                       />
                     </div>
                     <div class="mb-3">
@@ -41,11 +43,13 @@
                         placeholder="Password"
                         name="password"
                         size="lg"
+                        :value="user.password"
+                        @input="user.password = $event.target.value"
                       />
                     </div>
-                    <argon-switch id="rememberMe" name="rememberMe">
+                    <!-- <argon-switch id="rememberMe" name="rememberMe">
                       Remember me
-                    </argon-switch>
+                    </argon-switch> -->
                     <div class="text-center">
                       <argon-button
                         class="mt-4"
@@ -53,12 +57,13 @@
                         color="success"
                         full-width
                         size="lg"
+                       type="submit"
                         >Sign in</argon-button
                       >
                     </div>
                   </form>
                 </div>
-                <div class="px-1 pt-0 text-center card-footer px-lg-2">
+                <!-- <div class="px-1 pt-0 text-center card-footer px-lg-2">
                   <p class="mx-auto mb-4 text-sm">
                     Don't have an account?
                     <router-link
@@ -67,7 +72,7 @@
                       >Sign up</router-link
                     >
                   </p>
-                </div>
+                </div> -->
               </div>
             </div>
             <div
@@ -76,9 +81,9 @@
               <div
                 class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 :style="{
-    backgroundImage: 'url(' + require('@/assets/img/our-partner.png') + ')',
-    backgroundSize: 'cover'
-  }"
+                  backgroundImage: 'url(' + require('@/assets/img/our-partner.png') + ')',
+                  backgroundSize: 'cover'
+                }"
               >
                 <span class="mask bg-gradient-success opacity-6"></span>
 
@@ -100,21 +105,33 @@
 </template>
 
 <script>
+import { mapMutations, mapActions, mapState } from "vuex";
+
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
-import ArgonSwitch from "@/components/ArgonSwitch.vue";
+/* import ArgonSwitch from "@/components/ArgonSwitch.vue"; */
 import ArgonButton from "@/components/ArgonButton.vue";
 const body = document.getElementsByTagName("body")[0];
-import { mapMutations } from "vuex";
 export default {
   name: "SigninIllustration",
   components: {
     Navbar,
     ArgonInput,
-    ArgonSwitch,
+    /* ArgonSwitch, */
     ArgonButton,
   },
-  created() {
+  data() {
+    return {
+      user: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  computed: {
+    ...mapState("login", ["isAuthenticated", "user"]),
+  },
+  async created() {
     this.$store.state.hideConfigButton = true;
     this.toggleDefaultLayout();
     body.classList.remove("bg-gray-100");
@@ -126,6 +143,21 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleDefaultLayout"]),
+    ...mapActions("login", ["login"]), // Use the login action from the login module
+
+    async submitForm() {
+      console.log(this.user);
+    },
+    async loginn() {
+      try {
+        await this.login(this.user);
+        console.log("Login successful");
+      } catch (error) {
+        console.error("Login error:", error);
+      }
+    },
+
   },
+  
 };
 </script>

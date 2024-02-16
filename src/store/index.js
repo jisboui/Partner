@@ -1,6 +1,8 @@
 import { createStore } from "vuex";
 import bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 
+import loginModule from './modules/login.module';
+
 export default createStore({
   state: {
     hideConfigButton: false,
@@ -19,6 +21,9 @@ export default createStore({
     showMain: true,
     layout: "default",
     bootstrap,
+  },
+  modules: {
+    login: loginModule,
   },
   mutations: {
     toggleConfigurator(state) {
