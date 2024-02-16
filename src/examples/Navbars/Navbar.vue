@@ -69,18 +69,11 @@
         </div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
-            <router-link
-              :to="{ name: 'Signin Illustration' }"
-              class="px-0 nav-link font-weight-bold"
-              :class="
-                isNavFixed && !darkMode ? ' opacity-8 text-dark' : 'text-white'
-              "
-              target="_blank"
-            >
-              <i class="fa fa-user" :class="isRTL ? 'ms-sm-2' : 'me-sm-1'"></i>
-              <span v-if="isRTL" class="d-sm-inline d-none">يسجل دخول</span>
-              <span v-else class="d-sm-inline d-none">Sign In</span>
-            </router-link>
+            
+              <span v-if="!isLoggedIn" class="d-sm-inline d-none">ur not logged in and not supposed to see this </span>
+           
+              <button @click="logoutclick" v-if="isLoggedIn"> <span  class="d-sm-inline d-none" >Logout</span></button>
+           
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a
@@ -261,6 +254,10 @@ export default {
     };
   },
   computed: {
+    ...mapState("loginNS", ["isAuthenticated"]),
+    isLoggedIn() {
+      return this.isAuthenticated;
+    },
     ...mapState(["isRTL", "isNavFixed", "darkMode"]),
     currentRouteName() {
       return this.$route.name;
@@ -277,6 +274,13 @@ export default {
     /* this.toggleNavigationOnMobile();  */
   },
   methods: {
+    async logoutclick() {
+    try {
+      await this.$store.dispatch("loginNS/logout", this.$router);
+    } catch (error) {
+      console.error(error);
+    }
+  },
     ...mapMutations(["navbarMinimize", "toggleConfigurator"]),
     ...mapActions(["toggleSidebarColor"]),
     toggleNavigationOnMobile() {

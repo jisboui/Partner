@@ -24,7 +24,7 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form"   @submit.prevent="loginn">
+                  <form role="form"   @submit.prevent="loginclick">
                     <div class="mb-3">
                       <argon-input
                         id="email"
@@ -105,19 +105,18 @@
 </template>
 
 <script>
-import { mapMutations, mapActions, mapState } from "vuex";
-
+import { mapMutations } from "vuex";
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
-/* import ArgonSwitch from "@/components/ArgonSwitch.vue"; */
 import ArgonButton from "@/components/ArgonButton.vue";
+
 const body = document.getElementsByTagName("body")[0];
+
 export default {
   name: "SigninIllustration",
   components: {
     Navbar,
     ArgonInput,
-    /* ArgonSwitch, */
     ArgonButton,
   },
   data() {
@@ -128,14 +127,14 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapState("login", ["isAuthenticated", "user"]),
-  },
-  async created() {
+ async created() {
     this.$store.state.hideConfigButton = true;
     this.toggleDefaultLayout();
     body.classList.remove("bg-gray-100");
-  },
+    
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    console.log(isAuthenticated);
+    },
   beforeUnmount() {
     this.$store.state.hideConfigButton = false;
     this.toggleDefaultLayout();
@@ -143,21 +142,20 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleDefaultLayout"]),
-    ...mapActions("login", ["login"]), // Use the login action from the login module
-
-    async submitForm() {
-      console.log(this.user);
-    },
-    async loginn() {
+    /* ...mapActions("loginNS", ["login"]), */ // only needed when using : await this.login(this.user);
+    async loginclick() {
       try {
-        await this.login(this.user);
-        console.log("Login successful");
+        await this.$store.dispatch("loginNS/login", this.user); // or use : await this.login(this.user);
+        this.navigateToDashboard();
       } catch (error) {
-        console.error("Login error:", error);
+        console.error(error);
       }
     },
-
+    navigateToDashboard() {
+      this.$router.push({ name: 'Default' });
+    },
   },
-  
 };
 </script>
+
+

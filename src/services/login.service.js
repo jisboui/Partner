@@ -9,12 +9,10 @@ export const loginService = {
           'Content-Type': 'application/json'
         }
       });
-
-      console.log("Login response:", response);
-      // Handle the response or commit mutations as needed.
+      console.log("Login response from the service : ", response);
     } catch (error) {
       console.error("Login error:", error);
-      throw error; // Throw the error or handle it as needed.
+      throw error;
     }
   }
 };

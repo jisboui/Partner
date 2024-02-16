@@ -23,7 +23,7 @@ export default createStore({
     bootstrap,
   },
   modules: {
-    login: loginModule,
+    loginNS: loginModule,
   },
   mutations: {
     toggleConfigurator(state) {
