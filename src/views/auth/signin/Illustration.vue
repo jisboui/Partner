@@ -60,6 +60,7 @@
                        type="submit"
                         >Sign in</argon-button
                       >
+                      <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
                     </div>
                   </form>
                 </div>
@@ -123,7 +124,8 @@ export default {
     return {
       user: {
         email: '',
-        password: ''
+        password: '',
+        errorMessage: "",
       }
     }
   },
@@ -132,8 +134,8 @@ export default {
     this.toggleDefaultLayout();
     body.classList.remove("bg-gray-100");
     
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    console.log(isAuthenticated);
+   /*  const isAuthenticated = localStorage.getItem("isAuthenticated");
+    console.log("isAuthenticated = ",isAuthenticated); */
     },
   beforeUnmount() {
     this.$store.state.hideConfigButton = false;
@@ -141,14 +143,17 @@ export default {
     body.classList.add("bg-gray-100");
   },
   methods: {
+    /* ...mapState("loginNS", ["isAuthenticated"]), */
     ...mapMutations(["toggleDefaultLayout"]),
-    /* ...mapActions("loginNS", ["login"]), */ // only needed when using : await this.login(this.user);
+    /* ...mapActions("loginNS", ["login"]), */ // only needed to when using : await this.login(this.user);
     async loginclick() {
       try {
         await this.$store.dispatch("loginNS/login", this.user); // or use : await this.login(this.user);
         this.navigateToDashboard();
       } catch (error) {
         console.error(error);
+        this.errorMessage = "Email or password are wrong";
+        this.$forceUpdate();
       }
     },
     navigateToDashboard() {

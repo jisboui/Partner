@@ -619,16 +619,13 @@ const router = createRouter({
   linkActiveClass: "active"
 });
 router.beforeEach((to, from, next) => {
-  // Allow access to "/path-to-allow" regardless of authentication status
+  // Allow access to "/authentication/signin/illustration" regardless of authentication status
   if (to.path === "/authentication/signin/illustration") {
     next();
   } else if (to.matched.some(record => record.meta.requiresAuth)) {
-    // Check if isAuthenticated is true
     if (!isAuthenticated()) {
-      // Redirect to login or any other route
       next({ name: "Signin Illustration" });
     } else {
-      // Continue to the route
       next();
     }
   } else {

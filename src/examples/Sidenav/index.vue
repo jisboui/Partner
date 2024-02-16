@@ -37,7 +37,7 @@
         class="top-0 p-3 cursor-pointer fas fa-times text-secondary opacity-5 position-absolute end-0 d-none d-xl-none"
         aria-hidden="true"
       ></i>
-      <router-link class="m-0 navbar-brand" to="/">
+      <router-link class="m-0 navbar-brand" to="/dashboards/dashboard-default">
         <img
           :src="
             layout === 'landing' || darkMode || sidebarType === 'bg-default'
