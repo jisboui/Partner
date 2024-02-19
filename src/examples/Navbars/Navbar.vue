@@ -72,7 +72,7 @@
             
               <span v-if="!isLoggedIn" class="d-sm-inline d-none">ur not logged in and not supposed to see this </span>
            
-              <button @click="logoutclick" v-if="isLoggedIn"> <span  class="d-sm-inline d-none" >Logout</span></button>
+              <button class="logout-button" @click="logoutclick" v-if="isLoggedIn"> <span>Logout</span></button>
            
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -275,19 +275,30 @@ export default {
   },
   methods: {
     async logoutclick() {
-    try {
-      await this.$store.dispatch("loginNS/logout", this.$router);
-    } catch (error) {
+    /* try { */
+     /*  await this.$store.dispatch("loginNS/logout", this.$router); */
+      this.$store.dispatch("loginNS/logout", this.$router);
+    /* } catch (error) {
       console.error(error);
-    }
+    } */
   },
     ...mapMutations(["navbarMinimize", "toggleConfigurator"]),
     ...mapActions(["toggleSidebarColor"]),
-    toggleNavigationOnMobile() {
+    /* toggleNavigationOnMobile() {
       if (window.innerWidth < 1200) {
         this.navbarMinimize();
       }
-    },
+    }, */
   }
 };
 </script>
+
+<style scoped>
+
+@media (max-width: 600px) {
+  .logout-button {
+    padding: 2px; 
+    font-size: 13px; 
+  }
+}
+</style>

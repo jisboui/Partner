@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 
 import loginModule from './modules/login.module';
+import gamesModule from './modules/games.module';
 
 export default createStore({
   state: {
@@ -24,6 +25,7 @@ export default createStore({
   },
   modules: {
     loginNS: loginModule,
+    gameNS: gamesModule,
   },
   mutations: {
     toggleConfigurator(state) {

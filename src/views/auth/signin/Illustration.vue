@@ -152,7 +152,7 @@ export default {
         this.navigateToDashboard();
       } catch (error) {
         console.error(error);
-        this.errorMessage = "Email or password are wrong";
+        this.errorMessage = "Email or password are wrong, please try again!";
         this.$forceUpdate();
       }
     },

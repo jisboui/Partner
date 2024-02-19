@@ -343,19 +343,18 @@
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
               { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Laptop Victus HP', 'GoBowi', '02.03.22')  },
             ]"
+            @delete-card="deleteCard(index)"
           />
         </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <ComplexCardForValidation
-            :logo="spotifyLogo"
-            title="Msi Gaming Laptop"
-            description="DimaWin"
-            date-time="22.11.21"
-            terminated="en cours de validation, prévu pour débuter le"
-            :actions="[
-              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Msi Gaming Laptop', 'DimaWin', '02.03.22')  },
-            ]"
+        <div class="mb-4 col-lg-4 col-md-6" v-for="(card, index) in cards" :key="index">
+          <ComplexCardForValidation 
+            :logo="card.logo"
+            :title="card.title"
+            :description="card.description"
+            :date-time="card.dateTime"
+            :terminated="card.terminated"
+            :actions="card.actions"
+            @delete-card="deleteCard(index)" 
           />
         </div>
         <div class="mb-4 col-lg-4 col-md-6">
@@ -582,6 +581,20 @@ export default {
   },
   data() {
     return {
+      cards: [
+        {
+          logo: spotifyLogo,
+          title: 'Msi Gaming Laptop',
+          description: 'DimaWin',
+          dateTime: '22.11.21',
+          terminated: 'en cours de validation, prévu pour débuter le',
+          actions: [
+            { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
+            { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark', action: () => this.editCampaign('Msi Gaming Laptop', 'DimaWin', '02.03.22') },
+          ],
+        },
+        // Repeat the structure for other cards...
+      ],
       showMenu: false,
       team1,
       team2,
@@ -596,6 +609,9 @@ export default {
     };
   },
   methods: {
+    deleteCard(index) {
+      this.cards.splice(index, 1);
+    },
     editCampaign(title, description, dateTime) {
     this.$router.push({ name: 'editCampaign', params: { title, 
     description, 
@@ -605,7 +621,7 @@ export default {
       this.$refs.sweetAlertsRef.showSwal("auto-close");
     },
   },
-
+  
   mounted() {
     this.$store.state.isAbsolute = true;
     setNavPills();

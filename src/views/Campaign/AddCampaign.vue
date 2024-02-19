@@ -28,11 +28,7 @@
                 v-model="selectedGame"
               >
                 <option value="" selected disabled>Select a game</option>
-                <option value="Choice 1">QuizUp</option>
-                <option value="Choice 2">GoBowi</option>
-                <option value="Choice 3">DimaWin</option>
-                <option value="Choice 4">HitSoumek</option>
-                <option value="Choice 5">Others</option>
+                <option v-for="game in games.data" :key="game.id" value="Choice 4">{{ game.nameGame }}</option>
               </select>
             </div>
             <div class="col-6">
@@ -194,6 +190,22 @@ export default {
       couponValue: '10%',
       showDiv: false,
     };
+  },
+  async created() {
+    // try {
+      // const response = await this.$store.dispatch('gameNS/fetchGames');
+      this.$store.dispatch('gameNS/fetchGames')
+    //   console.log('Games response in the component:', response);
+    // } catch (error) {
+    //   console.error('Error fetching games:', error);
+    // }
+  },
+  computed: {
+    games() {
+    const games = this.$store.state.gameNS.games;
+    console.log('Games in computed property:', games);
+    return games;
+    },
   },
   methods : {
     updateSelectedGift(event) {

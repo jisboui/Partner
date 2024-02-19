@@ -31,7 +31,7 @@
                   <a
                     class="btn btn-link px-3 mb-0"
                     :class="action.class"
-                    @click="action.action()"
+                    @click="handleAction(action)"
                   >
                     <i :class="action.icon + ' me-2'" aria-hidden="true"></i>
                     {{ action.label }}
@@ -107,6 +107,15 @@ export default {
         showMenu: false,
       };
     },
+    methods: {
+    handleAction(action) {
+      if (action.label === 'Supprimer') {
+        this.$emit('delete-card');
+      } else {
+        action.action();
+      }
+    },
+  },
 };
 </script>
   
