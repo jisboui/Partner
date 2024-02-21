@@ -1,8 +1,13 @@
 import axios from 'axios';
 import dev from '../config/dev';
+/* import production from '../config/production'; */
 
 const base_URL = "auth/"
-const  API_URL = dev.host + base_URL;
+const API_URL = dev.host + base_URL;
+
+/* if (process.env.NODE_ENV === "production") {
+  API_URL = production.host + base_URL;
+} */
 
 export const loginService = {
   async serviceLogin(user) {

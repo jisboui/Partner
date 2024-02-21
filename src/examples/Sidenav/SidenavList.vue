@@ -35,12 +35,12 @@
             <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
           </template>
           <template #list>
-            <ul class="navbar-nav">
+            <ul class="nav ms-4">
               <li class="nav-item">
                 <sidenav-item
                   :to="{ name: 'AddCampaign' }"
                   mini-icon="NC"
-                  text="Créer une nouvelle campagne"
+                  text="Créer une campagne"
                 />
               </li>
               <li class="nav-item">
@@ -50,13 +50,31 @@
                   text="Consulter mes campagnes"
                 />
               </li>
-              <li class="nav-item">
-                <sidenav-item
-                  :to="{ name: 'DiscountVoucher' }"
-                  mini-icon="BR"
-                  text="Bons de réductions"
-                />
-              </li>
+            </ul>
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse
+          collapse-ref="ecommerceExamples"
+          nav-text="Discount Voucher"
+          :class="getRoute() === 'ecommerce' ? 'active' : ''"
+        >
+          <template #icon>
+            <i class="ni ni-archive-2 text-success text-sm opacity-10"></i>
+          </template>
+          <template #list>
+            <ul class="nav ms-4">
+              <sidenav-item
+                :to="{ name: 'DiscountVoucher' }"
+                mini-icon="BR"
+                text="Consulter/Valider les bons"
+              />
+              <sidenav-item
+                :to="{ name: 'dvList' }"
+                mini-icon="R"
+                text="Bibliothèque des bons"
+              />
             </ul>
           </template>
         </sidenav-collapse>
@@ -71,7 +89,7 @@
             <i class="ni ni-shop text-primary text-sm opacity-10"></i>
           </template>
           <template #list>
-            <ul class="navbar-nav">
+            <ul class="nav ms-4">
               <li class="nav-item">
                 <sidenav-item
                   :to="{ name: 'ProductList' }"
@@ -108,7 +126,7 @@
             <i class="ni ni-ui-04 text-info text-sm opacity-10"></i>
           </template>
           <template #list>
-            <ul class="navbar-nav">
+            <ul class="nav ms-4">
               <li class="nav-item">
               <sidenav-item
                 :to="{ name: 'BibAds' }"
@@ -334,83 +352,6 @@
           </template>
         </sidenav-collapse>
       </li> -->
-
-     
-<!-- 
-      <li class="nav-item">
-        <sidenav-collapse
-          collapse-ref="ecommerceExamples"
-          nav-text="Ecommerce"
-          :class="getRoute() === 'ecommerce' ? 'active' : ''"
-        >
-          <template #icon>
-            <i class="ni ni-archive-2 text-success text-sm opacity-10"></i>
-          </template>
-          <template #list>
-            <ul class="nav ms-4">
-              <sidenav-item
-                :to="{ name: 'Overview' }"
-                mini-icon="O"
-                text="Overview"
-              />
-
-              <sidenav-collapse-item
-                refer="productsExample"
-                mini-icon="P"
-                text="Products"
-              >
-                <template #nav-child-item>
-                  <sidenav-item
-                    :to="{ name: 'New Product' }"
-                    mini-icon="N"
-                    text="New Product"
-                  />
-                  <sidenav-item
-                    :to="{ name: 'Edit Product' }"
-                    mini-icon="E"
-                    text="Edit Product"
-                  />
-                  <sidenav-item
-                    :to="{ name: 'Product Page' }"
-                    mini-icon="P"
-                    text="Product page"
-                  />
-                  <sidenav-item
-                    :to="{ name: 'Products List' }"
-                    mini-icon="P"
-                    text="Products List"
-                  />
-                </template>
-              </sidenav-collapse-item>
-
-              <sidenav-collapse-item
-                refer="ordersExample"
-                mini-icon="O"
-                text="Orders"
-              >
-                <template #nav-child-item>
-                  <sidenav-item
-                    :to="{ name: 'Order List' }"
-                    mini-icon="O"
-                    text="Order List"
-                  />
-                  <sidenav-item
-                    :to="{ name: 'Order Details' }"
-                    mini-icon="O"
-                    text="Order Details"
-                  />
-                </template>
-              </sidenav-collapse-item>
-              <sidenav-item
-                :to="{ name: 'Referral' }"
-                mini-icon="R"
-                text="Referral"
-              />
-            </ul>
-          </template>
-        </sidenav-collapse>
-      </li>
- -->
       <!-- <li class="nav-item">
         <sidenav-collapse
           collapse-ref="authExamples"

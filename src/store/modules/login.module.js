@@ -18,7 +18,6 @@ const mutations = {
 };
 
 const actions = {
-
 async login( _, user) {
     try {
         /* commit('SET_USER', { username: user.username }); */
@@ -30,7 +29,6 @@ async login( _, user) {
     throw error;
     }
 },
-
 async logout(_, router) {
     try {
       if (router) {
@@ -43,7 +41,6 @@ async logout(_, router) {
       throw error;
     }
   },
-
 };
   
   export default {

@@ -284,11 +284,11 @@ export default {
   },
     ...mapMutations(["navbarMinimize", "toggleConfigurator"]),
     ...mapActions(["toggleSidebarColor"]),
-    /* toggleNavigationOnMobile() {
+    toggleNavigationOnMobile() {
       if (window.innerWidth < 1200) {
         this.navbarMinimize();
       }
-    }, */
+    },
   }
 };
 </script>

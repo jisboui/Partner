@@ -66,6 +66,7 @@ import DiscountVoucher from "../views/DiscountVoucher/DiscountVoucher.vue";
 import dvDetails from "../views/DiscountVoucher/dvDetails.vue";
 import dvValidation from "../views/DiscountVoucher/dvValidation.vue";
 import editCampaign from "../views/Campaign/editCampaign.vue";
+import dvList from "../views/DiscountVoucher/dvList.vue";
 
 const routes = [
   {
@@ -607,8 +608,19 @@ const routes = [
   {
     path: "/campaign/edit-campaign",
     name: "editCampaign", 
-    component: editCampaign
+    component: editCampaign,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/DiscountVoucher/dv-list",
+    name: "dvList", 
+    component: dvList,
+  meta: {
+    requiresAuth: true
   }
+  },
 
 
 ];

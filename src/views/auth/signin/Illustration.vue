@@ -32,7 +32,6 @@
                         placeholder="Email"
                         name="email"
                         size="lg"
-                        :value="user.email"
                         @input="user.email = $event.target.value"
                       />
                     </div>
@@ -43,7 +42,6 @@
                         placeholder="Password"
                         name="password"
                         size="lg"
-                        :value="user.password"
                         @input="user.password = $event.target.value"
                       />
                     </div>
@@ -125,9 +123,12 @@ export default {
       user: {
         email: '',
         password: '',
-        errorMessage: "",
-      }
+      },
+      errorMessage: "",
     }
+  },
+  computed: {
+    /* ...mapState("loginNS", ["isAuthenticated"]), */
   },
  async created() {
     this.$store.state.hideConfigButton = true;
@@ -143,7 +144,6 @@ export default {
     body.classList.add("bg-gray-100");
   },
   methods: {
-    /* ...mapState("loginNS", ["isAuthenticated"]), */
     ...mapMutations(["toggleDefaultLayout"]),
     /* ...mapActions("loginNS", ["login"]), */ // only needed to when using : await this.login(this.user);
     async loginclick() {

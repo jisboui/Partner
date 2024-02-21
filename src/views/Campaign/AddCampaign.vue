@@ -26,9 +26,10 @@
                 class="form-control"
                 name="choices-category"
                 v-model="selectedGame"
+                @change="updateSelectedGame"
               >
                 <option value="" selected disabled>Select a game</option>
-                <option v-for="game in games.data" :key="game.id" value="Choice 4">{{ game.nameGame }}</option>
+                <option v-for="game in games.data" :key="game.id" :value="game.id">{{ game.nameGame }}</option>
               </select>
             </div>
             <div class="col-6">
@@ -67,7 +68,7 @@
             </div>
           </div>
           <br />
-          <div v-show="selectedGame === 'Choice 2'">
+          <div v-show="selectedGame === '65b7c3424ea8bd2cd4d6968c'">
             <label class="mt-4 form-label"
               >Ajouter les éléments graphique à afficher à l'intérieur de GoBowi
               (pro+)</label
@@ -82,7 +83,7 @@
               </div>
             </form>
           </div>
-          <div v-show="selectedGame === 'Choice 1'">
+          <div v-show="selectedGame === '64ae6782d87e9d685790657d'">
             <label class="mt-4 form-label"
               >Ajouter le fichier.csv pour les questions de QuiUp (pro+)</label
             >
@@ -119,7 +120,7 @@
                   <div class="vertical"></div>
                   <div class="content">
                     <h2>{{ selectedGift }}</h2>
-                    <h1><input type="text" v-model="couponValue" class="editable-input"> <span>Bon de réduction</span></h1>
+                    <h1><input type="text" value="10%" class="editable-input"> <span>Bon de réduction</span></h1>
                     <p>Valable jusqu'au <input type="text" value="30 avril 2025" class="long-input" /></p> 
                   </div>
                 </div>
@@ -187,7 +188,6 @@ export default {
       config: {
         allowInput: true,
       },
-      couponValue: '10%',
       showDiv: false,
     };
   },
@@ -208,6 +208,11 @@ export default {
     },
   },
   methods : {
+    updateSelectedGame() {
+      // Update selectedGame with the value of the selected option
+      const select = document.getElementById("games");
+      this.selectedGame = select.value;
+    },
     updateSelectedGift(event) {
     this.selectedGift = event.target.options[event.target.selectedIndex].text;
   },
