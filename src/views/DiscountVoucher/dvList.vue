@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Bibliothèque des bons</h1>
-    
+    <br>
     <div id="DV" class="container" style="display: flex; justify-content: center; align-items: center;">
       <div class="card">
         <div class="main">
@@ -15,28 +15,28 @@
           <div class="content">
           <div>
           <div>
-            <label for="type">Choisir un type</label>
-            <select id="type"  class="form-control" style="width: 200px; margin-left: 85px;" v-model="dvP.dvType">
-              <option value="PRODUCT">PRODUCT</option>
-              <option value="service">service</option>
-              <option value="autre">autre</option>
+            <label for="dvType">Choisir un dvType</label>
+            <select id="dvType"  class="form-control" style="width: 200px; margin-left: 85px;" v-model="dvP.dvType">
+              <option value="PRODUCT">Produit</option>
+              <option value="service">Service</option>
+              <option value="autre">Autre</option>
             </select>
           </div>
           </div>
           <br>
-            <h1><input v-model="dvP.discountValue" type="text" class="editable-input"> <select class="editable-input" v-model="dvP.discountType"><option value="PERCENTAGE">Bon de réduction</option><option value="DINAR">Bon d'achat</option></select></h1>
-            <p>Valable <input v-model="dvP.validityInDays" type="text" class="long-input" /> jours</p> 
+            <h1><input v-model="dvP.discountValue" dvType="text" class="editable-input">% <select class="editable-input" v-model="dvP.discountType"><option value="PERCENTAGE">Bon de réduction</option><option value="DINAR">Bon d'achat</option></select></h1>
+            <p>Valable <input v-model="dvP.validityInDays" dvType="text" class="long-input"/> jours</p> 
           </div>
         </div>
         <br>
       <button @click="addItem" class="add-button">Ajouter le bon</button>
       </div>
     </div>
-<br>
-    <div class="items-container" >
+<br> <br>
+    <div v-if="items.length" class="items-container" >
       <div class="item" v-for="(dv,index) in dvs.data" :key="dv.id" :value="dv.id">
         <div class="item-details" >
-          <strong>{{ dv.discountValue }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType }} - {{ dv.discountType }}
+          <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Service" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}
         </div>
         <div class="item-actions">
           <button @click="editItem(index)" class="edit-button">Modifier</button>
@@ -45,22 +45,22 @@
       </div>
     </div>
 
-    <div>
+    <div v-else>
       <p>Pas de bons, ajouter en uns!</p>
     </div>
 
     <div v-if="editIndex !== null" class="modal">
       <div class="modal-content">
         <h2>Modifier le bon</h2>
-        <input v-model="editedItem.reduction" placeholder="% réduction" class="input-field">
-        <input v-model="editedItem.valabilité" placeholder="date d'expiration" class="input-field">
-            <select v-model="editedItem.type" class="input-field">
+        <input v-model="editedItem.discountValue" placeholder="% réduction" class="input-field">
+        <input v-model="editedItem.validityInDays" placeholder="date d'expiration" class="input-field">
+            <select v-model="editedItem.dvType" class="input-field">
               <option value="" selected disabled>Select Option</option>
-              <option value="PRODUCT">PRODUCT</option>
+              <option value="PRODUCT">Produit</option>
               <option value="service">service</option>
               <option value="autre">autre</option>
             </select>
-            <select v-model="editedItem.dtype" class="input-field">
+            <select v-model="editedItem.discountType" class="input-field">
               <option value="" selected disabled>Select Option</option>
               <option value="PERCENTAGE">Bon de réduction</option>
               <option value="DINAR">Bon d'achat</option>
@@ -80,33 +80,33 @@ export default {
   data() {
     return {
       dvP : {
-        dvType: "",
-        discountType: "",
-        validityInDays: '',
-        discountValue: '',
+        dvType: "PRODUCT",
+        discountType: "PERCENTAGE",
+        validityInDays: '30',
+        discountValue: '10',
       },/* 
-      newreduction: '',
-      newvalabilité: '',
+      newdiscountValue: '',
+      newvalidityInDays: '',
       newItemtype: '', */
       items: [], 
       editIndex: null,
       editedItem: {
-        reduction: '',
-        valabilité: '',
-        type: '',
-        dtype: ''
-
+        dvType: "",
+        discountType: "",
+        validityInDays: '',
+        discountValue: '',
       }
     };
   },
-  async created() {
+async created() {
   this.$store.dispatch('dvNS/fetchdv')
     .then(() => {
       this.items = this.dvs.data.map((dv) => ({
-        reduction: dv.discountValue,
-        valabilité: dv.validityInDays,
-        type: dv.dvType,
-        dtype : dv.discountType,
+        discountValue: dv.discountValue,
+        validityInDays: dv.validityInDays,
+        dvType: dv.dvType,
+        discountType : dv.discountType,
+        id: dv.id
       }));
       console.log("Items:", this.items);
     })
@@ -125,13 +125,13 @@ computed: {
     if (this.dvP.dvType && this.dvP.discountType && this.dvP.validityInDays && this.dvP.discountValue !== '') {
       this.$store.dispatch('dvPNS/postdvP', this.dvP);
      /*  this.items.push({
-        reduction: this.newreduction,
-        valabilité: this.newvalabilité,
-        type: this.newItemtype
+        discountValue: this.newdiscountValue,
+        validityInDays: this.newvalidityInDays,
+        dvType: this.newItemtype
       }); */
       // Clear input fields after adding item
-     /*  this.newreduction = '';
-      this.newvalabilité = '';
+     /*  this.newdiscountValue = '';
+      this.newvalidityInDays = '';
       this.newItemtype = ''; */
     } else {
       alert('Veuillez entrer tous les champs.');
@@ -140,25 +140,34 @@ computed: {
 
     editItem(index) {
       this.editIndex = index;
-      this.editedItem.reduction = this.items[index].reduction;
-      this.editedItem.valabilité = this.items[index].valabilité;
-      this.editedItem.type = this.items[index].type;
+      this.editedItem.dvType = this.items[index].dvType;
+      this.editedItem.discountType = this.items[index].discountType;
+      this.editedItem.validityInDays = this.items[index].validityInDays;
+      this.editedItem.discountValue = this.items[index].discountValue;    
     },
     saveEdit() {
-      this.items[this.editIndex].reduction = this.editedItem.reduction;
-      this.items[this.editIndex].valabilité = this.editedItem.valabilité;
-      this.items[this.editIndex].type = this.editedItem.type; 
+      this.items[this.editIndex].discountValue = this.editedItem.discountValue;
+      this.items[this.editIndex].validityInDays = this.editedItem.validityInDays;
+      this.items[this.editIndex].dvType = this.editedItem.dvType; 
+      const id = this.items[this.editIndex].id;
+      console.log("id:", id);
+      console.log("editedItem:", this.editedItem);    
+      console.log("dvP:", this.dvP); // it's the same as editedItem, why isnt't it updating ???
+       this.$store.dispatch('dvPUNS/updateDvP', {id ,dv : this.editedItem}); 
       this.cancelEdit();
-    },
+    }, 
     cancelEdit() {
       this.editIndex = null;
-      this.editedItem.reduction = '';
-      this.editedItem.valabilité = '';
-      this.editedItem.type = '';
+      this.editedItem.discountValue = '';
+      this.editedItem.validityInDays = '';
+      this.editedItem.dvType = '';
     },
     deleteItem(index) {
       if (confirm('Are you sure you want to delete this item?')) {
         this.items.splice(index, 1);
+        const id = this.items[index].id;
+        console.log("id of deletion:", id);
+        this.$store.dispatch('dvDeNS/deleteDv', {id});
         this.cancelEdit(); // Close the edit modal if open for the deleted item
       }
     }
@@ -286,7 +295,7 @@ computed: {
   background: none;
   font-size: 1em;
   font-weight: 1000;
-  width: 78px;
+  width: 50px;
   }
 
   .long-input {
@@ -376,7 +385,7 @@ computed: {
   .content h1 select {
   font-size: 17px;
   color: #565656;
-  width: 175px;
+  width: 170px;
   }
   .content h2 {
   font-size: 18px;

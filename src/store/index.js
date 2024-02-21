@@ -5,6 +5,8 @@ import loginModule from './modules/login.module';
 import gamesModule from './modules/games.module';
 import dvModule from './modules/dv.module';
 import dvPModule from './modules/dvP.module';
+import dvPUModule from './modules/dvPU.module';
+import dvDeModule from './modules/dvDe.module';
 
 export default createStore({
   state: {
@@ -30,6 +32,8 @@ export default createStore({
     gameNS: gamesModule,
     dvNS: dvModule,
     dvPNS: dvPModule,
+    dvPUNS: dvPUModule,
+    dvDeNS: dvDeModule,
   },
   mutations: {
     toggleConfigurator(state) {
