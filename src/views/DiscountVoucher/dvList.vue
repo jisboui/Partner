@@ -15,7 +15,7 @@
           <div class="content">
           <div>
           <div>
-            <label for="dvType">Choisir un dvType</label>
+            <label for="dvType">Choisir le type du bon </label>
             <select id="dvType"  class="form-control" style="width: 200px; margin-left: 85px;" v-model="dvP.dvType">
               <option value="PRODUCT">Produit</option>
               <option value="service">Service</option>
@@ -123,7 +123,7 @@ computed: {
   methods: {
   addItem() {
     if (this.dvP.dvType && this.dvP.discountType && this.dvP.validityInDays && this.dvP.discountValue !== '') {
-      this.$store.dispatch('dvPNS/postdvP', this.dvP);
+      this.$store.dispatch('dvNS/postdvP', this.dvP);
      /*  this.items.push({
         discountValue: this.newdiscountValue,
         validityInDays: this.newvalidityInDays,
@@ -150,10 +150,10 @@ computed: {
       this.items[this.editIndex].validityInDays = this.editedItem.validityInDays;
       this.items[this.editIndex].dvType = this.editedItem.dvType; 
       const id = this.items[this.editIndex].id;
-      console.log("id:", id);
+      console.log("id in edition:", id);
       console.log("editedItem:", this.editedItem);    
       console.log("dvP:", this.dvP); // it's the same as editedItem, why isnt't it updating ???
-       this.$store.dispatch('dvPUNS/updateDvP', {id ,dv : this.editedItem}); 
+       this.$store.dispatch('dvNS/updateDv', {id ,dvPU : this.editedItem}); 
       this.cancelEdit();
     }, 
     cancelEdit() {
@@ -164,14 +164,17 @@ computed: {
     },
     deleteItem(index) {
       if (confirm('Are you sure you want to delete this item?')) {
-        this.items.splice(index, 1);
         const id = this.items[index].id;
-        console.log("id of deletion:", id);
-        this.$store.dispatch('dvDeNS/deleteDv', {id});
+        console.log("id in deletion:", id);
+        this.items.splice(index, 1);
+        this.$store.dispatch('dvNS/deleteDv', {id});
         this.cancelEdit(); // Close the edit modal if open for the deleted item
       }
     }
-  }
+  },
+  beforeMount() {
+    this.$store.state.layout = "default";
+  },  
 };
 </script>
 
@@ -326,7 +329,7 @@ computed: {
 
   .card {
   width: 500px;
-  height: 230px;
+  height: 235px;
   border-radius: 5px;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
   background-color: beige;
@@ -370,7 +373,7 @@ computed: {
   }
   .vertical {
   border-left: 5px dotted black;
-  height: 100px;
+  height: 160px;
   position: absolute;
   left: 35%;
   }

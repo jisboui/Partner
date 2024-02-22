@@ -68,7 +68,7 @@
             </div>
           </div>
           <br />
-          <div v-show="selectedGame === '65b7c3424ea8bd2cd4d6968c'">
+          <div v-show="selectedGame === 'Gobowi'">
             <label class="mt-4 form-label"
               >Ajouter les éléments graphique à afficher à l'intérieur de GoBowi
               (pro+)</label
@@ -83,7 +83,7 @@
               </div>
             </form>
           </div>
-          <div v-show="selectedGame === '64ae6782d87e9d685790657d'">
+          <div v-show="selectedGame === 'QuizUp'">
             <label class="mt-4 form-label"
               >Ajouter le fichier.csv pour les questions de QuiUp (pro+)</label
             >
@@ -108,29 +108,20 @@
           </div>
           <br />
 
-           <div id="DV" v-show="showDiv" class="container" style="display: flex; justify-content: center; align-items: center;">
-              <div class="card">
-                <div class="main">
-                  <div class="co-img">
-                    <img
-                      src="https://scontent.fnbe1-2.fna.fbcdn.net/v/t39.30808-6/273207779_281563397405455_6026609381950187436_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=9WqjAmUBLWsAX_NkJM1&_nc_ht=scontent.fnbe1-2.fna&oh=00_AfA6qhovC-bEm09eAmf_MAkl55ucOzLSyMlp98oO1cvDlw&oe=65C9F461"
-                      alt=""
-                    />
-                  </div>
-                  <div class="vertical"></div>
-                  <div class="content">
-                    <h2>{{ selectedGift }}</h2>
-                    <h1><input type="text" value="10%" class="editable-input"> <span>Bon de réduction</span></h1>
-                    <p>Valable jusqu'au <input type="text" value="30 avril 2025" class="long-input" /></p> 
-                  </div>
-                </div>
-                <div class="copy-button">
-                  <input id="copyvalue" type="text" readonly value="QR code" />
-                  <button class="copybtn">COPY</button>
-                </div>
-                <br />
+          <div id="DV" v-show="showDiv"  style="display: flex; justify-content: center; align-items: center;">
+            <div class="items-container" >
+              <div>
+              <!-- {{ selectedGift }} -->
               </div>
-           </div>
+              <div class="item" v-for="(dv) in dvs.data" :key="dv.id" :value="dv.id">
+                <div class="item-details" >
+                  <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Service" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}
+                </div>
+                <input type="radio" :value="dv.id" v-model="selectedDv" @change="console.log('id:', selectedDv)" />
+              </div>
+            </div>
+          </div>
+          
            <br />
 
           <!-- <label class="mt-4 form-label">Project Tags</label>
@@ -181,6 +172,7 @@ export default {
   },
   data() {
     return {
+      selectedDv: null,
       selectedGift: '',
       selectedGame: "",
       date: "",
@@ -195,12 +187,17 @@ export default {
     // try {
       // const response = await this.$store.dispatch('gameNS/fetchGames');
       this.$store.dispatch('gameNS/fetchGames')
+      this.$store.dispatch('dvNS/fetchdv')
     //   console.log('Games response in the component:', response);
     // } catch (error) {
     //   console.error('Error fetching games:', error);
     // }
   },
   computed: {
+    dvs() {
+    const dvs = this.$store.state.dvNS.dv;
+    return dvs;
+  },
     games() {
     const games = this.$store.state.gameNS.games;
     console.log('Games in computed property:', games);
@@ -209,13 +206,14 @@ export default {
   },
   methods : {
     updateSelectedGame() {
-      // Update selectedGame with the value of the selected option
       const select = document.getElementById("games");
-      this.selectedGame = select.value;
+      const selectedOption = select.options[select.selectedIndex];
+      if (selectedOption.value)
+      this.selectedGame = selectedOption.text;
     },
     updateSelectedGift(event) {
-    this.selectedGift = event.target.options[event.target.selectedIndex].text;
-  },
+      this.selectedGift = event.target.options[event.target.selectedIndex].text;
+    },
     toggleDiv() {
       this.showDiv = !this.showDiv;
     },
@@ -260,177 +258,30 @@ export default {
   },  
 };
 </script>
+
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-#DV {
-.editable-input {
-  background: none;
-  font-size: 1em;
-  font-weight: 1000;
-  width: 78px;
+#app {
+  text-align: center;
 }
-
-.long-input {
-  width: 110px; /* Adjust this value to suit your needs */
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-.container {
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+.items-container {
   display: flex;
-  background-color: #6bcc8b;
-}
-.qr-img {
-  width: 100%;
-  height: 100vh;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  display: flex;
 }
-
-.card {
-  width: 500px;
-  height: 200px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
-  background-color: beige;
-  padding: 10px 20px;
-  position: relative;
-}
-
-.main,
-.copy-button {
+.item {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
   align-items: center;
+  width: 300px;
+  border-radius: 5px;
 }
-.card::after {
-  position: absolute;
-  content: "";
-  height: 40px;
-  right: -20px;
-  border-radius: 40px;
-  z-index: 1;
-  top: 70px;
-  background-color: white;
-  width: 40px;
-}
-
-.card::before {
-  position: absolute;
-  content: "";
-  height: 40px;
-  left: -20px;
-  border-radius: 40px;
-  z-index: 1;
-  top: 70px;
-  background-color: white;
-  width: 40px;
-}
-
-.co-img img {
-  width: 100px;
-  height: 100px;
-}
-.vertical {
-  border-left: 5px dotted black;
-  height: 100px;
-  position: absolute;
-  left: 35%;
-}
-
-.content h1 {
-  font-size: 35px;
-  margin-left: -20px;
-  color: #565656;
-  padding-left: 100px; 
-}
-
-.content h1 span {
-  font-size: 18px;
-}
-.content h2 {
-  font-size: 18px;
-  margin-left: -20px;
-  color: #565656;
-  text-transform: uppercase;
-  padding-left: 100px; 
-}
-
-.content p {
-  font-size: 16px;
-  color: #696969;
-  margin-left: -20px;
-  padding-left: 100px; 
-}
-
-.copy-button {
-  margin: 12px 0 -5px 0;
-  height: 45px;
-  border-radius: 4px;
-  padding: 0 5px;
-  border: 1px solid #e1e1e1;
-}
-
-.copy-button input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  font-size: 15px;
-}
-
-.copy-button button {
-  padding: 5px 20px;
-  background-color: #6bcc8b;
-  color: #fff;
-  border: 1px solid transparent;
-}
-
-@media (max-width: 600px) {
-
-  .editable-input {
-  width: 58px;
-}
-  
-  .content h1 {
-    font-size: 25px;
-    padding-left: 30px; /* reduce the font size on small screens */
-  }
-
-  .content h2 {
-    font-size: 14px;
-    padding-left: 30px; 
-  }
-
-  .content p {
-    padding-left: 30px; 
-  }
-  .card {
-  height: 230px;
-  }
-  .co-img img {
-  width: 100px;
-  height: 150px;
-  padding-right: 15px;
-}
-.vertical {
-  border-left: 5px dotted black;
-  height: 100px;
-  position: absolute;
-  left: 45%;
-}
-}
+.item-details {
+  flex-grow: 1;
 }
 </style>
 
