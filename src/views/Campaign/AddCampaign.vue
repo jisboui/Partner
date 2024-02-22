@@ -25,7 +25,6 @@
                 id="games"
                 class="form-control"
                 name="choices-category"
-                v-model="selectedGame"
                 @change="updateSelectedGame"
               >
                 <option value="" selected disabled>Select a game</option>
@@ -68,7 +67,7 @@
             </div>
           </div>
           <br />
-          <div v-show="selectedGame === 'Gobowi'">
+          <div v-show="selectedGame === 'GoBowi'">
             <label class="mt-4 form-label"
               >Ajouter les éléments graphique à afficher à l'intérieur de GoBowi
               (pro+)</label
@@ -111,11 +110,13 @@
           <div id="DV" v-show="showDiv"  style="display: flex; justify-content: center; align-items: center;">
             <div class="items-container" >
               <div>
-              <!-- {{ selectedGift }} -->
               </div>
               <div class="item" v-for="(dv) in dvs.data" :key="dv.id" :value="dv.id">
                 <div class="item-details" >
-                  <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Service" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}
+                  <span v-if="selectedDv === dv.id">
+                    {{ selectedGift }}
+                  </span> <br>                 
+                  <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Service" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}                 
                 </div>
                 <input type="radio" :value="dv.id" v-model="selectedDv" @change="console.log('id:', selectedDv)" />
               </div>
@@ -212,7 +213,7 @@ export default {
       this.selectedGame = selectedOption.text;
     },
     updateSelectedGift(event) {
-      this.selectedGift = event.target.options[event.target.selectedIndex].text;
+      this.selectedGift = event.target.options[event.target.selectedIndex].text; // shorter way to do it than the one above but it's another way
     },
     toggleDiv() {
       this.showDiv = !this.showDiv;

@@ -18,13 +18,12 @@
             <label for="dvType">Choisir le type du bon </label>
             <select id="dvType"  class="form-control" style="width: 200px; margin-left: 85px;" v-model="dvP.dvType">
               <option value="PRODUCT">Produit</option>
-              <option value="service">Service</option>
-              <option value="autre">Autre</option>
+              <option value="PURCHASE">Achat</option>
             </select>
           </div>
           </div>
           <br>
-            <h1><input v-model="dvP.discountValue" dvType="text" class="editable-input">% <select class="editable-input" v-model="dvP.discountType"><option value="PERCENTAGE">Bon de réduction</option><option value="DINAR">Bon d'achat</option></select></h1>
+            <h1><input v-model="dvP.discountValue" dvType="text" class="editable-input">% <select class="editable-input" v-model="dvP.discountType"><option value="PERCENTAGE">Bon de réduction</option><option value="FLAT_AMOUNT">Bon d'achat</option></select></h1>
             <p>Valable <input v-model="dvP.validityInDays" dvType="text" class="long-input"/> jours</p> 
           </div>
         </div>
@@ -36,7 +35,7 @@
     <div v-if="items.length" class="items-container" >
       <div class="item" v-for="(dv,index) in dvs.data" :key="dv.id" :value="dv.id">
         <div class="item-details" >
-          <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Service" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}
+          <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Achat" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}
         </div>
         <div class="item-actions">
           <button @click="editItem(index)" class="edit-button">Modifier</button>
@@ -57,13 +56,12 @@
             <select v-model="editedItem.dvType" class="input-field">
               <option value="" selected disabled>Select Option</option>
               <option value="PRODUCT">Produit</option>
-              <option value="service">service</option>
-              <option value="autre">autre</option>
+              <option value="PURCHASE">Achat</option>
             </select>
             <select v-model="editedItem.discountType" class="input-field">
               <option value="" selected disabled>Select Option</option>
               <option value="PERCENTAGE">Bon de réduction</option>
-              <option value="DINAR">Bon d'achat</option>
+              <option value="FLAT_AMOUNT">Bon d'achat</option>
             </select>
         <div class="modal-buttons">
           <button @click="saveEdit" class="save-button">Save</button>
@@ -124,6 +122,13 @@ computed: {
   addItem() {
     if (this.dvP.dvType && this.dvP.discountType && this.dvP.validityInDays && this.dvP.discountValue !== '') {
       this.$store.dispatch('dvNS/postdvP', this.dvP);
+      this.$store.dispatch('dvNS/fetchdv')
+      .then(() => {
+        this.$store.dispatch('dvNS/fetchdv');
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
      /*  this.items.push({
         discountValue: this.newdiscountValue,
         validityInDays: this.newvalidityInDays,
@@ -145,7 +150,7 @@ computed: {
       this.editedItem.validityInDays = this.items[index].validityInDays;
       this.editedItem.discountValue = this.items[index].discountValue;    
     },
-    saveEdit() {
+     saveEdit() {
       this.items[this.editIndex].discountValue = this.editedItem.discountValue;
       this.items[this.editIndex].validityInDays = this.editedItem.validityInDays;
       this.items[this.editIndex].dvType = this.editedItem.dvType; 
@@ -153,7 +158,13 @@ computed: {
       console.log("id in edition:", id);
       console.log("editedItem:", this.editedItem);    
       console.log("dvP:", this.dvP); // it's the same as editedItem, why isnt't it updating ???
-       this.$store.dispatch('dvNS/updateDv', {id ,dvPU : this.editedItem}); 
+       this.$store.dispatch('dvNS/updateDv', {id ,dvPU : this.editedItem})
+       .then(() => {
+        this.$store.dispatch('dvNS/fetchdv');
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
       this.cancelEdit();
     }, 
     cancelEdit() {
@@ -167,7 +178,13 @@ computed: {
         const id = this.items[index].id;
         console.log("id in deletion:", id);
         this.items.splice(index, 1);
-        this.$store.dispatch('dvNS/deleteDv', {id});
+        this.$store.dispatch('dvNS/deleteDv', {id})
+        .then(() => {
+          this.$store.dispatch('dvNS/fetchdv');
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
         this.cancelEdit(); // Close the edit modal if open for the deleted item
       }
     }
@@ -179,6 +196,7 @@ computed: {
 </script>
 
 <style scoped>
+
 #app {
   text-align: center;
 }
@@ -319,13 +337,6 @@ computed: {
   display: flex;
   background-color: #6bcc8b;
   }
-  .qr-img {
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  }
 
   .card {
   width: 500px;
@@ -350,7 +361,7 @@ computed: {
   right: -20px;
   border-radius: 40px;
   z-index: 1;
-  top: 70px;
+  top: 80px;
   background-color: #2dce89;
   width: 40px;
   }
@@ -362,7 +373,7 @@ computed: {
   left: -20px;
   border-radius: 40px;
   z-index: 1;
-  top: 70px;
+  top: 80px;
   background-color: #2dce89;
   width: 40px;
   }
@@ -373,7 +384,7 @@ computed: {
   }
   .vertical {
   border-left: 5px dotted black;
-  height: 160px;
+  height: 170px;
   position: absolute;
   left: 35%;
   }
