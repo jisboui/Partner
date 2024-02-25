@@ -7,7 +7,7 @@
         <div class="main">
           <div class="co-img">
             <img
-              src="https://scontent.fnbe1-2.fna.fbcdn.net/v/t39.30808-6/273207779_281563397405455_6026609381950187436_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=9WqjAmUBLWsAX_NkJM1&_nc_ht=scontent.fnbe1-2.fna&oh=00_AfA6qhovC-bEm09eAmf_MAkl55ucOzLSyMlp98oO1cvDlw&oe=65C9F461"
+              src="https://scontent.ftun1-2.fna.fbcdn.net/v/t39.30808-6/273207779_281563397405455_6026609381950187436_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=HGUW6fMm42IAX-W1BLb&_nc_ht=scontent.ftun1-2.fna&oh=00_AfA6GjWlWl60eSwUiQZgDtcuPkIWTPwCdy12_5kgyhBD4w&oe=65DDBAE1"
               alt=""
             />
           </div>
@@ -15,7 +15,7 @@
           <div class="content">
           <div>
           <div>
-            <label for="dvType">Choisir le type du bon </label>
+            <label for="dvType">Le bon se porte sur un :</label>
             <select id="dvType"  class="form-control" style="width: 200px; margin-left: 85px;" v-model="dvP.dvType">
               <option value="PRODUCT">Produit</option>
               <option value="PURCHASE">Achat</option>
@@ -23,7 +23,13 @@
           </div>
           </div>
           <br>
-            <h1><input v-model="dvP.discountValue" dvType="text" class="editable-input">% <select class="editable-input" v-model="dvP.discountType"><option value="PERCENTAGE">Bon de réduction</option><option value="FLAT_AMOUNT">Bon d'achat</option></select></h1>
+            <h1>
+              <input v-model="dvP.discountValue" dvType="text" class="editable-input">{{ discountSign }}
+                <select class="editable-input" v-model="dvP.discountType">
+                <option value="PERCENTAGE">Bon de réduction</option>
+                <option value="FLAT_AMOUNT">Bon d'achat</option>
+                </select>
+            </h1>
             <p>Valable <input v-model="dvP.validityInDays" dvType="text" class="long-input"/> jours</p> 
           </div>
         </div>
@@ -31,7 +37,7 @@
       <button @click="addItem" class="add-button">Ajouter le bon</button>
       </div>
     </div>
-<br> <br>
+      <br> <br>
     <div v-if="items.length" class="items-container" >
       <div class="item" v-for="(dv,index) in dvs.data" :key="dv.id" :value="dv.id">
         <div class="item-details" >
@@ -97,47 +103,49 @@ export default {
     };
   },
 async created() {
-  this.$store.dispatch('dvNS/fetchdv')
-    .then(() => {
-      this.items = this.dvs.data.map((dv) => ({
-        discountValue: dv.discountValue,
-        validityInDays: dv.validityInDays,
-        dvType: dv.dvType,
-        discountType : dv.discountType,
-        id: dv.id
-      }));
-      console.log("Items:", this.items);
-    })
-    .catch((error) => {
-      console.error("Error fetching dv:", error);
-    });
+  this.fillItems();
 },
 computed: {
   dvs() {
     const dvs = this.$store.state.dvNS.dv;
     return dvs;
   },
+  discountSign() {
+    return this.dvP.discountType == 'PERCENTAGE' ? '%' : 'Dt';
+  }
 },
   methods: {
+    fillItems() {
+    this.$store.dispatch('dvNS/fetchdv')
+      .then(() => {
+        this.items = this.dvs.data.map((dv) => ({
+          discountValue: dv.discountValue,
+          validityInDays: dv.validityInDays,
+          dvType: dv.dvType,
+          discountType : dv.discountType,
+          id: dv.id
+        }));
+        console.log("Items:", this.items);
+      })
+      .catch((error) => {
+        console.error("Error fetching dv:", error);
+      });
+  },
   addItem() {
     if (this.dvP.dvType && this.dvP.discountType && this.dvP.validityInDays && this.dvP.discountValue !== '') {
-      this.$store.dispatch('dvNS/postdvP', this.dvP);
-      this.$store.dispatch('dvNS/fetchdv')
+      this.$store.dispatch('dvNS/postdvP', this.dvP)
       .then(() => {
         this.$store.dispatch('dvNS/fetchdv');
+        this.fillItems();
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-     /*  this.items.push({
-        discountValue: this.newdiscountValue,
-        validityInDays: this.newvalidityInDays,
-        dvType: this.newItemtype
-      }); */
       // Clear input fields after adding item
-     /*  this.newdiscountValue = '';
-      this.newvalidityInDays = '';
-      this.newItemtype = ''; */
+        /* this.dvP.discountValue = "";
+        this.dvP.validityInDays = "";
+        this.dvP.discountType = '';
+        this.dvP.dvType = '';   */  
     } else {
       alert('Veuillez entrer tous les champs.');
     }
@@ -156,8 +164,6 @@ computed: {
       this.items[this.editIndex].dvType = this.editedItem.dvType; 
       const id = this.items[this.editIndex].id;
       console.log("id in edition:", id);
-      console.log("editedItem:", this.editedItem);    
-      console.log("dvP:", this.dvP); // it's the same as editedItem, why isnt't it updating ???
        this.$store.dispatch('dvNS/updateDv', {id ,dvPU : this.editedItem})
        .then(() => {
         this.$store.dispatch('dvNS/fetchdv');
@@ -196,7 +202,6 @@ computed: {
 </script>
 
 <style scoped>
-
 #app {
   text-align: center;
 }
@@ -393,7 +398,7 @@ computed: {
   font-size: 35px;
   margin-left: -20px;
   color: #565656;
-  padding-left: 100px; 
+  padding-left: 95px; 
   }
 
   .content h1 select {

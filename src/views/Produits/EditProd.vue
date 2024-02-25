@@ -16,7 +16,7 @@
           type="button"
           class="mt-2 mb-0 btn btn-outline-white ms-lg-auto me-lg-0 me-auto mt-lg-0"
         >
-          Save
+        <span @click="save()">Save</span>
         </router-link>
       </div>
     </div>
@@ -56,22 +56,34 @@
         </div>
       </div>
       <div class="mt-4 col-lg-8 mt-lg-0">
-        <div class="card">
+        <div class="card" style="height: 460px;">
           <div class="card-body">
             <h5 class="font-weight-bolder">Product Information</h5>
             <div class="row">
               <div class="col-12 col-sm-6">
+              <br>
                 <label>Name</label>
                 <input
                   class="form-control"
                   type="text"
-                  value="macbook-pro"
+                  placeholder="ex : Laptop Victus HP"
+                  v-model="prod.productName.EN"
                 />
+                
               </div>
-              <!-- <div class="mt-3 col-12 col-sm-6 mt-sm-0">
-                <label>Weight</label>
-                <input class="form-control" type="number" value="2" />
-              </div> -->
+              <div class=" col-sm-6">
+                <label class="mt-4">Tier</label>
+                <select
+                  id="choices-tier"
+                  class="form-control"
+                  name="choices-tier"
+                >
+                  <option value="T1" >T1</option>
+                  <option value="T2">T2</option>
+                  <option value="T3">T3</option>
+                  <option value="T4">T4</option>
+                </select>
+              </div>
             </div>
             <!-- <div class="row">
               <div class="col-3">
@@ -87,45 +99,45 @@
                 <input class="form-control" type="number" value="50" />
               </div>
             </div> -->
-            <div class="row">
-              <div class="col-sm-6">
-                <label class="mt-4">Description</label>
-                <p class="text-xs form-text text-muted ms-1 d-inline">
-                  (optional)
-                </p>
-                <div id="edit-description-edit" class="h-50">
-                  Long sleeves black denim jacket with a twisted design.
-                  Contrast stitching. Button up closure. White arrow prints on
-                  the back.
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <br>
+                  <label>Description</label>
+                  <input type="text" 
+                  class="multisteps-form__input form-control "
+                  placeholder="Ecrire la description de votre produit ici!"
+                  style="height: 115px;"
+                  v-model="prod.description.EN"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <label class="mt-4">Category</label>
+                  <select
+                    id="choices-category-edit"
+                    class="form-control"
+                    name="choices-category"
+                    v-model="prod.category"
+                  >
+                    <option value="Furniture" >Furniture</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Others">Others</option>
+                  </select>
+                  <!-- <label>Color</label>
+                  <select
+                    id="choices-color-edit"
+                    class="form-control"
+                    name="choices-color"
+                  >
+                    <option value="Choice 1" selected>Black</option>
+                    <option value="Choice 2">White</option>
+                    <option value="Choice 3">Blue</option>
+                    <option value="Choice 4">Orange</option>
+                    <option value="Choice 5">Green</option>
+                  </select> -->
                 </div>
               </div>
-              <div class="col-sm-6">
-                <label class="mt-4">Category</label>
-                <select
-                  id="choices-category-edit"
-                  class="form-control"
-                  name="choices-category"
-                >
-                  <option value="Choice 1" selected>Furniture</option>
-                  <option value="Choice 2">Real Estate</option>
-                  <option value="Choice 3">Electronics</option>
-                  <option value="Choice 4">Clothing</option>
-                  <option value="Choice 5">Others</option>
-                </select>
-                <!-- <label>Color</label>
-                <select
-                  id="choices-color-edit"
-                  class="form-control"
-                  name="choices-color"
-                >
-                  <option value="Choice 1" selected>Black</option>
-                  <option value="Choice 2">White</option>
-                  <option value="Choice 3">Blue</option>
-                  <option value="Choice 4">Orange</option>
-                  <option value="Choice 5">Green</option>
-                </select> -->
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -202,7 +214,33 @@ import Quill from "quill";
 
 export default {
   name: "EditProduct",
-
+ data() {
+    return {
+      prod :  {
+  "productName":  {
+     "EN": this.$route.params.productName,
+    "FR": "fr",
+    "AR": "ar" 
+  },
+  "description":  {
+    "EN": this.$route.params.description,
+    "FR": "fr",
+    "AR": "ar"
+  },
+  "itemImage": "https://firebasestorage.googleapis.com/v0/b/dopawinapi.appspot.com/o/petit-dej.png?alt=media",
+  "category": this.$route.params.category,
+  "idPartner": "65ce1b13f7da5b1fc0987383",
+  "productTier": "T1"
+},
+    };
+  },
+  methods: {
+    save() {
+      const id= this.$route.params.id;
+      console.log("id in edition:", id);
+      this.$store.dispatch('prodNS/updateProd', {id ,prodPU : this.prod})
+    },
+  },
   mounted() {
     if (document.getElementById("edit-description-edit")) {
       new Quill("#edit-description-edit", {

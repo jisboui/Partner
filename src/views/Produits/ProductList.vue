@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <!-- Card header -->
           <div class="pb-0 card-header">
             <div class="d-lg-flex">
               <div>
@@ -20,7 +19,7 @@
                     class="mb-0 btn bg-gradient-success btn-sm"
                     >+&nbsp; Nouveau produit
                   </router-link>
-                  <button
+                  <!-- <button
                     type="button"
                     class="mx-1 mb-0 btn btn-outline-success btn-sm"
                     data-bs-toggle="modal"
@@ -87,7 +86,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <!--  <button
                       class="mt-1 mb-0 btn btn-outline-success btn-sm export mt-sm-0"
                       data-type="csv"
@@ -103,6 +102,12 @@
           <div class="px-0 pb-0 card-body">
             <div class="table-responsive">
               <table id="products-list" class="table table-flush" > 
+                <colgroup>
+                  <col style="width: 450px; overflow: auto;"> 
+                  <col style="width: 220px; overflow: auto;"> 
+                  <col style="width: 400px; overflow: auto;"> 
+                  <col style="width: 125px; overflow: auto;"> 
+                </colgroup>
                 <thead class="thead-light">
                   <tr>
                     <th>Product</th>
@@ -114,8 +119,8 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody v-for="(prod) in prods.data" :key="prod.id" :value="prod.id">
-                  <tr>
+                <tbody >
+                  <tr v-for="(prod) in prods.data" :key="prod.id" :value="prod.id">
                     <td>
                       <div class="d-flex">
                         <!-- <div class="my-auto form-check">
@@ -137,14 +142,8 @@
                     </td>
                     <td class="text-sm">{{prod.category}}</td>
                     <!--            <td class="text-sm">$1,321</td> -->
-                    <td class="text-sm">{{prod.description}}</td>
+                    <td class="text-sm description-column" >{{prod.description}}</td>
                     <!--       <td class="text-sm">0</td>-->
-         
-                    <td>
-                      <!-- <span class="badge badge-danger badge-sm"
-                          >Out of Stock</span
-                        > -->
-                    </td>
                     <td class="text-sm">
                       <a
                         href="javascript:;"
@@ -153,21 +152,8 @@
                       >
                         <i class="fas fa-eye text-secondary"></i>
                       </a>
-                      <a
-                        href="/produits/edit-prod"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Edit product"
-                      >
-                        <i class="fas fa-user-edit text-secondary"></i>
-                      </a>
-                      <a
-                        href="javascript:;"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Delete product"
-                      >
-                        <i class="fas fa-trash text-secondary"></i>
-                      </a>
+                      <button @click="editProduct(prod.productName, prod.category, prod.description,prod.id)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
+                        <button @click="deleteProd(prod.id); console.log('id  : ',prod.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
                     </td>
                   </tr>
                 </tbody>
@@ -197,13 +183,14 @@ import setTooltip from "@/assets/js/tooltip.js";
 
 export default {
   name: "ProductList",
-  data() {
-    return {
-      dataTableSearch: null,
-    };
-  },
-  async created() {
+  created() {
     this.$store.dispatch("prodNS/fetchprod");
+  },
+  async mounted() {
+    await this.$store.dispatch("prodNS/fetchprod")
+    .then(() => {
+      /* this.setupDataTable(); */
+    });
   },
   computed: {
     prods() {
@@ -211,47 +198,65 @@ export default {
       return prods;
     },
   },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => vm.setupDataTable());
-  },
-  beforeRouteUpdate(to, from, next) {
-    this.setupDataTable();
-    next();
-  },
-  beforeRouteLeave(to, from, next) {
+ /*  beforeRouteLeave(to, from, next) {
     if (this.dataTableSearch) {
       this.dataTableSearch.destroy();
     }
     next();
-  },
+  }, */
   methods: {
+    editProduct(productName, category, description,id) {
+    this.$router.push({ name: 'EditProd', params: { productName, category, description,id} });
+  },
+    deleteProd(id) {
+    this.$store.dispatch('prodNS/deleteProd', { id })
+    .then(() => {
+      return this.$store.dispatch('prodNS/fetchprod');
+    })
+    .then(() => {
+      this.$nextTick(() => {
+        if (this.dataTableSearch) {
+          this.dataTableSearch.refresh();
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+},
     setupDataTable() {
       if (document.getElementById("products-list")) {
-        this.dataTableSearch = new DataTable("#products-list", {
-          searchable: true,
-          fixedHeight: false,
-          perPage: 5,
-        });
-
-        /* document.querySelectorAll(".export").forEach((el) => {
-            el.addEventListener("click", () => {
-              var type = el.dataset.type;
-    
-              var data = {
-                type: type,
-                filename: "soft-ui-" + type,
-              };
-    
-              if (type === "csv") {
-                data.columnDelimiter = "|";
-              }
-    
-              this.dataTableSearch.export(data);
-            });
-          }); */
+          this.dataTableSearch = new DataTable("#products-list", {
+            searchable: true,
+            fixedHeight: false,
+            perPage: 5,
+          });
+          document.getElementById("products-list").addEventListener("click", (event) => {
+          const target = event.target;
+          if (target.tagName.toLowerCase() === "button" && target.dataset.action === "delete") {
+          const id = target.closest("tr").getAttribute("value");
+          console.log("target closest tr wala chnia : ",id);
+          this.deleteProd(id);
+            }
+            else if (target.tagName.toLowerCase() === "button" && target.dataset.action === "tooltip") {
+              console.log("inside tooltip");
+              this.editProduct();
+            }
+          });
       }
       setTooltip(this.$store.state.bootstrap);
     },
   },
 };
 </script>
+
+<style scoped>
+#products-list {
+  table-layout: fixed;
+}
+
+#products-list .description-column {
+  width: 100px; 
+  overflow: auto;
+}
+</style>

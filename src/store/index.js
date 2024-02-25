@@ -4,6 +4,7 @@ import bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 import loginModule from './modules/login.module';
 import gamesModule from './modules/games.module';
 import dvModule from './modules/dv.module';
+import prodModule from './modules/prod.module';
 
 export default createStore({
   state: {
@@ -28,6 +29,7 @@ export default createStore({
     loginNS: loginModule,
     gameNS: gamesModule,
     dvNS: dvModule,
+    prodNS : prodModule,
   },
   mutations: {
     toggleConfigurator(state) {

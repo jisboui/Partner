@@ -113,10 +113,10 @@
               </div>
               <div class="item" v-for="(dv) in dvs.data" :key="dv.id" :value="dv.id">
                 <div class="item-details" >
-                  <span v-if="selectedDv === dv.id">
+                  <span v-if="selectedDv === dv.id && dv.dvType !== 'PURCHASE'">
                     {{ selectedGift }}
                   </span> <br>                 
-                  <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Service" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}                 
+                  <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Achat" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}                 
                 </div>
                 <input type="radio" :value="dv.id" v-model="selectedDv" @change="console.log('id:', selectedDv)" />
               </div>

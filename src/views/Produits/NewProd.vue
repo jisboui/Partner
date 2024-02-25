@@ -211,7 +211,7 @@
                 >
                   2. Media
                 </button>
-                <button
+                <!-- <button
                   class="multisteps-form__progress-btn"
                   type="button"
                   title="Socials"
@@ -219,7 +219,7 @@
                   @click="activeStep = 2"
                 >
                   3. Socials
-                </button>
+                </button> -->
                 <!-- <button
                     class="multisteps-form__progress-btn"
                     type="button"
@@ -241,7 +241,7 @@
                 <!--single form panel-->
                 <media :class="activeStep === 1 ? activeClass : ''" />
                 <!--single form panel-->
-                <socials :class="activeStep === 2 ? activeClass : ''" />
+                <!-- <socials :class="activeStep === 2 ? activeClass : ''" /> -->
                 <!--single form panel-->
                 <!-- <pricing :class="activeStep === 3 ? activeClass : ''" /> -->
               </form>
@@ -254,9 +254,9 @@
 </template>
 
 <script>
-import ProductInfo from "@/views/ecommerce/products/components/ProductInfo.vue";
-import Media from "@/views/ecommerce/products/components/Media.vue";
-import Socials from "@/views/ecommerce/products/components/Socials.vue";
+import ProductInfo from "./components/ProductInfo.vue";
+import Media from "./components/Media.vue";
+/* import Socials from "./components/Socials.vue"; */
 /* import Pricing from "@/views/ecommerce/products/components/Pricing.vue"; */
 
 /*import setNavPills from "@/assets/js/nav-pills.js"; */
@@ -265,7 +265,7 @@ export default {
   components: {
     ProductInfo,
     Media,
-    Socials,
+    /* Socials, */
     /* Pricing, */
   },
   data() {
@@ -273,11 +273,16 @@ export default {
       showMenu: false,
       activeClass: "js-active position-relative",
       activeStep: 0,
-      formSteps: 2,
+      formSteps: 1,
     };
   },
   beforeMount() {
     this.$store.state.layout = "custom";
+  },
+  computed: {
+    prod() {
+      return this.$store.state.prodNS.prodd;
+    },
   },
   methods: {
     nextStep() {
@@ -285,6 +290,8 @@ export default {
         // If not at the last step, move to the next step
         this.activeStep += 1;
       } else {
+        console.log("prod fel newprod : " , this.prod);
+        this.$store.dispatch('prodNS/postprodP', this.prod)
         // If at the last step, navigate to a different path
         this.$router.push("/produits/product-list");
       }

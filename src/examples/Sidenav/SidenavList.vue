@@ -104,13 +104,13 @@
                   text="Nouveau produit"
                 />
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <sidenav-item
                   :to="{ name: 'EditProd' }"
                   mini-icon="MP"
                   text="Modifier un produit"
                 />
-              </li>
+              </li> -->
               </ul>
           </template>
         </sidenav-collapse>
