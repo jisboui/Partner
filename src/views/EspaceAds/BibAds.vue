@@ -3,14 +3,12 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <!-- Card header -->
           <div class="pb-0 card-header">
             <div class="d-lg-flex">
               <div>
                 <h5 class="mb-0">Bibliothèque des vidéos Ads</h5>
                 <p class="mb-0 text-sm">
-                  C'est ici que vous trouveriez vos 5 vidéos Ads dont vous
-                  pourriez activer qu'une seule à la fois.
+                  C'est ici que vous trouveriez vos 5 vidéos Ads dont vous pourriez activer qu'une seule à la fois.
                 </p>
               </div>
               <div class="my-auto mt-4 ms-auto mt-lg-0">
@@ -18,10 +16,9 @@
                   <router-link
                     to="./ajouter-ad"
                     class="mb-0 btn bg-gradient-success btn-sm"
-                  >
-                    +&nbsp; Nouvelle Ad
+                    >+&nbsp; Nouveau aduit
                   </router-link>
-                  <button
+                  <!-- <button
                     type="button"
                     class="mx-1 mb-0 btn btn-outline-success btn-sm"
                     data-bs-toggle="modal"
@@ -88,26 +85,31 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- <button
-                    class="mt-1 mb-0 btn btn-outline-success btn-sm export mt-sm-0"
-                    data-type="csv"
-                    type="button"
-                    name="button"
-                  >
-                    Export
-                  </button> -->
+                  </div> -->
+                  <!--  <button
+                      class="mt-1 mb-0 btn btn-outline-success btn-sm export mt-sm-0"
+                      data-type="csv"
+                      type="button"
+                      name="button"
+                    >
+                      Export
+                    </button> -->
                 </div>
               </div>
             </div>
           </div>
           <div class="px-0 pb-0 card-body">
             <div class="table-responsive">
-              <table id="products-list" class="table table-flush">
+              <table id="aducts-list" class="table table-flush" > 
+                <colgroup>
+                  <col style="width: 450px; overflow: auto;"> 
+                  <col style="width: 220px; overflow: auto;"> 
+                  <col style="width: 400px; overflow: auto;"> 
+                  <col style="width: 125px; overflow: auto;"> 
+                </colgroup>
                 <thead class="thead-light">
                   <tr>
-                    <th class="wide-column">Titre et logo de l'Ad</th>
-                    <!-- <th>Category</th> -->
+                    <th>Ad image</th>
                     <!-- <th>Price</th> -->
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
@@ -115,278 +117,37 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody >
+                  <!-- <tr v-for="(ad) in ads.data" :key="ad.id" :value="ad.id">
                     <td>
                       <div class="d-flex">
-                        <!-- <div class="my-auto form-check">
-                          <input
-                            id="customCheck1"
-                            class="form-check-input"
-                            type="checkbox"
-                            checked
-                          />
-                        </div> -->
-                        <img class="w-20 ms-3" :src="img1" alt="hoodie" />
-                        <h6 class="my-auto ms-3">Publicité offre Artfin</h6>
+                        <img
+                          class=" ms-3"
+                          style="width: 140px; height: 130px;"
+                          :src="ad.adsList"
+                          alt="ad"
+                        />
+                        <h6 class="my-auto ms-3">{{ad.}}</h6>
                       </div>
                     </td>
-                    <!--  <td class="text-sm">Clothing</td>
-   -->
-                    <!--            <td class="text-sm">$1,321</td> -->
-                    <td class="text-sm">
-                      pub sur l'offre n°45 de Artfin qui se porte sur ..
-                    </td>
-                    <!--       <td class="text-sm">0</td>
-       -->
-                    <td>
-                      <!-- <span class="badge badge-danger badge-sm"
-                        >Out of Stock</span
-                      > -->
-                    </td>
+                    <td class="text-sm">{{ad.}}</td>
+                    <td class="text-sm description-column" >{{ad.}}</td>
                     <td class="text-sm">
                       <a
                         href="javascript:;"
                         data-bs-toggle="tooltip"
-                        data-bs-original-title="Preview product"
+                        data-bs-original-title="Preview aduct"
                       >
                         <i class="fas fa-eye text-secondary"></i>
                       </a>
-                      <!-- <a
-                        href="/produits/edit-prod"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Edit product"
-                      >
-                        <i class="fas fa-user-edit text-secondary"></i>
-                      </a> -->
-                      <a
-                        href="javascript:;"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Delete product"
-                      >
-                        <i class="fas fa-trash text-secondary"></i>
-                      </a>
+                      <button @click="editAd(ad., ad., ad.,ad.)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
+                        <button @click="deleteAd(ad.id); console.log('id  : ',ad.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex">
-                        <!-- <div class="my-auto form-check">
-                          <input
-                            id="customCheck2"
-                            class="form-check-input"
-                            type="checkbox"
-                            checked
-                          />
-                        </div> -->
-                        <img class="w-20 ms-3" :src="img2" alt="mac" />
-                        <h6 class="my-auto ms-3">
-                          Annonce d'arriver produit
-                        </h6>
-                      </div>
-                    </td>
-                    <!--  <td class="text-sm">Electronics</td>
-   -->
-                    <!--            <td class="text-sm">$1,869</td> -->
-                    <td class="text-sm">Pub sur l'arrivée de nouvelle édition de parfum</td>
-                    <!--       <td class="text-sm">0</td>
-       -->
-                    <td>
-                      <!-- <span class="badge badge-danger badge-sm"
-                        >Out of Stock</span
-                      > -->
-                    </td>
-                    <td class="text-sm">
-                      <a
-                        href="javascript:;"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Preview product"
-                      >
-                        <i class="fas fa-eye text-secondary"></i>
-                      </a>
-                      <!-- <a
-                        href="/produits/edit-prod"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Edit product"
-                      >
-                        <i class="fas fa-user-edit text-secondary"></i>
-                      </a> -->
-                      <a
-                        href="javascript:;"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Delete product"
-                      >
-                        <i class="fas fa-trash text-secondary"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex">
-                        <!-- <div class="my-auto form-check">
-                          <input
-                            id="customCheck3"
-                            class="form-check-input"
-                            type="checkbox"
-                          />
-                        </div>-->
-                        <img class="w-20 ms-3" :src="img3" alt="metro-chair" />
-                        <h6 class="my-auto ms-3">Annoce local</h6>
-                      </div>
-                    </td>
-                    <!-- <td class="text-sm">Furniture</td>
-   -->
-                    <!--            <td class="text-sm">$99</td>
- -->
-                    <td class="text-sm">
-                      disponibilité de nos produits dans nouveau local
-                    </td>
-                    <!--       <td class="text-sm">978</td>
-     -->
-                    <td>
-                      <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
-                    </td>
-                    <td class="text-sm">
-                      <a
-                        href="javascript:;"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Preview product"
-                      >
-                        <i class="fas fa-eye text-secondary"></i>
-                      </a>
-                      <!-- <a
-                        href="/produits/edit-prod"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Edit product"
-                      >
-                        <i class="fas fa-user-edit text-secondary"></i>
-                      </a> -->
-                      <a
-                        href="javascript:;"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Delete product"
-                      >
-                        <i class="fas fa-trash text-secondary"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex">
-                        <!-- <div class="my-auto form-check">
-                          <input
-                            id="customCheck10"
-                            class="form-check-input"
-                            type="checkbox"
-                          />
-                        </div>-->
-                        <img class="w-20 ms-3" :src="img4" alt="alchimia" />
-                        <h6 class="my-auto ms-3">
-                          Pub produit Oriental épicé
-                        </h6>
-                      </div>
-                    </td>
-                    <!-- <td class="text-sm">Furniture</td>
-   -->
-                    <!--            <td class="text-sm">$2,999</td> -->
-                    <td class="text-sm">Image pub pour produit Oriental épicé</td>
-                    <!--       <td class="text-sm">0</td>
-       -->
-                    <td>
-                      <!-- <span class="badge badge-danger badge-sm"
-                        >Out of Stock</span
-                      > -->
-                    </td>
-                    <td class="text-sm">
-                      <a
-                        href="javascript:;"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Preview product"
-                      >
-                        <i class="fas fa-eye text-secondary"></i>
-                      </a>
-                      <!-- <a
-                        href="/produits/edit-prod"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Edit product"
-                      >
-                        <i class="fas fa-user-edit text-secondary"></i>
-                      </a> -->
-                      <a
-                        href="javascript:;"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Delete product"
-                      >
-                        <i class="fas fa-trash text-secondary"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex">
-                        <!-- <div class="my-auto form-check">
-                          <input
-                            id="customCheck5"
-                            class="form-check-input"
-                            type="checkbox"
-                          />
-                        </div> -->
-                        <img class="w-20 ms-3" :src="img5" alt="fendi" />
-                        <h6 class="my-auto ms-3">
-                          Pub produit Floral Fruité
-                        </h6>
-                      </div>
-                    </td>
-                    <!--  <td class="text-sm">Clothing</td>
-   -->
-                    <!--            <td class="text-sm">$869</td>
--->
-                    <td class="text-sm">Image pub pour produit Floral Fruité</td>
-                    <!--       <td class="text-sm">725</td>
-     -->
-                    <td>
-                      <!-- <span class="badge badge-success badge-sm">in Stock</span> -->
-                    </td>
-                    <td class="text-sm">
-                      <a
-                        href="javascript:;"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Preview product"
-                      >
-                        <i class="fas fa-eye text-secondary"></i>
-                      </a>
-                      <!-- <a
-                        href="/produits/edit-prod"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Edit product"
-                      >
-                        <i class="fas fa-user-edit text-secondary"></i>
-                      </a> -->
-                      <a
-                        href="javascript:;"
-                        class="mx-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-original-title="Delete product"
-                      >
-                        <i class="fas fa-trash text-secondary"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <!--  -->
+                  </tr> -->
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Titre et logo de l'Ad</th>
-                    <!-- <th>Category</th> -->
+                    <th>Ad image</th>
                     <!-- <th>Price</th> -->
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
@@ -406,70 +167,80 @@
 <script>
 import { DataTable } from "simple-datatables";
 import setTooltip from "@/assets/js/tooltip.js";
-import img1 from "./assets/images/img1.jpg";
-import img2 from "./assets/images/img2.jpg";
-import img3 from "./assets/images/img3.jpg";
-import img4 from "./assets/images/img4.jpg";
-import img5 from "./assets/images/img5.jpg";
 
 export default {
-  name: "ProductList",
-  data() {
-    return {
-      img1,
-      img2,
-      img3,
-      img4,
-      img5,
-      dataTableSearch: null,
-    };
+  name: "BibAds",
+  created() {
+    this.$store.dispatch("adNS/fetchad");
   },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => vm.setupDataTable());
+  async mounted() {
+      /* this.setupDataTable(); */
   },
-  beforeRouteUpdate(to, from, next) {
-    this.setupDataTable();
-    next();
+  computed: {
+    ads() {
+      const ads = this.$store.state.adNS.ad;
+      return ads;
+    },
   },
-  beforeRouteLeave(to, from, next) {
+ /*  beforeRouteLeave(to, from, next) {
     if (this.dataTableSearch) {
       this.dataTableSearch.destroy();
     }
     next();
-  },
+  }, */
   methods: {
+    editAd(aductName, category, description,id) {
+    this.$router.push({ name: 'EditAd', params: { aductName, category, description,id} });
+  },
+    deleteAd(id) {
+    this.$store.dispatch('adNS/deleteAd', { id })
+    .then(() => {
+      return this.$store.dispatch('adNS/fetchad');
+    })
+    .then(() => {
+      this.$nextTick(() => {
+        if (this.dataTableSearch) {
+          this.dataTableSearch.refresh();
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+},
     setupDataTable() {
-      if (document.getElementById("products-list")) {
-        this.dataTableSearch = new DataTable("#products-list", {
-          searchable: true,
-          fixedHeight: false,
-          perPage: 7,
-        });
-
-        /* document.querySelectorAll(".export").forEach((el) => {
-          el.addEventListener("click", () => {
-            var type = el.dataset.type;
-
-            var data = {
-              type: type,
-              filename: "soft-ui-" + type,
-            };
-
-            if (type === "csv") {
-              data.columnDelimiter = "|";
-            }
-
-            this.dataTableSearch.export(data);
+      if (document.getElementById("aducts-list")) {
+          this.dataTableSearch = new DataTable("#aducts-list", {
+            searchable: true,
+            fixedHeight: false,
+            perPage: 5,
           });
-        }); */
+          document.getElementById("aducts-list").addEventListener("click", (event) => {
+          const target = event.target;
+          if (target.tagName.toLowerCase() === "button" && target.dataset.action === "delete") {
+          const id = target.closest("tr").getAttribute("value");
+          console.log("target closest tr wala chnia : ",id);
+          this.deleteAd(id);
+            }
+            else if (target.tagName.toLowerCase() === "button" && target.dataset.action === "tooltip") {
+              console.log("inside tooltip");
+              this.editAd();
+            }
+          });
       }
       setTooltip(this.$store.state.bootstrap);
     },
   },
 };
 </script>
+
 <style scoped>
-.wide-column {
-  width: 200000px; /* adjust as needed */
+#aducts-list {
+  table-layout: fixed;
+}
+
+#aducts-list .description-column {
+  width: 100px; 
+  overflow: auto;
 }
 </style>

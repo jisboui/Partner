@@ -3,15 +3,16 @@
     class="p-3 bg-white card multisteps-form__panel border-radius-xl"
     data-animation="FadeIn"
   >
-    <h5 class="font-weight-bolder">Titre de l'Ad</h5>
+    <h5 class="font-weight-bolder">Info sur l'Ad</h5>
     <div class="multisteps-form__content">
       <div class="mt-3 row">
         <div class="col-12 col-sm-6">
-          <label>Titre</label>
+          <label>Id room</label>
           <input
             class="multisteps-form__input form-control"
             type="text"
-            placeholder="Publicité pour pc Lenovo"
+            placeholder="id room"
+            v-model="ad.idRoom"
           />
         </div>
         <!-- <div class="mt-3 col-12 col-sm-6 mt-sm-0">
@@ -24,12 +25,13 @@
         </div> -->
       </div>
       <div class="row">
-        <div class="col-sm-6">
-          <label class="mt-4">Description</label>
-          <p class="text-xs form-text text-muted ms-1 d-inline">(optional)</p>
-          <div id="edit-description" class="h-50">
-            <p>écrivez la description de votre Ad ici</p>
-          </div>
+          <div class="col-12 col-sm-6">
+          <label>Description</label>
+          <input type="text" 
+          class="multisteps-form__input form-control h-100"
+          placeholder="Ecrire la description de votre ad ici!"
+          v-model="ad.partnerDescription"
+          />
         </div>
         <!-- <div class="mt-4 col-sm-6 mt-sm-0">
           <label class="mt-4">Category</label>
@@ -70,8 +72,6 @@
 </template>
 
 <script>
-import Quill from "quill";
-import Choices from "choices.js";
 import ArgonButton from "@/components/ArgonButton.vue";
 
 export default {
@@ -81,34 +81,20 @@ export default {
   },
   data() {
     return {
-      choicesInstances: [],
+      ad:{
+  "imageUrl": "https://firebasestorage.googleapis.com/v0/b/dopawinapi.appspot.com/o/petit-dej.png?alt=media",
+  "idRoom": "",
+  "startDate": "2024-02-25T19:12:44.318Z",
+  "partnerDescription": ""
+}
     };
   },
   mounted() {
-    if (document.getElementById("edit-description")) {
-      // eslint-disable-next-line no-unused-vars
-      var quill = new Quill("#edit-description", {
-        theme: "snow", // Specify theme in configuration
-      });
-    }
-    if (document.getElementById("choices-category")) {
-      var element = document.getElementById("choices-category");
-      this.choicesInstances.push(new Choices(element, {
-        searchEnabled: false,
-        allowHTML: true,
-      }));
-    }
-
-    if (document.getElementById("choices-sizes")) {
-      let element = document.getElementById("choices-sizes");
-      this.choicesInstances.push(new Choices(element, {
-        searchEnabled: false,
-        allowHTML: true,
-      }));
-    }
+    this.$store.commit('adNS/updateAd', this.ad);
+    console.log("ad fel adinfo : ",this.ad);
   },
   beforeUnmount() {
-    this.choicesInstances.forEach(instance => instance.destroy());
+    /* this.choicesInstances.forEach(instance => instance.destroy()); */
   },
 };
 </script>

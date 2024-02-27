@@ -18,14 +18,16 @@ export const loginService = {
           'Content-Type': 'application/json'
         }
       });
-      if (response.data && response.data.token) {
+      if (response.data && response.data.token && response.data.user.partnerId) {
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('partnerId', response.data.user.partnerId);
         console.log("Login response from the service : ", response);
 
       } else {
         console.error("Login error: Token not found in the response");
         throw new Error("Token not found in the response"); 
       }
+     /*  return response; */ //no need to return response to the action since i'm already locally storing the partnerId from here
     } catch (error) {
       console.error("Login error:", error);
       throw error;

@@ -1,7 +1,4 @@
-import { dvService } from "@/services/dv.service";
-import { dvPService } from "@/services/dvP.service";
-import { dvDeService } from "@/services/dvDe.service";
-import { dvPUService } from "@/services/dvPU.service";
+import  {dvService}  from "@/services/dv.service";
 
 const state = {
     dv: [],
@@ -28,7 +25,7 @@ const actions = {
     },
     async postdvP(_,dvP) {
         try {
-            const response = await dvPService.serviceDvP(dvP);
+            const response = await dvService.serviceDvP(dvP);
             console.log("dvP response from the action : ", response);
         } catch (error) {
             console.error("dvP error:", error);
@@ -37,7 +34,7 @@ const actions = {
     },
     async deleteDv(_, { id }) {
         try {
-          const response = await dvDeService.serviceDvDe(id);
+          const response = await dvService.serviceDvDe(id);
           console.log("Delete dvP action response: ", response);
          /*  return response; */
         } catch (error) {
@@ -47,7 +44,7 @@ const actions = {
       },
       async updateDv(_, { id, dvPU }) {
         try {
-          const response = await dvPUService.serviceDvPU(id, dvPU);
+          const response = await dvService.serviceDvPU(id, dvPU);
           console.log("Update dvP action response: ", response);
          /*  return response; */
         } catch (error) {

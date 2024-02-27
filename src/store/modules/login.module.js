@@ -14,6 +14,7 @@ const mutations = {
   }, */
   /* SET_USER(state, user) {
     state.user = user;
+    console.log("User state :", user);
   }, */
 };
 
@@ -21,9 +22,9 @@ const actions = {
 async login( _, user) {
     try {
         /* commit('SET_USER', { username: user.username }); */
-        await loginService.serviceLogin(user); 
-        
+       const response = await loginService.serviceLogin(user); 
        localStorage.setItem("isAuthenticated", "true");  
+       console.log("Login response from the action : ", response);
     } catch (error) {
     console.error("Login error:", error);
     throw error;

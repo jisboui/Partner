@@ -258,7 +258,7 @@
     import Media from "./components/Media.vue";
    /* import Socials from "./components/Socials.vue"; */
   /* import Pricing from "./components/Pricing.vue"; */
-  const body = document.getElementsByTagName("body")[0];
+ /*  const body = document.getElementsByTagName("body")[0]; */
   
   /*import setNavPills from "@/assets/js/nav-pills.js"; */
   export default {
@@ -277,28 +277,22 @@
         formSteps: 1,
       };
     },
-    mounted() {
-      this.$store.state.isAbsolute = true; 
-      /* setNavPills();  */ 
-    },
     beforeMount() {
       this.$store.state.layout = "custom";
-      this.$store.state.showFooter = true;
     },
-    beforeUnmount() {
-      this.$store.state.isAbsolute = false;
-      this.$store.state.layout = "default";
-      this.$store.state.showNavbar = true;
-      this.$store.state.showFooter = true;
-      this.$store.state.hideConfigButton = false;
-      body.classList.remove("new-product");
+    computed: {
+    ad() {
+      return this.$store.state.adNS.add;
     },
+  },
     methods: {
       nextStep() {
       if (this.activeStep < this.formSteps) {
         // If not at the last step, move to the next step
         this.activeStep += 1;
       } else {
+        console.log("ad fel newad : " , this.ad);
+        this.$store.dispatch('adNS/postadP', this.ad)
         // If at the last step, navigate to a different path
         this.$router.push('/espaceads/bib-ads'); 
       }

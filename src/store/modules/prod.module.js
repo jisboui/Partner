@@ -1,7 +1,4 @@
 import { prodService } from "@/services/prod.service";
-import { prodPService } from "@/services/prodP.service";
-import { prodDeService } from "@/services/prodDe.service";
-import { prodPUService } from "@/services/prodPU.service";
 const state = {
     prod: [],
     prodd: [],
@@ -33,7 +30,7 @@ const actions = {
     },
     async postprodP(_,prodP) {
         try {
-            const response = await prodPService.serviceProdP(prodP);
+            const response = await prodService.serviceProdP(prodP);
             console.log("prodP response from the action : ", response);
         } catch (error) {
             console.error("prodP error:", error);
@@ -42,7 +39,7 @@ const actions = {
     },
     async deleteProd(_, { id }) {
         try {
-          const response = await prodDeService.serviceProdDe(id);
+          const response = await prodService.serviceProdDe(id);
           console.log("Delete prodP action response: ", response);
          /*  return response; */
         } catch (error) {
@@ -52,7 +49,7 @@ const actions = {
       },
       async updateProd(_, { id, prodPU }) {
         try {
-          const response = await prodPUService.serviceProdPU(id, prodPU);
+          const response = await prodService.serviceProdPU(id, prodPU);
           console.log("Update prodP action response: ", response);
          /*  return response; */
         } catch (error) {

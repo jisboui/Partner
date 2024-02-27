@@ -103,16 +103,17 @@
             <div class="table-responsive">
               <table id="products-list" class="table table-flush" > 
                 <colgroup>
-                  <col style="width: 450px; overflow: auto;"> 
-                  <col style="width: 220px; overflow: auto;"> 
-                  <col style="width: 400px; overflow: auto;"> 
-                  <col style="width: 125px; overflow: auto;"> 
+                  <col style="width: 500px; overflow: auto;"> 
+                  <col style="width: 120px; overflow: auto;"> 
+                  <col style="width: 120px; overflow: auto;"> 
+                  <col style="width: 355px; overflow: auto;"> 
+                  <col style="width: 100px; overflow: auto;"> 
                 </colgroup>
                 <thead class="thead-light">
                   <tr>
                     <th>Product</th>
                     <th>Category</th>
-                    <!-- <th>Price</th> -->
+                    <th>Price</th>
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
                     <!-- <th>Status</th> -->
@@ -135,24 +136,33 @@
                           class=" ms-3"
                           style="width: 140px; height: 130px;"
                           :src="prod.itemImage"
-                          alt="hoodie"
+                          alt="product image"
                         />
-                        <h6 class="my-auto ms-3">{{prod.productName}}</h6>
+                        <div>
+                          <div v-for="lang in langs.data" :key="lang.id">
+                            <h6 class="my-auto ms-3">{{ lang.languageCode }}: {{ prod.productName[lang.languageCode] }}</h6>
+                          </div>
+                      </div>
                       </div>
                     </td>
                     <td class="text-sm">{{prod.category}}</td>
-                    <!--            <td class="text-sm">$1,321</td> -->
-                    <td class="text-sm description-column" >{{prod.description}}</td>
+                    <td class="text-sm">{{ prod.productTier }}</td>
+                    <div>
+                      <div v-for="lang in langs.data" :key="lang.id">
+                        {{ lang.languageCode }}: {{ prod.description[lang.languageCode] }}
+                      </div>
+                  </div>
                     <!--       <td class="text-sm">0</td>-->
-                    <td class="text-sm">
-                      <a
+                    <td class="text-sm" v-for="lang in langs.data" :key="lang.id">
+                      <!-- <a
                         href="javascript:;"
                         data-bs-toggle="tooltip"
                         data-bs-original-title="Preview product"
                       >
                         <i class="fas fa-eye text-secondary"></i>
-                      </a>
-                      <button @click="editProduct(prod.productName, prod.category, prod.description,prod.id)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
+                      </a> -->
+                      <button @click="editProduct(prod.productName, prod.category, prod.description, prod.id, prod.productTier, prod.itemImage)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
+
                         <button @click="deleteProd(prod.id); console.log('id  : ',prod.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
                     </td>
                   </tr>
@@ -161,7 +171,7 @@
                   <tr>
                     <th>Product</th>
                     <th>Category</th>
-                    <!-- <th>Price</th> -->
+                    <th>Price</th>
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
                     <!-- <th>Status</th> -->
@@ -183,16 +193,16 @@ import setTooltip from "@/assets/js/tooltip.js";
 
 export default {
   name: "ProductList",
-  created() {
+   created() {
     this.$store.dispatch("prodNS/fetchprod");
   },
   async mounted() {
-    await this.$store.dispatch("prodNS/fetchprod")
-    .then(() => {
       /* this.setupDataTable(); */
-    });
   },
   computed: {
+    langs() {
+      return this.$store.state.langNS.langs;
+    },
     prods() {
       const prods = this.$store.state.prodNS.prod;
       return prods;
@@ -205,8 +215,29 @@ export default {
     next();
   }, */
   methods: {
-    editProduct(productName, category, description,id) {
-    this.$router.push({ name: 'EditProd', params: { productName, category, description,id} });
+    editProduct(productName, category, description, id, tier, image) {
+    const productNameObj = {};
+    const descriptionObj = {};
+
+    this.langs.data.forEach((lang) => {
+      productNameObj[lang.languageCode] = productName[lang.languageCode];
+      descriptionObj[lang.languageCode] = description[lang.languageCode];
+    });
+
+    const encodedProductName = encodeURIComponent(JSON.stringify(productNameObj));
+    const encodedDescription = encodeURIComponent(JSON.stringify(descriptionObj));
+
+    this.$router.push({
+      name: 'EditProd',
+      params: {
+        productName: encodedProductName,
+        category,
+        description: encodedDescription,
+        id,
+        tier,
+        image,
+      },
+    });
   },
     deleteProd(id) {
     this.$store.dispatch('prodNS/deleteProd', { id })

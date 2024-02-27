@@ -5,6 +5,9 @@ import loginModule from './modules/login.module';
 import gamesModule from './modules/games.module';
 import dvModule from './modules/dv.module';
 import prodModule from './modules/prod.module';
+import adModule from './modules/ad.module';
+import langModule from './modules/lang.module';
+import fileUpload from './modules/fileUpload.module';
 
 export default createStore({
   state: {
@@ -30,6 +33,9 @@ export default createStore({
     gameNS: gamesModule,
     dvNS: dvModule,
     prodNS : prodModule,
+    adNS : adModule,
+    langNS : langModule,
+    fileUploadNS : fileUpload,
   },
   mutations: {
     toggleConfigurator(state) {
