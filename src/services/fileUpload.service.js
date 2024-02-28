@@ -20,15 +20,24 @@ const authToken = () => {
   
   const authHeaders = {
     'Authorization': `Bearer ${authToken()}`,
-    'Content-Type': 'application/json'
+    'Content-Type': 'multipart/form-data',
   };
 
 export const fileUploadService = {
     async serviceFileUpload(file) {
         try {
+          console.log('File object:', file);
         const formData = new FormData();
         formData.append('file', file);
-        const response = await axios.post(API_URL, formData, {
+        console.log('FormData properties:', formData.get('file'));
+
+        const partnerId = localStorage.getItem('partnerId');
+        if (!partnerId) {
+          console.error("partnerId not found in local storage");
+          throw new Error("partnerId not found in local storage");
+      }
+        const url = `${API_URL}/${partnerId}`;
+        const response = await axios.post(url, formData, {
             headers: authHeaders,
         });
         console.log("File upload response from the service: ", response);

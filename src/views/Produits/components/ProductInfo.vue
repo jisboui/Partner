@@ -1,8 +1,8 @@
 <template>
   <div class="p-3 bg-white card multisteps-form__panel border-radius-xl" data-animation="FadeIn">
     <h5 class="font-weight-bolder">Product Information</h5>
-    <div class="multisteps-form__content" v-for="lang in langs.data" :key="lang.id">
-      <button @click.prevent="setCurrentLanguage(lang.languageCode)" class="mb-0 btn bg-gradient-success btn-sm me-2">
+    <div class="multisteps-form__content" >
+      <button v-for="lang in langs.data" :key="lang.id" @click.prevent="setCurrentLanguage(lang.languageCode)" class="mb-0 btn bg-gradient-success btn-sm me-2">
         {{ lang.languageCode }}
       </button>
     </div>
@@ -126,7 +126,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit("prodNS/updateProd", this.prod);
+    this.$store.commit("prodNS/setProd", this.prod);
     console.log("prod fel productinfo : ", this.prod);
     console.log("descriptio, : ", this.prod.description);
   },

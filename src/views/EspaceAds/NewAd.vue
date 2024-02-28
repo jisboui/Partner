@@ -282,7 +282,7 @@
     },
     computed: {
     ad() {
-      return this.$store.state.adNS.add;
+      return this.$store.state.adNS.ad;
     },
   },
     methods: {

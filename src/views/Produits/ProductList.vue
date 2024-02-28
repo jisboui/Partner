@@ -153,7 +153,7 @@
                       </div>
                   </div>
                     <!--       <td class="text-sm">0</td>-->
-                    <td class="text-sm" v-for="lang in langs.data" :key="lang.id">
+                    <td class="text-sm">
                       <!-- <a
                         href="javascript:;"
                         data-bs-toggle="tooltip"
@@ -193,10 +193,11 @@ import setTooltip from "@/assets/js/tooltip.js";
 
 export default {
   name: "ProductList",
-   created() {
-    this.$store.dispatch("prodNS/fetchprod");
+    created() {
+     this.$store.dispatch("langNS/fetchLangs");
   },
   async mounted() {
+    this.$store.dispatch("prodNS/fetchprod")
       /* this.setupDataTable(); */
   },
   computed: {
@@ -223,6 +224,7 @@ export default {
       productNameObj[lang.languageCode] = productName[lang.languageCode];
       descriptionObj[lang.languageCode] = description[lang.languageCode];
     });
+  
 
     const encodedProductName = encodeURIComponent(JSON.stringify(productNameObj));
     const encodedDescription = encodeURIComponent(JSON.stringify(descriptionObj));

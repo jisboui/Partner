@@ -1,7 +1,6 @@
 import { adService } from "@/services/ad.service";
 const state = {
     ad: [],
-    add: [],
     adP: null,
     adPu: null,
     };
@@ -10,11 +9,6 @@ const mutations = {
         console.log('setting ad in state:', ad);
         state.ad = ad;
       },
-      updateAd(state, ad) {
-        state.add = ad;
-        
-        console.log('setting addddddd in state:', ad);
-      }
 };
 const actions = {
     async fetchad({ commit }) {

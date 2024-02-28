@@ -90,7 +90,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit('adNS/updateAd', this.ad);
+    this.$store.commit('adNS/setAd', this.ad);
     console.log("ad fel adinfo : ",this.ad);
   },
   beforeUnmount() {

@@ -8,15 +8,8 @@
       <div class="mt-3 row">
         <div class="col-12">
           <label>Image du produit</label>
-          <form
-            id="dropzone"
-            action="/file-upload"
-            class="form-control dropzone"
-          >
-            <div class="fallback">
-              <input name="file" type="file" multiple @change="handleFileChange"/>
-            </div>
-          </form>
+          <input type="file" ref="fileInput" @change="handleFileChange" />
+
         </div>
       </div>
       <div class="mt-4 button-row d-flex col-12">
@@ -44,32 +37,38 @@
 
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
-import Dropzone from "dropzone";
+/* import Dropzone from "dropzone"; */
 
 export default {
   name: "Media",
   data() {
     return {
+        file: null,
+      prod: {
+        itemImage: null,
+      },
     };
   },
   components: {
     ArgonButton,
   },
   methods: {
-    handleFileChange(event) {
-      const files = event.target.files;
-
-      if (files.length > 0) {
-        // Assuming you want to take the first file if multiple files are selected
-        this.prod.itemImage = files[0];
-      } else {
-        this.prod.itemImage = null; // Reset if no file is selected
-      }
-    },
+    uploadFile() {
+  if (this.file) {
+    console.log("file : ", this.file);
+    this.$store.dispatch("fileUploadNS/a_serviceFileUpload", this.file);
+  } else {
+    console.error("No file selected.");
+  }
+},
+handleFileChange(event) {
+    console.log('handleFileChange called');
+    this.file = event.target.files[0];
+  },
   },
   mounted() {
     /* console.log("prod itemimage : ",this.prod.itemImage); */
-    Dropzone.autoDiscover = false;
+   /*  Dropzone.autoDiscover = false;
     var drop = document.getElementById("dropzone");
     var myDropzone = new Dropzone(drop, {
       url: "/file/post",
@@ -81,7 +80,7 @@ export default {
       if (this.files.length > 1) {
         this.removeFile(this.files[0]);
       }
-    });
+    }); */
   },
 };
 </script>

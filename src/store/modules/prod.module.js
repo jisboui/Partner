@@ -1,7 +1,6 @@
 import { prodService } from "@/services/prod.service";
 const state = {
     prod: [],
-    prodd: [],
     prodP: null,
     prodPu: null,
     };
@@ -10,11 +9,6 @@ const mutations = {
         console.log('setting prod in state:', prod);
         state.prod = prod;
       },
-      updateProd(state, prod) {
-        state.prodd = prod;
-        
-        console.log('setting proddddddd in state:', prod);
-      }
 };
 const actions = {
     async fetchprod({ commit }) {

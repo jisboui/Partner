@@ -35,10 +35,7 @@
               <label for="product">Choisir un cadeau</label>
               <select id="product" class="form-control" name="choices-category" @change="updateSelectedGift">
                 <option value="" selected disabled>Select a gift</option>
-                <option value="Choice 1">Eau de Parfum Number 60 Unisex</option>
-                <option value="Choice 2">Msi Gaming Laptop</option>
-                <option value="Choice 3">Nvidea Geforce</option>
-                <option value="Choice 4">Lenovo Legion</option>
+                <option v-for="prod in prods.data" :key="prod.id" :value="prod.id">{{ prod.productName.EN }}</option>
               </select>
             </div>
           </div>
@@ -187,6 +184,7 @@ export default {
   async created() {
     // try {
       // const response = await this.$store.dispatch('gameNS/fetchGames');
+      this.$store.dispatch('prodNS/fetchprod')
       this.$store.dispatch('gameNS/fetchGames')
       this.$store.dispatch('dvNS/fetchdv')
     //   console.log('Games response in the component:', response);
@@ -195,6 +193,10 @@ export default {
     // }
   },
   computed: {
+    prods() {
+      const prods = this.$store.state.prodNS.prod;
+      return prods;
+    },
     dvs() {
     const dvs = this.$store.state.dvNS.dv;
     return dvs;

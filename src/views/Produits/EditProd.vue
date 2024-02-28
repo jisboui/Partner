@@ -9,9 +9,8 @@
         </p>
       </div>
       <div class="text-right col-lg-6 d-flex flex-column justify-content-center">
-        <router-link to="/produits/product-list" type="button" class="d-flex justify-content-end">
           <span class="mt-2 mb-0 btn btn-outline-white ms-lg-auto me-lg-0 me-auto mt-lg-0" @click="save()">Save</span>
-        </router-link>
+        
       </div>
     </div>
     <div class="mt-4 row">
@@ -41,8 +40,8 @@
         <div class="card" style="height: 519px">
           <div class="card-body">
             <h5 class="font-weight-bolder">Product Information</h5>
-            <div v-for="lang in langs.data" :key="lang.id">
-            <button @click.prevent="setCurrentLanguage(lang.languageCode)"
+            <div >
+            <button v-for="lang in langs.data" :key="lang.id" @click.prevent="setCurrentLanguage(lang.languageCode)"
               class="mb-0 btn bg-gradient-success btn-sm me-2">
               {{ lang.languageCode }}
             </button>
@@ -165,7 +164,10 @@ export default {
     save() {
       const id = this.$route.params.id;
       console.log("id in edition:", id);
-      this.$store.dispatch("prodNS/updateProd", { id, prodPU: this.prod });
+      this.$store.dispatch("prodNS/updateProd", { id, prodPU: this.prod })
+      .then(() => {
+      this.$router.push('/produits/product-list');
+    });
     },
   },
   mounted() {

@@ -270,6 +270,7 @@ export default {
   },
   data() {
     return {
+      
       showMenu: false,
       activeClass: "js-active position-relative",
       activeStep: 0,
@@ -281,7 +282,7 @@ export default {
   },
   computed: {
     prod() {
-      return this.$store.state.prodNS.prodd;
+      return this.$store.state.prodNS.prod;
     },
   },
   methods: {
@@ -292,6 +293,7 @@ export default {
       } else {
         console.log("prod fel newprod : " , this.prod);
         this.$store.dispatch('prodNS/postprodP', this.prod)
+        /* this.$store.dispatch("fileUploadNS/a_serviceFileUpload", this.file); */
         // If at the last step, navigate to a different path
         this.$router.push("/produits/product-list");
       }
