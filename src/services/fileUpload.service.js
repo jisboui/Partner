@@ -20,16 +20,13 @@ const authToken = () => {
   
   const authHeaders = {
     'Authorization': `Bearer ${authToken()}`,
-    'Content-Type': 'multipart/form-data',
   };
 
 export const fileUploadService = {
     async serviceFileUpload(file) {
         try {
-          console.log('File object:', file);
         const formData = new FormData();
         formData.append('file', file);
-        console.log('FormData properties:', formData.get('file'));
 
         const partnerId = localStorage.getItem('partnerId');
         if (!partnerId) {

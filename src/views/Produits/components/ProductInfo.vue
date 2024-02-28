@@ -9,6 +9,8 @@
     <div>
       <div v-for="lang in langs.data" :key="lang.id">
         <div v-show="currentLanguage === lang.languageCode">
+        <br>
+        Veuillez remplir les champs en langue : {{ lang.languageCode }}
           <div class="mt-3 row">
             <div class="col-12 col-sm-6">
               <label>Name</label>
@@ -75,6 +77,7 @@
         class="mb-0 ms-auto js-btn-next"
         title="Next"
         @click="$parent.nextStep"
+        :disabled="!allFieldsFilled" 
       >Next</argon-button>
     </div>
   </div>
@@ -94,8 +97,7 @@ export default {
       prod: {
         productName: {},
         description: {},
-        itemImage:
-          "https://firebasestorage.googleapis.com/v0/b/dopawinapi.appspot.com/o/petit-dej.png?alt=media",
+        itemImage:"",
         category: "Real Estate",
         idPartner: "",
         productTier: "T1",
@@ -115,19 +117,32 @@ export default {
     this.prod.productName[lang.languageCode] = "";
     this.prod.description[lang.languageCode] = "";
   });
-    this.currentLanguage = this.langs.data[0].languageCode;
-  },
-  computed: {
+    this.currentLanguage = this.langs.data[0].languageCode;   
+  }, 
+    computed: {
     user() {
       return this.$store.state.loginNS.user;
     },
     langs() {
       return this.$store.state.langNS.langs;
     },
+    allFieldsFilled() {
+    // Check if all fields are filled for each language
+    for (let lang of this.langs.data) {
+      if (!this.prod.productName[lang.languageCode] || !this.prod.description[lang.languageCode]) {
+        return false;
+      }
+    }
+    // Check if the other fields are filled
+    if (!this.prod.category || !this.prod.productTier) {
+      return false;
+    }
+    return true;
+  },
   },
   mounted() {
-    this.$store.commit("prodNS/setProd", this.prod);
     console.log("prod fel productinfo : ", this.prod);
+    this.$store.commit("prodNS/setProd", this.prod);
     console.log("descriptio, : ", this.prod.description);
   },
   beforeUnmount() {

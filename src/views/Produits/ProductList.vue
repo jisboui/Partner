@@ -113,7 +113,7 @@
                   <tr>
                     <th>Product</th>
                     <th>Category</th>
-                    <th>Price</th>
+                    <th>Tier</th>
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
                     <!-- <th>Status</th> -->
@@ -171,7 +171,7 @@
                   <tr>
                     <th>Product</th>
                     <th>Category</th>
-                    <th>Price</th>
+                    <th>Tier</th>
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
                     <!-- <th>Status</th> -->

@@ -291,7 +291,8 @@ export default {
         // If not at the last step, move to the next step
         this.activeStep += 1;
       } else {
-        console.log("prod fel newprod : " , this.prod);
+        this.prod.itemImage = this.$store.state.fileUploadNS.fileUpload;
+        /* console.log("prod fel newprod : " , this.prod); */
         this.$store.dispatch('prodNS/postprodP', this.prod)
         /* this.$store.dispatch("fileUploadNS/a_serviceFileUpload", this.file); */
         // If at the last step, navigate to a different path
