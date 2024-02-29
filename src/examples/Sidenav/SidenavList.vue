@@ -159,6 +159,13 @@
                     text="Espace profil"
                   />
       </li>
+      <li class="nav-item">
+        <sidenav-item
+                    :to="{ name: 'Historic' }"
+                    mini-icon="HA"
+                    text="Historique d'actions"
+                  />
+      </li>
 <!--       <li class="nav-item">
         <sidenav-collapse
           collapse-ref="dashboardsExamples"

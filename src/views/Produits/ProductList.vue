@@ -104,16 +104,15 @@
               <table id="products-list" class="table table-flush" > 
                 <colgroup>
                   <col style="width: 500px; overflow: auto;"> 
+                  <col style="width: 400px; overflow: auto;"> 
+                  <col style="width: 500px; overflow: auto;"> 
                   <col style="width: 120px; overflow: auto;"> 
-                  <col style="width: 120px; overflow: auto;"> 
-                  <col style="width: 355px; overflow: auto;"> 
-                  <col style="width: 100px; overflow: auto;"> 
                 </colgroup>
                 <thead class="thead-light">
                   <tr>
                     <th>Product</th>
                     <th>Category</th>
-                    <th>Tier</th>
+                    <!-- <th>Tier</th> -->
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
                     <!-- <th>Status</th> -->
@@ -146,7 +145,7 @@
                       </div>
                     </td>
                     <td class="text-sm">{{prod.category}}</td>
-                    <td class="text-sm">{{ prod.productTier }}</td>
+                    <!-- <td class="text-sm">{{ prod.productTier }}</td> -->
                     <div>
                       <div v-for="lang in langs.data" :key="lang.id">
                         {{ lang.languageCode }}: {{ prod.description[lang.languageCode] }}
@@ -161,7 +160,8 @@
                       >
                         <i class="fas fa-eye text-secondary"></i>
                       </a> -->
-                      <button @click="editProduct(prod.productName, prod.category, prod.description, prod.id, prod.productTier, prod.itemImage)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
+                      <br><br>
+                      <button @click="editProduct(prod.productName, prod.category, prod.description, prod.id, prod.itemImage)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
 
                         <button @click="deleteProd(prod.id); console.log('id  : ',prod.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
                     </td>
@@ -171,7 +171,7 @@
                   <tr>
                     <th>Product</th>
                     <th>Category</th>
-                    <th>Tier</th>
+                    <!-- <th>Tier</th> -->
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
                     <!-- <th>Status</th> -->
@@ -216,7 +216,7 @@ export default {
     next();
   }, */
   methods: {
-    editProduct(productName, category, description, id, tier, image) {
+    editProduct(productName, category, description, id, image) {
     const productNameObj = {};
     const descriptionObj = {};
 
@@ -236,7 +236,6 @@ export default {
         category,
         description: encodedDescription,
         id,
-        tier,
         image,
       },
     });

@@ -4,7 +4,7 @@
       <div class="col-lg-6">
       </div>
       <div class="text-right col-lg-6 d-flex flex-column justify-content-center">
-          <span class="mt-2 mb-0 btn btn-outline-white ms-lg-auto me-lg-0 me-auto mt-lg-0" @click="save()">Save</span>
+          <span class="mt-2 mb-0 btn btn-outline-white ms-lg-auto me-lg-0 me-auto mt-lg-0" @click="save()">Enregistrer</span>
       </div>
     </div>
     <div class="mt-4 row">
@@ -79,7 +79,7 @@
                 </select>
               </div>
 
-              <div class="col-12 col-sm-6">
+              <!-- <div class="col-12 col-sm-6">
                 <label class="col-12 col-sm-6">Tier</label>
                 <select id="choices-tier" class="form-control" name="choices-tier" v-model="prod.productTier">
                   <option value="T1">T1</option>
@@ -87,7 +87,7 @@
                   <option value="T3">T3</option>
                   <option value="T4">T4</option>
                 </select>
-              </div>
+              </div> -->
               <div class="mt-4 col-sm-6 mt-sm-0"></div>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default {
         itemImage: this.$route.params.image,
         category: this.$route.params.category,
         idPartner: "",
-        productTier: this.$route.params.tier,
+        productTier: "T1",
       },
     };
   },

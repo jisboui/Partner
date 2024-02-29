@@ -67,6 +67,7 @@ import dvDetails from "../views/DiscountVoucher/dvDetails.vue";
 import dvValidation from "../views/DiscountVoucher/dvValidation.vue";
 import editCampaign from "../views/Campaign/editCampaign.vue";
 import dvList from "../views/DiscountVoucher/dvList.vue";
+import Historic from "../views/Historic/Historic.vue";
 
 const routes = [
   {
@@ -617,6 +618,14 @@ const routes = [
     path: "/DiscountVoucher/dv-list",
     name: "dvList", 
     component: dvList,
+  meta: {
+    requiresAuth: true
+  }
+  },
+  {
+    path: "/Historic/historic",
+    name: "Historic", 
+    component: Historic,
   meta: {
     requiresAuth: true
   }

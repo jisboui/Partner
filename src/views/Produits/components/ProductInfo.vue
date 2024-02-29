@@ -54,7 +54,7 @@
         </select>
       </div>
 
-      <div class="col-12 col-sm-6">
+      <!-- <div class="col-12 col-sm-6">
         <label class="col-12 col-sm-6">Tier</label>
         <select
           id="choices-tier"
@@ -67,7 +67,7 @@
           <option value="T3">T3</option>
           <option value="T4">T4</option>
         </select>
-      </div>
+      </div> -->
     </div>
 
     <div class="mt-4 button-row d-flex col-12">
@@ -106,7 +106,7 @@ export default {
         itemImage:"",
         category: "",
         idPartner: "",
-        productTier: "",
+        productTier: "T1",
       },
     };
   },
@@ -165,7 +165,7 @@ export default {
       }
     }
     // Check if the other fields are filled
-    if (!this.prod.category || !this.prod.productTier) {
+    if (!this.prod.category) {
       return false;
     }
     return true;
