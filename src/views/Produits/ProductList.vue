@@ -284,12 +284,13 @@ export default {
 </script>
 
 <style scoped>
-#products-list {
+
+/* #products-list {
   table-layout: fixed;
 }
 
 #products-list .description-column {
   width: 100px; 
   overflow: auto;
-}
+} */
 </style>

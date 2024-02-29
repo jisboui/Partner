@@ -27,14 +27,14 @@
                 name="choices-category"
                 @change="updateSelectedGame"
               >
-                <option value="" selected disabled>Select a game</option>
+                <option value="" selected disabled>Selectionner un jeu</option>
                 <option v-for="game in games.data" :key="game.id" :value="game.id">{{ game.nameGame }}</option>
               </select>
             </div>
             <div class="col-6">
               <label for="product">Choisir un cadeau</label>
               <select id="product" class="form-control" name="choices-category" @change="updateSelectedGift">
-                <option value="" selected disabled>Select a gift</option>
+                <option value="" selected disabled>Selectionner un produit</option>
                 <option v-for="prod in prods.data" :key="prod.id" :value="prod.id">{{ prod.productName.EN }}</option>
               </select>
             </div>

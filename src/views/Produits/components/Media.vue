@@ -27,18 +27,18 @@
           class="mb-0 js-btn-prev"
           title="Prev"
           @click="$parent.prevStep"
-          >Prev</argon-button
-        >
-        <argon-button
-          type="button"
-          color="dark"
-          variant="gradient"
-          class="mb-0 ms-auto js-btn-next"
-          title="Next"
-          @click="this.$parent.nextStep();"
-          :disabled="!file"
-          >Next</argon-button
-        >
+        >Prev</argon-button>
+        <div @mouseenter="showTooltip" class="ms-auto" ref="tooltipDiv">
+          <argon-button
+            type="button"
+            color="dark"
+            variant="gradient"
+            class="mb-0 js-btn-next"
+            title="Next"
+            @click="this.$parent.nextStep();"
+            :disabled="!uploadComplete || !file"
+          >Next</argon-button>
+        </div>
       </div>
     </div>
   </div>
@@ -47,18 +47,30 @@
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
 import Dropzone from "dropzone";
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 
 export default {
   name: "Media",
   data() {
     return {
         file: null,
+        uploadComplete: false,
+        tooltipInstance: null,
     };
   },
   components: {
     ArgonButton,
   },
   methods: {
+    showTooltip(event) {
+      if ((!this.uploadComplete || !this.file) && !this.tooltipInstance) {
+        this.tooltipInstance = tippy(event.target, {
+          content: 'Veuillez télécharger une image pour continuer!',
+        });
+      }
+    },
+  
     /* handleClick() {      
       this.uploadFile()
       this.$parent.nextStep();
@@ -71,6 +83,32 @@ export default {
       this.file = event.target.files[0];
       this.$store.dispatch("fileUploadNS/a_serviceFileUpload", this.file);
     }, */ // this is the old method used with input type="file" that was replaced by the Dropzone method below
+  },
+  watch: {
+    uploadComplete(newVal) {
+      if (!newVal && !this.tooltipInstance) {
+        this.$nextTick(() => {
+          this.tooltipInstance = tippy(this.$refs.tooltipDiv, {
+            content: 'Veuillez télécharger une image pour continuer!',
+          });
+        });
+      } else if (newVal && this.tooltipInstance) {
+        this.tooltipInstance.destroy();
+        this.tooltipInstance = null;
+      }
+    },
+    file(newVal) {
+      if (!newVal && !this.tooltipInstance) {
+        this.$nextTick(() => {
+          this.tooltipInstance = tippy(this.$refs.tooltipDiv, {
+            content: 'Veuillez télécharger une image pour continuer!',
+          });
+        });
+      } else if (newVal && this.tooltipInstance) {
+        this.tooltipInstance.destroy();
+        this.tooltipInstance = null;
+      }
+    },
   },
   mounted() {
   Dropzone.autoDiscover = false;
@@ -85,13 +123,19 @@ export default {
     addRemoveLinks: true,
     autoProcessQueue: false, // Prevent Dropzone from automatically uploading the file
   });
-
+  myDropzone.on("removedfile", function() {
+    vueComponent.file = null;
+    vueComponent.uploadComplete = false;
+});
   myDropzone.on("addedfile", function(file) {
     if (this.files.length > 1) {
       this.removeFile(this.files[0]);
     }
     vueComponent.file = file; // Store the file in my component's data instead of this.file which refers to the Dropzone instance and won't work
-    vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUpload", vueComponent.file); 
+    vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUpload", vueComponent.file)
+    .then(() => {
+      vueComponent.uploadComplete = true;
+    });
   });
 },
 };

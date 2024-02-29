@@ -2,15 +2,9 @@
   <div class="py-4 container-fluid">
     <div class="row">
       <div class="col-lg-6">
-        <h4 class="text-white"><!-- Make the changes below --></h4>
-        <p class="text-white">
-          <!--  We’re constantly trying to express ourselves and actualize our dreams.
-          If you have the opportunity to play. -->
-        </p>
       </div>
       <div class="text-right col-lg-6 d-flex flex-column justify-content-center">
           <span class="mt-2 mb-0 btn btn-outline-white ms-lg-auto me-lg-0 me-auto mt-lg-0" @click="save()">Save</span>
-        
       </div>
     </div>
     <div class="mt-4 row">
@@ -24,7 +18,8 @@
               </div>
               <div class="mt-5 col-12">
                 <div class="d-flex">
-                  <button class="mb-0 btn bg-gradient-success btn-sm me-2" type="button" name="button">
+                  <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none" />
+                  <button class="mb-0 btn bg-gradient-success btn-sm me-2" type="button" name="button" @click="$refs.fileInput.click()">
                     Modifier
                   </button>
                   <button class="mb-0 btn btn-outline-dark btn-sm" type="button" name="button">
@@ -42,7 +37,7 @@
             <h5 class="font-weight-bolder">Product Information</h5>
             <div >
             <button v-for="lang in langs.data" :key="lang.id" @click.prevent="setCurrentLanguage(lang.languageCode)"
-              class="mb-0 btn bg-gradient-success btn-sm me-2">
+            :class="['mb-0 btn btn-sm me-2', currentLanguage === lang.languageCode ? 'bg-gradient-primary' : 'bg-gradient-success']">
               {{ lang.languageCode }}
             </button>
           </div>
@@ -118,7 +113,7 @@
 </template>
 
 <script>
-import Quill from "quill";
+/* import Quill from "quill"; */
 /* import Choices from "choices.js"; */
 
 export default {
@@ -127,10 +122,8 @@ export default {
     return {
       currentLanguage: null,
       prod: {
-        productName: {
-        },
-        description: {
-        },
+        productName: {},
+        description: {},
         itemImage: this.$route.params.image,
         category: this.$route.params.category,
         idPartner: "",
@@ -158,6 +151,16 @@ export default {
     },
   },
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      // Now you can handle the uploaded file
+      // For example, you can read it as a data URL and assign it to prod.itemImage
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.prod.itemImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
     setCurrentLanguage(language) {
       this.currentLanguage = language;
     },
@@ -170,52 +173,5 @@ export default {
     });
     },
   },
-  mounted() {
-    if (document.getElementById("edit-description-edit")) {
-      new Quill("#edit-description-edit", {
-        theme: "snow", // Specify theme in configuration
-      });
-    }
-    /* this.getChoices("choices-category-edit");
-    this.getChoices("choices-color-edit");
-    this.getChoices("choices-currency-edit"); */
-
-    /* if (document.getElementById("choices-tags-edit")) {
-      var tags = document.getElementById("choices-tags-edit");
-      const examples = new Choices(tags, {
-        removeItemButton: true,
-        allowHTML: true,
-      });
-
-      examples.setChoices(
-        [
-          {
-            value: "One",
-            label: "Expired",
-            disabled: true,
-          },
-          {
-            value: "Two",
-            label: "Out of Stock",
-            selected: true,
-          },
-        ],
-        "value",
-        "label",
-        false
-      );
-    } */
-  },
-  /* methods: {
-    getChoices(id) {
-      if (document.getElementById(id)) {
-        var element = document.getElementById(id);
-        return new Choices(element, {
-          searchEnabled: false,
-          allowHTML: true,
-        });
-      }
-    },
-  }, */
 };
 </script>

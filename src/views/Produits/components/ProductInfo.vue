@@ -2,7 +2,7 @@
   <div class="p-3 bg-white card multisteps-form__panel border-radius-xl" data-animation="FadeIn">
     <h5 class="font-weight-bolder">Product Information</h5>
     <div class="multisteps-form__content" >
-      <button v-for="lang in langs.data" :key="lang.id" @click.prevent="setCurrentLanguage(lang.languageCode)" class="mb-0 btn bg-gradient-success btn-sm me-2">
+      <button v-for="lang in langs.data" :key="lang.id" @click.prevent="setCurrentLanguage(lang.languageCode)" :class="['mb-0 btn btn-sm me-2', currentLanguage === lang.languageCode ? 'bg-gradient-primary' : 'bg-gradient-success']">
         {{ lang.languageCode }}
       </button>
     </div>
@@ -45,6 +45,7 @@
           name="choices-category"
           v-model="prod.category"
         >
+          <option value="" selected disabled>Selectionner une catégorie</option>
           <option value="Clothing">Clothing</option>
           <option value="Real Estate">Real Estate</option>
           <option value="Electronics">Electronics</option>
@@ -70,21 +71,25 @@
     </div>
 
     <div class="mt-4 button-row d-flex col-12">
-      <argon-button
-        type="button"
-        color="dark"
-        variant="gradient"
-        class="mb-0 ms-auto js-btn-next"
-        title="Next"
-        @click="$parent.nextStep"
-        :disabled="!allFieldsFilled" 
-      >Next</argon-button>
-    </div>
+      <div @mouseenter="showTooltip" class="ms-auto" ref="tooltipDiv">
+        <argon-button
+          type="button"
+          color="dark"
+          variant="gradient"
+          class="mb-0 js-btn-next"
+          title="Next"
+          @click="$parent.nextStep"
+          :disabled="!allFieldsFilled"
+        >Next</argon-button>
+      </div>
+    </div>  
   </div>
 </template>
 
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 
 export default {
   name: "ProductInfo",
@@ -93,14 +98,15 @@ export default {
   },
   data() {
     return {
+      tooltipInstance: null,
       currentLanguage: null,
       prod: {
         productName: {},
         description: {},
         itemImage:"",
-        category: "Real Estate",
+        category: "",
         idPartner: "",
-        productTier: "T1",
+        productTier: "",
       },
     };
   },
@@ -108,7 +114,28 @@ export default {
     setCurrentLanguage(language) {
       this.currentLanguage = language;
     },
+    showTooltip(event) {
+    if (!this.allFieldsFilled && !this.tooltipInstance) {
+      this.tooltipInstance = tippy(event.target, {
+        content: 'Veuillez remplir tous les champs pour continuer!',
+      });
+    }
   },
+  },
+  watch: {
+  allFieldsFilled(newVal) {
+    if (!newVal && !this.tooltipInstance) {
+      this.$nextTick(() => {
+        this.tooltipInstance = tippy(this.$refs.tooltipDiv, {
+          content: 'Veuillez remplir tous les champs pour continuer!',
+        });
+      });
+    } else if (newVal && this.tooltipInstance) {
+      this.tooltipInstance.destroy();
+      this.tooltipInstance = null;
+    }
+  },
+},
   async created() {
     await this.$store.dispatch("langNS/fetchLangs");
     const partnerId = localStorage.getItem("partnerId");
@@ -117,7 +144,7 @@ export default {
     this.prod.productName[lang.languageCode] = "";
     this.prod.description[lang.languageCode] = "";
   });
-    this.currentLanguage = this.langs.data[0].languageCode;   
+    this.currentLanguage = this.langs.data[0].languageCode; // to start with the first language in the list by default instead of showing nothing at the start
   }, 
     computed: {
     user() {
@@ -127,6 +154,10 @@ export default {
       return this.$store.state.langNS.langs;
     },
     allFieldsFilled() {
+    // Check if this.langs.data is an array
+    if (!Array.isArray(this.langs.data)) {
+      return false;
+    }
     // Check if all fields are filled for each language
     for (let lang of this.langs.data) {
       if (!this.prod.productName[lang.languageCode] || !this.prod.description[lang.languageCode]) {
@@ -141,9 +172,9 @@ export default {
   },
   },
   mounted() {
-    console.log("prod fel productinfo : ", this.prod);
+    /* console.log("prod fel productinfo : ", this.prod); */
     this.$store.commit("prodNS/setProd", this.prod);
-    console.log("descriptio, : ", this.prod.description);
+    /* console.log("descriptio, : ", this.prod.description); */
   },
   beforeUnmount() {
     /* this.choicesInstances.forEach((instance) => instance.destroy()); */
