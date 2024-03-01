@@ -114,7 +114,7 @@ export default {
     setCurrentLanguage(language) {
       this.currentLanguage = language;
     },
-    showTooltip(event) {
+    showTooltip(event) { // Show a alerting message to the partner when hovering over the next button if all fields are not filled
     if (!this.allFieldsFilled && !this.tooltipInstance) {
       this.tooltipInstance = tippy(event.target, {
         content: 'Veuillez remplir tous les champs pour continuer!',
@@ -123,7 +123,7 @@ export default {
   },
   },
   watch: {
-  allFieldsFilled(newVal) {
+  allFieldsFilled(newVal) { // Destroy the alerting message when all fields are filled
     if (!newVal && !this.tooltipInstance) {
       this.$nextTick(() => {
         this.tooltipInstance = tippy(this.$refs.tooltipDiv, {
@@ -172,12 +172,10 @@ export default {
   },
   },
   mounted() {
-    /* console.log("prod fel productinfo : ", this.prod); */
     this.$store.commit("prodNS/setProd", this.prod);
-    /* console.log("descriptio, : ", this.prod.description); */
   },
-  beforeUnmount() {
-    /* this.choicesInstances.forEach((instance) => instance.destroy()); */
-  },
+  /* beforeUnmount() {
+    this.choicesInstances.forEach((instance) => instance.destroy());
+  }, */
 };
 </script>

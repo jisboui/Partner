@@ -12,67 +12,88 @@ const authToken = () => {
   const token = localStorage.getItem('token');
   if (!token) {
     console.error("Token not found in local storage");
-    throw new Error("Token not found in local storage");
+    return Promise.reject(new Error("Token not found in local storage"));
   }
-  return token;
+  return Promise.resolve(token);
 };
 
 const authHeaders = {
-  'Authorization': `Bearer ${authToken()}`,
   'Content-Type': 'application/json'
 };
 
-export const prodService = {
-  async serviceProd() {
-    try {
-      const response = await axios.get(API_URL+"/all", {
-        headers: authHeaders,
+export const serviceProd = () => {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        return axios.get(API_URL + "/all", {
+          headers: authHeaders,
+        });
+      })
+      .then((response) => {
+        console.log("prod response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("prod error:", error);
+        return Promise.reject(error);
       });
-      console.log("prod response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("prod error:", error);
-      throw error;
-    }
-  },
-  async serviceProdP(prod) {
-    try {
-      const data = JSON.stringify(prod);
-      const response = await axios.post(API_URL, data, {
-        headers: authHeaders,
+  };
+
+  export const serviceProdP = (prod) => {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        const data = JSON.stringify(prod);
+        return axios.post(API_URL, data, {
+          headers: authHeaders,
+        });
+      })
+      .then((response) => {
+        console.log("prodP response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("prodP error:", error);
+        return Promise.reject(error);
       });
-      console.log("prodP response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("prodP error:", error);
-      throw error;
-    }
-  },
-  async serviceProdPU(id,prod) {
-    try {
-      const url = `${API_URL}/${id}`;
-      const data = JSON.stringify(prod);
-      const response = await axios.put(url, data, {
-        headers: authHeaders,
+  };
+
+  export const serviceProdPU = (id, prod) => {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        const url = `${API_URL}/${id}`;
+        const data = JSON.stringify(prod);
+        return axios.put(url, data, {
+          headers: authHeaders,
+        });
+      })
+      .then((response) => {
+        console.log("prodPU response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("prodPU error:", error);
+        return Promise.reject(error);
       });
-      console.log("prodPU response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("prodPU error:", error);
-      throw error;
-    }
-  },
-  async serviceProdDe(id) {
-    try {
-      const url = `${API_URL}/${id}`;
-      const response = await axios.delete(url, {
-        headers: authHeaders,
+  };
+
+  export const serviceProdDe = (id) => {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        const url = `${API_URL}/${id}`;
+        return axios.delete(url, {
+          headers: authHeaders,
+        });
+      })
+      .then((response) => {
+        console.log("prodDE response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("prodDE error:", error);
+        return Promise.reject(error);
       });
-      console.log("prodDE response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("prodDE error:", error);
-      throw error;
-    }
-  }
-};
+  };
+

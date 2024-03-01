@@ -1,8 +1,7 @@
 <template>
-<div class="container">
 <br>
-    <h1 class="my-4 text-center">Mon historique d'opérations</h1>
-    <div class="table-responsive">
+<h1 class="my-4 text-center">Mon historique d'opérations</h1>
+<div class="table-responsive">
     <br>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
@@ -34,7 +33,6 @@
         </tr>
         </tbody>
     </table>
-    </div>
 </div>
 </template>
   
@@ -52,10 +50,10 @@ computed: {
     },
 },
 methods: {
-    formatTimestamp(timestamp) {
-    return new Date(timestamp).toLocaleString();
+    formatTimestamp(timestamp) { // Format the timestamp to a readable date
+      return timestamp ? new Date(timestamp).toLocaleString() : '';
     },
-    formatTime(time) {
+    formatTime(time) { // Format the time to a readable time
     return time ? new Date(time).toLocaleTimeString() : '';
     },
 },
@@ -64,7 +62,7 @@ methods: {
   
 <style scoped>
 .custom-row {
-  height: 65px; /* Adjust this value as needed */
+  height: 65px;
 }
 .table {
 width: 100%;

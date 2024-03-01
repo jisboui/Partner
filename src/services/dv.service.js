@@ -13,66 +13,77 @@ const authToken = () => {
   const token = localStorage.getItem('token');
   if (!token) {
     console.error("Token not found in local storage");
-    throw new Error("Token not found in local storage");
+    return Promise.reject(new Error("Token not found in local storage"));
   }
-  return token;
+  return Promise.resolve(token);
 };
 
 const authHeaders = {
-  'Authorization': `Bearer ${authToken()}`,
   'Content-Type': 'application/json'
 };
 
-export const dvService = {
-
-  async serviceDv() {
-    try {
-      const response = await axios.get(API_URL, {
-        headers: authHeaders,
+export const serviceDv=()=> {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        return axios.get(API_URL, {
+          headers: authHeaders,
+        });
+      })
+      .then((response) => {
+        console.log("dv response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("dv error:", error);
+        return Promise.reject(error);
       });
-      console.log("dv response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("dv error:", error);
-      throw error;
-    }
-  },
-  async serviceDvDe(id) {
-    try {
-      const url = `${API_URL}/${id}`;
-      const response = await axios.delete(url, { headers: authHeaders });
-      console.log("dvDE response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("dvDE error:", error);
-      throw error;
-    }
-  },
+  };
 
-  async serviceDvP(dv) {
-    try {
-      const data = JSON.stringify(dv);
-      const response = await axios.post(API_URL, data, { headers: authHeaders });
-      console.log("dvP response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("dvP error:", error);
-      throw error;
-    }
-  },
+  export const serviceDvDe=(id)=> {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        const url = `${API_URL}/${id}`;
+        return axios.delete(url, { headers: authHeaders });
+      })
+      .then((response) => {
+        console.log("dvDE response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("dvDE error:", error);
+        return Promise.reject(error);
+      });
+  };
 
-  async serviceDvPU(id, dv) {
-    try {
-      const url = `${API_URL}/${id}`;
-      const data = JSON.stringify(dv);
-      const response = await axios.put(url, data, { headers: authHeaders });
-      console.log("dvPU response from the service: ", response);
-      return response;
-    } catch (error) {
-      console.error("dvPU error:", error);
-      throw error;
-    }
-  }
-};
+  export const serviceDvP=(dv)=> {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        const data = JSON.stringify(dv);
+        return axios.post(API_URL, data, { headers: authHeaders });
+      })
+      .then((response) => {
+        console.log("dvP response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("dvP error:", error);
+        return Promise.reject(error);
+      });
+  };
 
- 
+  export const serviceDvPU=(id, dv)=> {
+        const url = `${API_URL}/${id}`;
+        const data = JSON.stringify(dv);
+        return axios.put(url, data, { headers: authHeaders })
+      .then((response) => {
+        console.log("dvPU response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("dvPU error:", error);
+        return Promise.reject(error);
+      });
+  };

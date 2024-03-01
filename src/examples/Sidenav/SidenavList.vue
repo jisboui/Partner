@@ -149,7 +149,7 @@
         <sidenav-item
                     :to="{ name: 'Sondage' }"
                     mini-icon="ES"
-                    text="Espace Sondage"
+                    text="Espace sondage"
                   />
       </li>
       <li class="nav-item">

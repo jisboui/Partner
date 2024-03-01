@@ -4,7 +4,7 @@
       <div class="col-lg-6">
       </div>
       <div class="text-right col-lg-6 d-flex flex-column justify-content-center">
-          <span class="mt-2 mb-0 btn btn-outline-white ms-lg-auto me-lg-0 me-auto mt-lg-0" @click="save()">Enregistrer</span>
+          <span class="mt-2 mb-0 btn btn-outline-white ms-lg-10 me-lg-0 me-auto mt-lg-0" @click="save()">Enregistrer</span>
       </div>
     </div>
     <div class="mt-4 row">
@@ -17,13 +17,10 @@
                 <img class="mt-3 shadow-lg w-100 border-radius-lg" :src="prod.itemImage" alt="product_image" />
               </div>
               <div class="mt-5 col-12">
-                <div class="d-flex">
+                <div class="d-flex justify-content-center">
                   <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none" />
-                  <button class="mb-0 btn bg-gradient-success btn-sm me-2" type="button" name="button" @click="$refs.fileInput.click()">
+                  <button class="mb-0 btn bg-gradient-success btn-sm me-2 w-50" type="button" name="button" @click="$refs.fileInput.click()">
                     Modifier
-                  </button>
-                  <button class="mb-0 btn btn-outline-dark btn-sm" type="button" name="button">
-                    Supprimer
                   </button>
                 </div>
               </div>
@@ -35,7 +32,8 @@
         <div class="card" style="height: 519px">
           <div class="card-body">
             <h5 class="font-weight-bolder">Product Information</h5>
-            <div >
+            <div> 
+            <br>
             <button v-for="lang in langs.data" :key="lang.id" @click.prevent="setCurrentLanguage(lang.languageCode)"
             :class="['mb-0 btn btn-sm me-2', currentLanguage === lang.languageCode ? 'bg-gradient-primary' : 'bg-gradient-success']">
               {{ lang.languageCode }}
@@ -43,6 +41,8 @@
           </div>
             <div v-for="lang in langs.data" :key="lang.id">
             <div v-show="currentLanguage === lang.languageCode">
+            <br>
+              Vous pouvez modifier les champs en langue : {{ lang.languageCode }}
               <div class="mt-3 row">
                 <div class="col-12 col-sm-6">
                   <label>Name</label>
@@ -66,7 +66,7 @@
               </div>
             </div>
           </div>
-            <br><br><br>
+            <br><br>
             <div class="mt-3 row">
               <div class="col-12 col-sm-6">
                 <label class="col-12 col-sm-6">Category</label>
@@ -113,9 +113,6 @@
 </template>
 
 <script>
-/* import Quill from "quill"; */
-/* import Choices from "choices.js"; */
-
 export default {
   name: "EditProduct",
   data() {
@@ -136,14 +133,15 @@ export default {
     const partnerId = localStorage.getItem("partnerId");
     this.prod.idPartner = partnerId;
     this.langs.data.forEach((lang) => {
-    this.prod.productName[lang.languageCode] = JSON.parse(
+    // here for every language, i'm parsing or decoding the productName and description from the URL after encoding it in ProductList to avoid the error of "URI malformed" and then assigning it to the productName and description properties of the prod object
+    this.prod.productName[lang.languageCode] = JSON.parse(   
       decodeURIComponent(this.$route.params.productName)
     )[lang.languageCode];
     this.prod.description[lang.languageCode] = JSON.parse(
       decodeURIComponent(this.$route.params.description)
     )[lang.languageCode];
   });
-    this.currentLanguage = this.langs.data[0].languageCode;
+    this.currentLanguage = this.langs.data[0].languageCode; // here i'm setting the currentLanguage to the first language in the langs array to make the first language the default language instead of starting with nothing until the user clicks on a language
   },
   computed: {
     langs() {
@@ -151,13 +149,11 @@ export default {
     },
   },
   methods: {
-    handleFileUpload(event) {
-      const file = event.target.files[0];
-      // Now you can handle the uploaded file
-      // For example, you can read it as a data URL and assign it to prod.itemImage
+    handleFileUpload(event) { 
+      const file = event.target.files[0]; // this makes it possible to handle file upload 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.prod.itemImage = e.target.result;
+        this.prod.itemImage = e.target.result; // and here is the assignment of the uploaded image to the product's itemImage property
       };
       reader.readAsDataURL(file);
     },

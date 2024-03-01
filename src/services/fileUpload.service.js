@@ -9,39 +9,43 @@ const API_URL = dev.host + base_URL;
   API_URL = production.host + base_URL;
 } */
 
-const authToken = () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.error("Token not found in local storage");
-      throw new Error("Token not found in local storage");
-    }
-    return token;
-  };
-  
-  const authHeaders = {
-    'Authorization': `Bearer ${authToken()}`,
-  };
-
-export const fileUploadService = {
-    async serviceFileUpload(file) {
-        try {
+export const serviceFileUpload = (file) => {
+    return new Promise((resolve, reject) => {
+      try {
         const formData = new FormData();
         formData.append('file', file);
 
         const partnerId = localStorage.getItem('partnerId');
         if (!partnerId) {
           console.error("partnerId not found in local storage");
-          throw new Error("partnerId not found in local storage");
-      }
-        const url = `${API_URL}/${partnerId}`;
-        const response = await axios.post(url, formData, {
-            headers: authHeaders,
-        });
-        console.log("File upload response from the service: ", response);
-        return response;
-        } catch (error) {
-        console.error("File upload error:", error);
-        throw error;
+          reject(new Error("partnerId not found in local storage"));
         }
-    },
-    };
+
+        const url = `${API_URL}/${partnerId}`;
+        const authToken = localStorage.getItem('token');
+        if (!authToken) {
+          console.error("Token not found in local storage");
+          reject(new Error("Token not found in local storage"));
+        }
+
+        const authHeaders = {
+          'Authorization': `Bearer ${authToken}`,
+        };
+
+        axios.post(url, formData, {
+          headers: authHeaders,
+        })
+          .then(response => {
+            console.log("File upload response from the service: ", response);
+            resolve(response);
+          })
+          .catch(error => {
+            console.error("File upload error:", error);
+            reject(error);
+          });
+      } catch (error) {
+        console.error("File upload error:", error);
+        reject(error);
+      }
+    });
+  };

@@ -110,7 +110,7 @@ computed: {
     const dvs = this.$store.state.dvNS.dv;
     return dvs;
   },
-  discountSign() {
+  discountSign() { // Return the sign of the discount type (percentage or flat amount) depending on the selected discount type
     return this.dvP.discountType == 'PERCENTAGE' ? '%' : 'Dt';
   }
 },

@@ -74,16 +74,13 @@
 import ProductInfo from "./components/ProductInfo.vue";
 import Media from "./components/Media.vue";
 /* import Socials from "./components/Socials.vue"; */
-/* import Pricing from "@/views/ecommerce/products/components/Pricing.vue"; */
 
-/*import setNavPills from "@/assets/js/nav-pills.js"; */
 export default {
   name: "NewProd",
   components: {
     ProductInfo,
     Media,
     /* Socials, */
-    /* Pricing, */
   },
   data() {
     return {
@@ -108,11 +105,9 @@ export default {
         // If not at the last step, move to the next step
         this.activeStep += 1;
       } else {
+        // If at the last step, navigate to a different path and post the product after assigning the upload image to the product's itemImage property
         this.prod.itemImage = this.$store.state.fileUploadNS.fileUpload;
-        /* console.log("prod fel newprod : " , this.prod); */
         this.$store.dispatch('prodNS/postprodP', this.prod)
-        /* this.$store.dispatch("fileUploadNS/a_serviceFileUpload", this.file); */
-        // If at the last step, navigate to a different path
         this.$router.push("/produits/product-list");
       }
     },

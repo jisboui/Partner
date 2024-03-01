@@ -196,7 +196,7 @@ export default {
     created() {
      this.$store.dispatch("langNS/fetchLangs");
   },
-  async mounted() {
+    mounted() {
     this.$store.dispatch("prodNS/fetchprod")
       /* this.setupDataTable(); */
   },
@@ -217,34 +217,34 @@ export default {
   }, */
   methods: {
     editProduct(productName, category, description, id, image) {
-    const productNameObj = {};
-    const descriptionObj = {};
+      const productNameObj = {};
+      const descriptionObj = {};
 
-    this.langs.data.forEach((lang) => {
-      productNameObj[lang.languageCode] = productName[lang.languageCode];
-      descriptionObj[lang.languageCode] = description[lang.languageCode];
-    });
-  
+      this.langs.data.forEach((lang) => {
+        productNameObj[lang.languageCode] = productName[lang.languageCode];
+        descriptionObj[lang.languageCode] = description[lang.languageCode];
+      });
+    
 
-    const encodedProductName = encodeURIComponent(JSON.stringify(productNameObj));
-    const encodedDescription = encodeURIComponent(JSON.stringify(descriptionObj));
+      const encodedProductName = encodeURIComponent(JSON.stringify(productNameObj));
+      const encodedDescription = encodeURIComponent(JSON.stringify(descriptionObj)); // this encoding is done to avoid the error of "URI malformed" when passing the object as a parameter in the URL
 
-    this.$router.push({
-      name: 'EditProd',
-      params: {
-        productName: encodedProductName,
-        category,
-        description: encodedDescription,
-        id,
-        image,
-      },
-    });
-  },
+      this.$router.push({  
+        name: 'EditProd',
+        params: {                         // this is to pass the data to the EditProd route and use it there to fill the form with the old data before the partner edits it
+          productName: encodedProductName,
+          category,
+          description: encodedDescription,
+          id,
+          image,
+        },
+      });
+    },
     deleteProd(id) {
     this.$store.dispatch('prodNS/deleteProd', { id })
     .then(() => {
       return this.$store.dispatch('prodNS/fetchprod');
-    })
+    })/* 
     .then(() => {
       this.$nextTick(() => {
         if (this.dataTableSearch) {
@@ -254,7 +254,7 @@ export default {
     })
     .catch((error) => {
       console.error("Error:", error);
-    });
+    }); */
 },
     setupDataTable() {
       if (document.getElementById("products-list")) {
@@ -281,15 +281,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-/* #products-list {
-  table-layout: fixed;
-}
-
-#products-list .description-column {
-  width: 100px; 
-  overflow: auto;
-} */
-</style>

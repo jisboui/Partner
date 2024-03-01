@@ -1,53 +1,59 @@
-import { loginService } from "@/services/login.service";
+import { serviceLogin } from "@/services/login.service";
 
 const isAuthenticated = localStorage.getItem("isAuthenticated");
 
-const state = {
-    isAuthenticated: isAuthenticated,
-    user: null,
-  };
+let state = {
+  isAuthenticated: isAuthenticated,
+  user: null,
+};
 
 const mutations = {
-  /* SET_AUTHENTICATION(state, isAuthenticated) {
+  SET_AUTHENTICATION(state, isAuthenticated) {
     state.isAuthenticated = isAuthenticated;
     console.log("Authenticated state :", isAuthenticated);
-  }, */
-  /* SET_USER(state, user) {
+  },
+  SET_USER(state, user) {
     state.user = user;
     console.log("User state :", user);
-  }, */
-};
-
-const actions = {
-async login( _, user) {
-    try {
-        /* commit('SET_USER', { username: user.username }); */
-       const response = await loginService.serviceLogin(user); 
-       localStorage.setItem("isAuthenticated", "true");  
-       console.log("Login response from the action : ", response);
-    } catch (error) {
-    console.error("Login error:", error);
-    throw error;
-    }
-},
-async logout(_, router) {
-    try {
-      if (router) {
-        let route = router.resolve({ name: 'Signin Illustration' });
-        window.open(route.href, '_blank'); // to take to new tab
-      }
-      localStorage.setItem("isAuthenticated", "false");
-    } catch (error) {
-      console.error("Logout error:", error);
-      throw error;
-    }
   },
 };
-  
-  export default {
-    namespaced: true, //to ensure that the actions, mutations, and state within the module are namespaced under the module's name. This helps avoid naming collisions with other modules.
-    state,
-    actions,
-    mutations,
-  };
-  
+
+let actions = {
+  login({ commit }, user) {
+    return serviceLogin(user)
+      .then(response => {
+        commit('SET_USER', { username: user.username });
+        localStorage.setItem("isAuthenticated", "true");
+        console.log("Login response from the action : ", response);
+        return response;
+      })
+      .catch(error => {
+        console.error("Login error:", error);
+        throw error;
+      });
+  },
+
+  logout({ commit }, router) {
+    return new Promise((resolve, reject) => {
+      try {
+        if (router) {
+          let route = router.resolve({ name: 'Signin Illustration' });
+          window.open(route.href, '_blank'); // to take to a new tab
+        }
+        localStorage.setItem("isAuthenticated", "false");
+        commit('SET_AUTHENTICATION', false);
+        resolve();
+      } catch (error) {
+        console.error("Logout error:", error);
+        reject(error);
+      }
+    });
+  },
+};
+
+export default {
+  namespaced: true,
+  state,
+  actions,
+  mutations,
+};

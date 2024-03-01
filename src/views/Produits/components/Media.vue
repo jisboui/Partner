@@ -63,7 +63,7 @@ export default {
     ArgonButton,
   },
   methods: {
-    showTooltip(event) {
+    showTooltip(event) { // Show a alerting message to the partner when hovering over the next button if the Partner hasn't uploaded an image yet
       if ((!this.uploadComplete || !this.file) && !this.tooltipInstance) {
         this.tooltipInstance = tippy(event.target, {
           content: 'Veuillez télécharger une image pour continuer!',
@@ -85,19 +85,7 @@ export default {
     }, */ // this is the old method used with input type="file" that was replaced by the Dropzone method below
   },
   watch: {
-    uploadComplete(newVal) {
-      if (!newVal && !this.tooltipInstance) {
-        this.$nextTick(() => {
-          this.tooltipInstance = tippy(this.$refs.tooltipDiv, {
-            content: 'Veuillez télécharger une image pour continuer!',
-          });
-        });
-      } else if (newVal && this.tooltipInstance) {
-        this.tooltipInstance.destroy();
-        this.tooltipInstance = null;
-      }
-    },
-    file(newVal) {
+    uploadComplete(newVal) {  // Destroy the alerting message when the image is uploaded by the Partner
       if (!newVal && !this.tooltipInstance) {
         this.$nextTick(() => {
           this.tooltipInstance = tippy(this.$refs.tooltipDiv, {
@@ -123,7 +111,7 @@ export default {
     addRemoveLinks: true,
     autoProcessQueue: false, // Prevent Dropzone from automatically uploading the file
   });
-  myDropzone.on("removedfile", function() {
+  myDropzone.on("removedfile", function() { // Reset the file and uploadComplete properties when the file is removed
     vueComponent.file = null;
     vueComponent.uploadComplete = false;
 });
