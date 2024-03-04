@@ -1,19 +1,20 @@
-import { serviceAd,serviceAdP,serviceAdPU,serviceAdDe } from "@/services/ad.service";
-
-let state = {
+import { serviceAd,serviceAdP,serviceAdPU,serviceAdDe,serviceAdI } from "@/services/ad.service";
+export default {
+namespaced: true,
+ state : {
   ad: [],
   adP: null,
   adPu: null,
-};
+},
 
-const mutations = {
+ mutations : {
   setAd(state, ad) {
     console.log('setting ad in state:', ad);
     state.ad = ad;
   },
-};
+},
 
-let actions = {
+ actions : {
   fetchad({ commit }) {
     return serviceAd()
       .then(response => {
@@ -23,6 +24,17 @@ let actions = {
       })
       .catch(error => {
         console.error("ad error:", error);
+        throw error;
+      });
+  },
+  fetchadI(_, { id }) {
+    return serviceAdI(id)
+      .then(response => {
+        console.log("adI response from the action : ", response);
+        return response;
+      })
+      .catch(error => {
+        console.error("adI error:", error);
         throw error;
       });
   },
@@ -40,7 +52,7 @@ let actions = {
     return serviceAdDe(id)
       .then(response => {
         console.log("Delete adP action response: ", response);
-        // return response; // Uncomment if you want to return the response
+        return response; 
       })
       .catch(error => {
         console.error("Delete adP action error: ", error);
@@ -51,18 +63,12 @@ let actions = {
     return serviceAdPU(id, adPU)
       .then(response => {
         console.log("Update adP action response: ", response);
-        // return response; // Uncomment if you want to return the response
+        return response; 
       })
       .catch(error => {
         console.error("Update adP action error: ", error);
         throw error;
       });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
+},
 };

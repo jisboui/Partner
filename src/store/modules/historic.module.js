@@ -1,17 +1,19 @@
 import { getHistoric } from '@/services/historic.service';
 
-let state = {
+export default {
+  namespaced: true,
+ state : {
   hist: [],
-};
+},
 
-const mutations = {
+ mutations : {
   setHist(state, hist) {
     console.log('setting hist in state:', hist);
     state.hist = hist;
   },
-};
+},
 
-let actions = {
+ actions : {
   fetchHist({ commit }) {
     return getHistoric()
       .then(response => {
@@ -24,11 +26,5 @@ let actions = {
         throw error;
       });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
+},
 };

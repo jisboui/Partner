@@ -2,12 +2,14 @@ import { serviceLogin } from "@/services/login.service";
 
 const isAuthenticated = localStorage.getItem("isAuthenticated");
 
-let state = {
+export default {
+  namespaced: true,
+ state : {
   isAuthenticated: isAuthenticated,
   user: null,
-};
+},
 
-const mutations = {
+ mutations : {
   SET_AUTHENTICATION(state, isAuthenticated) {
     state.isAuthenticated = isAuthenticated;
     console.log("Authenticated state :", isAuthenticated);
@@ -16,9 +18,9 @@ const mutations = {
     state.user = user;
     console.log("User state :", user);
   },
-};
+},
 
-let actions = {
+ actions : {
   login({ commit }, user) {
     return serviceLogin(user)
       .then(response => {
@@ -49,11 +51,5 @@ let actions = {
       }
     });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
+},
 };

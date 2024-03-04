@@ -621,7 +621,9 @@ export default {
       this.$refs.sweetAlertsRef.showSwal("auto-close");
     },
   },
-  
+  created() {
+    this.$store.dispatch('requestNS/fetchRequests')
+  },
   mounted() {
     this.$store.state.isAbsolute = true;
     setNavPills();

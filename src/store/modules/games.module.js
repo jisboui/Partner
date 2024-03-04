@@ -1,17 +1,19 @@
 import { serviceGames } from "@/services/games.service";
 
-let state = {
+export default {
+  namespaced: true,
+ state : {
   games: [],
-};
+},
 
-const mutations = {
+ mutations : {
   setGames(state, games) {
     console.log('setting games in state:', games);
     state.games = games;
   },
-};
+},
 
-let actions = {
+ actions : {
   fetchGames({ commit }) {
     return serviceGames()
       .then(response => {
@@ -24,11 +26,5 @@ let actions = {
         throw error;
       });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
+},
 };

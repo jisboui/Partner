@@ -61,6 +61,7 @@ import NewProd from "../views/Produits/NewProd.vue";
 import EditProd from "../views/Produits/EditProd.vue";
 import NewAd from "../views/EspaceAds/NewAd.vue";
 import BibAds from "../views/EspaceAds/BibAds.vue";
+import EditAd from "../views/EspaceAds/EditAd.vue";
 import Sondage from "../views/Survey/Sondage.vue";
 import DiscountVoucher from "../views/DiscountVoucher/DiscountVoucher.vue";
 import dvDetails from "../views/DiscountVoucher/dvDetails.vue";
@@ -570,6 +571,14 @@ const routes = [
     path: "/espaceads/bib-ads",
     name: "BibAds", 
     component: BibAds,
+  meta: {
+    requiresAuth: true
+  }
+  },
+  {
+    path: "/espaceads/edit-ad",
+    name: "EditAd", 
+    component: EditAd,
   meta: {
     requiresAuth: true
   }

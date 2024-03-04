@@ -107,6 +107,7 @@ export default {
       } else {
         // If at the last step, navigate to a different path and post the product after assigning the upload image to the product's itemImage property
         this.prod.itemImage = this.$store.state.fileUploadNS.fileUpload;
+        console.log("prod fel newprod : " , this.prod);
         this.$store.dispatch('prodNS/postprodP', this.prod)
         this.$router.push("/produits/product-list");
       }

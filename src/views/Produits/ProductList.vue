@@ -19,82 +19,6 @@
                     class="mb-0 btn bg-gradient-success btn-sm"
                     >+&nbsp; Nouveau produit
                   </router-link>
-                  <!-- <button
-                    type="button"
-                    class="mx-1 mb-0 btn btn-outline-success btn-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#import"
-                  >
-                    Import
-                  </button>
-                  <div
-                    id="import"
-                    class="modal fade"
-                    tabindex="-1"
-                    aria-hidden="true"
-                  >
-                    <div class="modal-dialog mt-lg-10">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 id="ModalLabel" class="modal-title">
-                            Import CSV
-                          </h5>
-                          <i class="fas fa-upload ms-3"></i>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div class="modal-body">
-                          <p>You can browse your computer for a file.</p>
-                          <input
-                            type="text"
-                            placeholder="Browse file..."
-                            class="mb-3 form-control"
-                          />
-                          <div class="form-check">
-                            <input
-                              id="importCheck"
-                              class="form-check-input"
-                              type="checkbox"
-                              value=""
-                              checked=""
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="importCheck"
-                              >I accept the terms and conditions</label
-                            >
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn bg-gradient-secondary btn-sm"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="button"
-                            class="btn bg-gradient-success btn-sm"
-                          >
-                            Upload
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                  <!--  <button
-                      class="mt-1 mb-0 btn btn-outline-success btn-sm export mt-sm-0"
-                      data-type="csv"
-                      type="button"
-                      name="button"
-                    >
-                      Export
-                    </button> -->
                 </div>
               </div>
             </div>
@@ -226,12 +150,12 @@ export default {
       });
     
 
-      const encodedProductName = encodeURIComponent(JSON.stringify(productNameObj));
-      const encodedDescription = encodeURIComponent(JSON.stringify(descriptionObj)); // this encoding is done to avoid the error of "URI malformed" when passing the object as a parameter in the URL
+      const encodedProductName = encodeURIComponent(JSON.stringify(productNameObj)); // this encoding is done to avoid the error of "URI malformed" when passing the object as a parameter in the URL to the EditProd route
+      const encodedDescription = encodeURIComponent(JSON.stringify(descriptionObj)); 
 
       this.$router.push({  
         name: 'EditProd',
-        params: {                         // this is to pass the data to the EditProd route and use it there to fill the form with the old data before the partner edits it
+        params: {                          // this is to pass the data to the EditProd route and use it there to fill the form with the old data before the partner edits it
           productName: encodedProductName,
           category,
           description: encodedDescription,
@@ -256,7 +180,7 @@ export default {
       console.error("Error:", error);
     }); */
 },
-    setupDataTable() {
+    setupDataTable() {  // this is not being used unless i uncomment : /* this.setupDataTable(); */ in mounted (has some problems)
       if (document.getElementById("products-list")) {
           this.dataTableSearch = new DataTable("#products-list", {
             searchable: true,

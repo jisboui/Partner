@@ -1,19 +1,21 @@
 import  {serviceDv,serviceDvDe,serviceDvP,serviceDvPU}  from "@/services/dv.service";
 
-let state = {
+export default {
+  namespaced: true,
+ state : {
   dv: [],
   dvP: null,
   dvPu: null,
-};
+},
 
-const mutations = {
+ mutations : {
   setDv(state, dv) {
     console.log('setting dv in state:', dv);
     state.dv = dv;
   },
-};
+},
 
-let actions = {
+ actions : {
   fetchdv({ commit }) {
     return serviceDv()
       .then(response => {
@@ -62,11 +64,6 @@ let actions = {
       });
   },
   
-};
+},
 
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
 };

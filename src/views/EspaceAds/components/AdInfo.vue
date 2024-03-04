@@ -7,7 +7,7 @@
     <div class="multisteps-form__content">
       <div class="mt-3 row">
         <div class="col-12 col-sm-6">
-          <label>Id room</label>
+          <label>Id room (codé en dure pour le moment)</label>
           <input
             class="multisteps-form__input form-control"
             type="text"
@@ -75,26 +75,25 @@
 import ArgonButton from "@/components/ArgonButton.vue";
 
 export default {
-  name: "ProductInfo",
+  name: "AdInfo",
   components: {
     ArgonButton,
   },
   data() {
     return {
       ad:{
-  "imageUrl": "https://firebasestorage.googleapis.com/v0/b/dopawinapi.appspot.com/o/petit-dej.png?alt=media",
-  "idRoom": "",
-  "startDate": "2024-02-25T19:12:44.318Z",
+  "imageUrl": "",
+  "idRoom": "65e1b1d91fc1e501dbdc4487",
+  "startDate": "2024-03-05T15:30:15.0", // startDate payload of post "Ad" isn't reading instead it's being auto filled in the backend
   "partnerDescription": ""
 }
     };
   },
   mounted() {
     this.$store.commit('adNS/setAd', this.ad);
-    console.log("ad fel adinfo : ",this.ad);
   },
-  beforeUnmount() {
-    /* this.choicesInstances.forEach(instance => instance.destroy()); */
-  },
+ /*  beforeUnmount() {
+    this.choicesInstances.forEach(instance => instance.destroy());
+  }, */
 };
 </script>

@@ -1,17 +1,19 @@
 import { serviceFileUpload } from "@/services/fileUpload.service";
 
-let state = {
+export default {
+  namespaced: true,
+ state : {
   fileUpload: null,
-};
+},
 
-const mutations = {
+ mutations : {
   setFileUpload(state, fileUpload) {
     console.log('setting fileUpload in state:', fileUpload.data);
     state.fileUpload = fileUpload.data;
   },
-};
+},
 
-let actions = {
+ actions : {
   a_serviceFileUpload({ commit }, file) {
     return serviceFileUpload(file)
       .then(response => {
@@ -24,11 +26,5 @@ let actions = {
         throw error;
       });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
+},
 };

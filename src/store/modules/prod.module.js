@@ -1,19 +1,22 @@
 import  { serviceProd, serviceProdP, serviceProdPU, serviceProdDe }  from "@/services/prod.service";
 
-let state = {
+
+export default {
+  namespaced: true,
+ state : {
   prod: [],
   prodP: null,
   prodPu: null,
-};
+},
 
-const mutations = {
+ mutations : {
   setProd(state, prod) {
     console.log('setting prod in state:', prod);
     state.prod = prod;
   },
-};
+},
 
-let actions = {
+ actions : {
   fetchprod({ commit }) {
     return serviceProd()
       .then(response => {
@@ -59,11 +62,5 @@ let actions = {
         return Promise.reject(error);
       });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
+},
 };

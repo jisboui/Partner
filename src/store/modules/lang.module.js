@@ -1,17 +1,19 @@
 import { getLang } from '@/services/lang.service';
 
-let state = {
+export default {
+  namespaced: true,
+ state : {
   langs: [],
-};
+},
 
-const mutations = {
+ mutations : {
   setLangs(state, langs) {
     console.log('setting langs in state:', langs);
     state.langs = langs;
   },
-};
+},
 
-let actions = {
+ actions : {
   fetchLangs({ commit }) {
     return getLang()
       .then(response => {
@@ -24,11 +26,5 @@ let actions = {
         throw error;
       });
   },
-};
-
-export default {
-  namespaced: true,
-  state,
-  actions,
-  mutations,
+},
 };

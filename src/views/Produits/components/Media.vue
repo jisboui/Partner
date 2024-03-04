@@ -116,8 +116,8 @@ export default {
     vueComponent.uploadComplete = false;
 });
   myDropzone.on("addedfile", function(file) {
-    if (this.files.length > 1) {
-      this.removeFile(this.files[0]);
+    if (this.files.length > 1) { // If the user adds more than one file, remove the first one and add or keep the new one
+      this.removeFile(this.files[0]); 
     }
     vueComponent.file = file; // Store the file in my component's data instead of this.file which refers to the Dropzone instance and won't work
     vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUpload", vueComponent.file)

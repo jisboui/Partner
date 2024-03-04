@@ -39,6 +39,24 @@ export const serviceAd=() =>{
         return Promise.reject(error);
       });
   };
+  export const serviceAdI=(id)=> {
+    return authToken()
+      .then((token) => {
+        authHeaders.Authorization = `Bearer ${token}`;
+        const url = `${API_URL}/${id}`;
+        return axios.get(url, {
+          headers: authHeaders,
+        });
+      })
+      .then((response) => {
+        console.log("adI response from the service: ", response);
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.error("adI error:", error);
+        return Promise.reject(error);
+      });
+  };
   export const serviceAdP=(ad)=> {
     return authToken()
       .then((token) => {
