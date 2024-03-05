@@ -37,16 +37,14 @@
                   <strong>Date de fin :</strong>
                   {{ formatDateTime(request.requestedChanges.endDate) }}
                 </li>
-                <!-- <li v-if="request.requestedChanges.imageUrl">
-                  <strong>Image:</strong>
-                  <br />
+                <li v-if="request.requestedChanges.imageUrl">
                   <img
                     v-if="request.requestedChanges.imageUrl"
                     :src="request.requestedChanges.imageUrl"
                     alt="Requested Image"
                     class="requested-image"
                   />
-                </li> -->
+                </li>
               </ul>
             </div>
           </div>
@@ -68,6 +66,23 @@ export default {
     },
   },
   methods: {
+    updateCardHeights() {
+  this.$nextTick(() => {
+    const cardContainers = document.querySelectorAll(".request-card");
+    let maxCardHeight = 0;
+
+    // First iteration to find the maximum card height
+    cardContainers.forEach((container) => {
+      const cardHeight = container.getBoundingClientRect().height; // Get the height of the card container element in pixels (including padding and border)
+      maxCardHeight = Math.max(maxCardHeight, cardHeight);
+    });
+
+    // Second iteration to set the height of all cards
+    cardContainers.forEach((container) => {
+      container.style.height = `${maxCardHeight}px`;
+    });
+  });
+},
     deleteRequest(id) {
       this.$store.dispatch("requestNS/deleteRequest", { id }).then(() => {
         this.$store.dispatch("requestNS/fetchRequests");
@@ -79,6 +94,7 @@ export default {
   },
   created() {
     this.$store.dispatch("requestNS/fetchRequests");
+    this.updateCardHeights();
   },
 };
 </script>
@@ -154,7 +170,8 @@ export default {
 
 .requested-image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   border-radius: 4px;
   transition: transform 0.2s ease-in-out;
 }
