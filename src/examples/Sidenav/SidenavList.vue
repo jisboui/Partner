@@ -129,7 +129,7 @@
             <ul class="nav ms-4">
               <li class="nav-item">
               <sidenav-item
-                :to="{ name: 'BibAds' }"
+                :to="{ name: 'AdsList' }"
                 mini-icon="BA"
                 text="Bibliothèque Ads"
               />
@@ -144,7 +144,14 @@
             </ul>
           </template>
         </sidenav-collapse>
-      </li> 
+      </li>
+      <li class="nav-item">
+        <sidenav-item
+                    :to="{ name: 'Request' }"
+                    mini-icon="Req"
+                    text="Mes requêtes"
+                  />
+      </li>
       <li class="nav-item">
         <sidenav-item
                     :to="{ name: 'Sondage' }"
@@ -154,16 +161,16 @@
       </li>
       <li class="nav-item">
         <sidenav-item
-                    :to="{ name: 'ManageProfil' }"
-                    mini-icon="EP"
-                    text="Espace profil"
+                    :to="{ name: 'Historic' }"
+                    mini-icon="HA"
+                    text="Historique d'actions"
                   />
       </li>
       <li class="nav-item">
         <sidenav-item
-                    :to="{ name: 'Historic' }"
-                    mini-icon="HA"
-                    text="Historique d'actions"
+                    :to="{ name: 'ManageProfil' }"
+                    mini-icon="EP"
+                    text="Espace profil"
                   />
       </li>
 <!--       <li class="nav-item">

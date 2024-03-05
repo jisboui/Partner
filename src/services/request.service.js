@@ -48,7 +48,7 @@ const authHeaders = {
         });
       })
       .then((response) => {
-        console.log("Request response from the service: ", response);
+        console.log("RequestID response from the service: ", response);
         return Promise.resolve(response);
       })
       .catch((error) => {
@@ -65,7 +65,7 @@ const authHeaders = {
         });
       })
       .then((response) => {
-        console.log("Request response from the service: ", response);
+        console.log("delete Request response from the service: ", response);
         return Promise.resolve(response);
       })
       .catch((error) => {

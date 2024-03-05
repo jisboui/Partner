@@ -60,7 +60,7 @@ import ProductList from "../views/Produits/ProductList.vue";
 import NewProd from "../views/Produits/NewProd.vue";
 import EditProd from "../views/Produits/EditProd.vue";
 import NewAd from "../views/EspaceAds/NewAd.vue";
-import BibAds from "../views/EspaceAds/BibAds.vue";
+import AdsList from "../views/EspaceAds/AdsList.vue";
 import EditAd from "../views/EspaceAds/EditAd.vue";
 import Sondage from "../views/Survey/Sondage.vue";
 import DiscountVoucher from "../views/DiscountVoucher/DiscountVoucher.vue";
@@ -69,6 +69,7 @@ import dvValidation from "../views/DiscountVoucher/dvValidation.vue";
 import editCampaign from "../views/Campaign/editCampaign.vue";
 import dvList from "../views/DiscountVoucher/dvList.vue";
 import Historic from "../views/Historic/Historic.vue";
+import Request from "../views/Request/Request.vue";
 
 const routes = [
   {
@@ -568,9 +569,9 @@ const routes = [
   }
   },
   {
-    path: "/espaceads/bib-ads",
-    name: "BibAds", 
-    component: BibAds,
+    path: "/espaceads/ads-list",
+    name: "AdsList", 
+    component: AdsList,
   meta: {
     requiresAuth: true
   }
@@ -635,6 +636,14 @@ const routes = [
     path: "/Historic/historic",
     name: "Historic", 
     component: Historic,
+  meta: {
+    requiresAuth: true
+  }
+  },
+  {
+    path: "/Request/request",
+    name: "Request", 
+    component: Request,
   meta: {
     requiresAuth: true
   }

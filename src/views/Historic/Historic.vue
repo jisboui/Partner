@@ -51,10 +51,10 @@ computed: {
 },
 methods: {
     formatTimestamp(timestamp) { // Format the timestamp to a readable date
-      return timestamp ? new Date(timestamp).toLocaleString() : '';
+      return timestamp ? new Date(timestamp).toLocaleString('fr-FR') : '';
     },
     formatTime(time) { // Format the time to a readable time
-    return time ? new Date(time).toLocaleTimeString() : '';
+    return time ? new Date(time).toLocaleTimeString('fr-FR') : '';
     },
 },
 };

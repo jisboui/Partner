@@ -36,9 +36,9 @@
                     <th>Image d'Ad</th>
                     <th>Nombre d'impression</th>
                     <!-- <th>Description</th> -->
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Added Date</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Date d'ajout</th>
                     <th>Statut d'activité</th>
                     <th>Action</th>
                   </tr>
@@ -79,8 +79,8 @@
                     <th>Image d'Ad</th>
                     <th>Nombre d'impression</th>
                     <!-- <th>Description</th> -->
-                    <th>Start Date</th>
-                    <th>End Date</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
                     <th>Added Date</th>
                     <th>Statut d'activité</th>
                     <th>Action</th>
@@ -100,7 +100,7 @@ import { DataTable } from "simple-datatables";
 import setTooltip from "@/assets/js/tooltip.js";
 
 export default {
-  name: "BibAds",
+  name: "AdsList",
   /* created() {
     
   }, */

@@ -1,4 +1,4 @@
-import { getRequest } from '@/services/request.service';
+import { getRequest,getRequestID,deleteRequest } from '@/services/request.service';
 
 export default {
   namespaced: true,
@@ -23,6 +23,28 @@ export default {
       })
       .catch(error => {
         console.error("Requests error:", error);
+        throw error;
+      });
+  },
+  fetchRequestID (_, { id }) {
+    return getRequestID(id)
+      .then(response => {
+        console.log("RequestID response from the action : ", response);
+        return response;
+      })
+      .catch(error => {
+        console.error("RequestID error:", error);
+        throw error;
+      });
+  },
+  deleteRequest(_, { id }) {
+    return deleteRequest(id)
+      .then(response => {
+        console.log("Delete request action response: ", response);
+        return response; 
+      })
+      .catch(error => {
+        console.error("Delete request action error: ", error);
         throw error;
       });
   },
