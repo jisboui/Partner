@@ -38,6 +38,7 @@
                   {{ formatDateTime(request.requestedChanges.endDate) }}
                 </li>
                 <li v-if="request.requestedChanges.imageUrl">
+                  <br />
                   <img
                     v-if="request.requestedChanges.imageUrl"
                     :src="request.requestedChanges.imageUrl"
@@ -66,14 +67,14 @@ export default {
     },
   },
   methods: {
-    updateCardHeights() {
+    updateCardHeights() {  // Update the height of all cards to match the height of the tallest card
   this.$nextTick(() => {
     const cardContainers = document.querySelectorAll(".request-card");
     let maxCardHeight = 0;
 
     // First iteration to find the maximum card height
     cardContainers.forEach((container) => {
-      const cardHeight = container.getBoundingClientRect().height; // Get the height of the card container element in pixels (including padding and border)
+      const cardHeight = container.getBoundingClientRect().height;
       maxCardHeight = Math.max(maxCardHeight, cardHeight);
     });
 
@@ -83,6 +84,7 @@ export default {
     });
   });
 },
+
     deleteRequest(id) {
       this.$store.dispatch("requestNS/deleteRequest", { id }).then(() => {
         this.$store.dispatch("requestNS/fetchRequests");
@@ -94,7 +96,7 @@ export default {
   },
   created() {
     this.$store.dispatch("requestNS/fetchRequests");
-    this.updateCardHeights();
+      this.updateCardHeights();
   },
 };
 </script>
@@ -170,7 +172,7 @@ export default {
 
 .requested-image {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 4px;
   transition: transform 0.2s ease-in-out;

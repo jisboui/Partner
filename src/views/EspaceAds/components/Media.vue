@@ -99,7 +99,7 @@ export default {
     },
   },
   mounted() {
-  Dropzone.autoDiscover = false;
+    
   var drop = document.getElementById("dropzone");
 
   var vueComponent = this; // Store the Vue component instance
@@ -111,20 +111,38 @@ export default {
     addRemoveLinks: true,
     autoProcessQueue: false, // Prevent Dropzone from automatically uploading the file
   });
-  myDropzone.on("removedfile", function() { // Reset the file and uploadComplete properties when the file is removed
+
+  myDropzone.on("removedfile", function() {
+    // Reset the file and uploadComplete properties when the file is removed
     vueComponent.file = null;
     vueComponent.uploadComplete = false;
-});
-  myDropzone.on("addedfile", function(file) {
-    if (this.files.length > 1) { // If the user adds more than one file, remove the first one and add or keep the new one
-      this.removeFile(this.files[0]); 
-    }
-    vueComponent.file = file; // Store the file in my component's data instead of this.file which refers to the Dropzone instance and won't work
-    vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUpload", vueComponent.file)
-    .then(() => {
-      vueComponent.uploadComplete = true;
-    });
   });
+
+  myDropzone.on("thumbnail", function(file) {
+    if (file.width > maxWidth || file.height > maxHeight) {
+      // Display an error message or take appropriate action
+      alert("Uploaded image dimensions should not exceed " + maxWidth + "x" + maxHeight);
+      this.removeFile(file); // Remove the file from Dropzone
+    }
+  });
+
+  myDropzone.on("addedfile", function(file) {
+    if (this.files.length > 1) {
+      // If the user adds more than one file, remove the first one and add or keep the new one
+      this.removeFile(this.files[0]);
+    }
+
+    vueComponent.file = file; // Store the file in my component's data instead of this.file
+    vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUpload", vueComponent.file)
+      .then(() => {
+        vueComponent.uploadComplete = true;
+      });
+  });
+
+  // Set your maximum width and height
+  var maxWidth = 1400;
+  var maxHeight = 1400;
+
 },
 };
 </script>
