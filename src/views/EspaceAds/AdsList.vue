@@ -81,7 +81,7 @@
                     <!-- <th>Description</th> -->
                     <th>Date de début</th>
                     <th>Date de fin</th>
-                    <th>Added Date</th>
+                    <th>Date d'ajout</th>
                     <th>Statut d'activité</th>
                     <th>Action</th>
                   </tr>

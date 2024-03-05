@@ -112,7 +112,7 @@
         console.log("ad fel newad : " , this.ad);
         this.$store.dispatch('adNS/postadP', this.ad)
         // If at the last step, navigate to a different path
-        this.$router.push('/espaceads/bib-ads'); 
+        this.$router.push('/espaceads/ads-list'); 
       }
     },
       prevStep() {

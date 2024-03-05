@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="header">Liste de mes requêtes</h2>
+    <h2 class="header">Liste de mes demandes</h2>
     <br />
     <ul class="request-list">
       <li v-for="request in requests.data" :key="request.id">
@@ -26,18 +26,18 @@
                   {{ request.requestedChanges.active ? "Yes" : "No" }}
                 </li>
                 <li v-if="request.requestedChanges.addedDate">
-                  <strong>Added Date:</strong>
+                  <strong>Date d'ajout :</strong>
                   {{ formatDateTime(request.requestedChanges.addedDate) }}
                 </li>
                 <li v-if="request.requestedChanges.startDate">
-                  <strong>Start Date:</strong>
+                  <strong>Date de début :</strong>
                   {{ formatDateTime(request.requestedChanges.startDate) }}
                 </li>
                 <li v-if="request.requestedChanges.endDate">
-                  <strong>End Date:</strong>
+                  <strong>Date de fin :</strong>
                   {{ formatDateTime(request.requestedChanges.endDate) }}
                 </li>
-                <li v-if="request.requestedChanges.imageUrl">
+                <!-- <li v-if="request.requestedChanges.imageUrl">
                   <strong>Image:</strong>
                   <br />
                   <img
@@ -46,14 +46,13 @@
                     alt="Requested Image"
                     class="requested-image"
                   />
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
           <button @click="deleteRequest(request.id)" class="delete-button">
             Delete
           </button>
-          <button @click="fetchRequestID(request.id)">Fetch Request ID</button>
         </div>
       </li>
     </ul>
@@ -69,15 +68,6 @@ export default {
     },
   },
   methods: {
-    fetchRequestID(id) {
-      this.$store.dispatch("requestNS/fetchRequestID", { id })
-        .then(response => {
-          console.log("RequestID response from the component: ", response);
-        })
-        .catch(error => {
-          console.error("RequestID error from the component:", error);
-        });
-    },
     deleteRequest(id) {
       this.$store.dispatch("requestNS/deleteRequest", { id }).then(() => {
         this.$store.dispatch("requestNS/fetchRequests");

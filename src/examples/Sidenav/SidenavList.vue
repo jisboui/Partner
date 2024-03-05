@@ -149,7 +149,7 @@
         <sidenav-item
                     :to="{ name: 'Request' }"
                     mini-icon="Req"
-                    text="Mes requêtes"
+                    text="Mes demandes"
                   />
       </li>
       <li class="nav-item">
