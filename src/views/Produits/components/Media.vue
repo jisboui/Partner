@@ -70,7 +70,16 @@ export default {
         });
       }
     },
-  
+    showSwal(type, maxWidth, maxHeight) {
+      if (type === "basic") {
+        this.$swal({
+          icon: "basic",
+          title: "Veuillez choisir une autre image",
+          text: `Les dimensions de l'image téléchargée ne doivent pas dépasser ${maxWidth}x${maxHeight}`,
+          type: type,
+        });
+      }
+    },
     /* handleClick() {      
       this.uploadFile()
       this.$parent.nextStep();
@@ -99,7 +108,6 @@ export default {
     },
   },
   mounted() {
-  Dropzone.autoDiscover = false;
   var drop = document.getElementById("dropzone");
 
   var vueComponent = this; // Store the Vue component instance
@@ -115,6 +123,13 @@ export default {
     vueComponent.file = null;
     vueComponent.uploadComplete = false;
 });
+  myDropzone.on("thumbnail", function(file) {
+      if (file.width > maxWidth || file.height > maxHeight) {
+        // Display an error message or take appropriate action
+        vueComponent.showSwal("basic", maxWidth, maxHeight);
+        this.removeFile(file); // Remove the file from Dropzone
+      }
+    });
   myDropzone.on("addedfile", function(file) {
     if (this.files.length > 1) { // If the user adds more than one file, remove the first one and add or keep the new one
       this.removeFile(this.files[0]); 
@@ -125,6 +140,9 @@ export default {
       vueComponent.uploadComplete = true;
     });
   });
+  // Set your maximum width and height
+  var maxWidth = 1400;
+    var maxHeight = 1400;
 },
 };
 </script>

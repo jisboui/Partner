@@ -7,15 +7,15 @@
         <thead class="thead-dark">
         <tr class="custom-row">
             <th>Role</th>
-            <th>Timestamp</th>
+            <th>Horodatage</th>
             <th>Action</th>
             <th>Description</th>
-            <th>Service Name</th>
-            <th>Method Name</th>
-            <th>Start Time</th>
-            <th>End Time</th>
+            <!-- <th>Service Name</th>
+            <th>Method Name</th> -->
+            <th>Date de début</th>
+           <!--  <th>End Time</th>
             <th>Duration</th>
-            <th>Response Status</th>
+            <th>Response Status</th> -->
         </tr>
         </thead>
         <tbody>
@@ -24,12 +24,12 @@
             <td>{{ formatTimestamp(historic.timestamp) }}</td>
             <td>{{ historic.action }}</td>
             <td>{{ historic.description }}</td>
-            <td>{{ historic.serviceName }}</td>
-            <td>{{ historic.methodName }}</td>
+            <!-- <td>{{ historic.serviceName }}</td>
+            <td>{{ historic.methodName }}</td> -->
             <td>{{ formatTime(historic.startTime) }}</td>
-            <td>{{ formatTime(historic.endTime) }}</td>
+            <!-- <td>{{ formatTime(historic.endTime) }}</td>
             <td>{{ historic.duration }} ms</td>
-            <td>{{ historic.responseStatus }}</td>
+            <td>{{ historic.responseStatus }}</td> -->
         </tr>
         </tbody>
     </table>

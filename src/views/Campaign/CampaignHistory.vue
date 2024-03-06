@@ -386,7 +386,7 @@ import asanaLogo from "@/assets/img/small-logos/dell.jpg";
 
 import ComplexProjectCard from "./components/ComplexProjectCard.vue";
 import PlaceholderCard from "@/examples/Cards/PlaceholderCard.vue";
-import setNavPills from "@/assets/js/nav-pills.js";
+/* import setNavPills from "@/assets/js/nav-pills.js"; */
 import ComplexCardForValidation from "./components/ComplexCardForValidation.vue";
 
 export default {
@@ -434,16 +434,16 @@ export default {
     description, 
     dateTime } });
   },
-    callShowSwal() {
+    /* callShowSwal() {
       this.$refs.sweetAlertsRef.showSwal("auto-close");
-    },
+    }, */
   },
   created() {
     this.$store.dispatch('requestNS/fetchRequests')
   },
   mounted() {
     this.$store.state.isAbsolute = true;
-    setNavPills();
+    /* setNavPills(); */
   },
   beforeMount() {
     this.$store.state.layout = "custom";
