@@ -1,8 +1,8 @@
 <template>
-<br>
+<br> <br> 
 <h1 class="my-4 text-center">Mon historique d'opérations</h1>
 <div class="table-responsive">
-    <br>
+    <br> <br>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
         <tr class="custom-row">
@@ -65,7 +65,8 @@ methods: {
   height: 65px;
 }
 .table {
-width: 100%;
+margin : 30px;
+width: 95%;
 margin-bottom: 1rem;
 color: #212529;
 }
@@ -102,6 +103,10 @@ border: 1px solid #dee2e6;
 .table-bordered thead td {
 border-bottom-width: 2px;
 }
-
+@media (max-width: 767px) {
+    .table {
+      width: 1% !important;
+    }
+  }
 </style>
   

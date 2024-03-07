@@ -57,7 +57,7 @@
       <li class="nav-item">
         <sidenav-collapse
           collapse-ref="ecommerceExamples"
-          nav-text="Discount Voucher"
+          nav-text="Bons de réduction"
           :class="getRoute() === 'ecommerce' ? 'active' : ''"
         >
           <template #icon>
@@ -66,7 +66,7 @@
           <template #list>
             <ul class="nav ms-4">
               <sidenav-item
-                :to="{ name: 'DiscountVoucher' }"
+                :to="{ name: 'dvPerCampaign' }"
                 mini-icon="BR"
                 text="Consulter/Valider les bons"
               />
@@ -146,32 +146,48 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-item
-                    :to="{ name: 'Request' }"
-                    mini-icon="Req"
+            <sidenav-item 
+                    :to="{ name: 'Request' }" 
+                    mini-icon="Req" 
                     text="Mes demandes"
-                  />
+            >
+              <template #icon>
+                <i class="fa-solid fa-rotate-right text-sm" style="color : tomato"></i>
+              </template>
+            </sidenav-item>
       </li>
       <li class="nav-item">
         <sidenav-item
                     :to="{ name: 'Sondage' }"
                     mini-icon="ES"
                     text="Espace sondage"
-                  />
+        >
+              <template #icon>
+                <i class="fa-solid fa-square-poll-vertical text-sm" style="color : green"></i>
+              </template>
+            </sidenav-item>
       </li>
       <li class="nav-item">
         <sidenav-item
                     :to="{ name: 'Historic' }"
                     mini-icon="HA"
                     text="Historique d'actions"
-                  />
+        >
+              <template #icon>
+                <i class="fa-solid fa-clock-rotate-left text-sm" style="color : blue"></i>
+              </template>
+            </sidenav-item>
       </li>
       <li class="nav-item">
         <sidenav-item
                     :to="{ name: 'ManageProfil' }"
                     mini-icon="EP"
                     text="Espace profil"
-                  />
+        >
+              <template #icon>
+                <i class="fa-solid fa-user text-sm" style="color : brown"></i>
+              </template>
+            </sidenav-item>
       </li>
 <!--       <li class="nav-item">
         <sidenav-collapse

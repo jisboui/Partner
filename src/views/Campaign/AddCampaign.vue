@@ -203,7 +203,6 @@ export default {
   },
     games() {
     const games = this.$store.state.gameNS.games;
-    console.log('Games in computed property:', games);
     return games;
     },
   },

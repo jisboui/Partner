@@ -3,7 +3,7 @@ import { serviceLogin } from "@/services/login.service";
 const isAuthenticated = localStorage.getItem("isAuthenticated");
 
 export default {
-  namespaced: true,
+ namespaced: true,
  state : {
   isAuthenticated: isAuthenticated,
   user: null,
@@ -14,17 +14,17 @@ export default {
     state.isAuthenticated = isAuthenticated;
     console.log("Authenticated state :", isAuthenticated);
   },
-  SET_USER(state, user) {
+  /* SET_USER(state, user) {
     state.user = user;
     console.log("User state :", user);
-  },
+  }, */
 },
 
  actions : {
-  login({ commit }, user) {
+  login(_, user) {
     return serviceLogin(user)
       .then(response => {
-        commit('SET_USER', { username: user.username });
+        /* commit('SET_USER', { username: user.username }); */  // not needed as of now
         localStorage.setItem("isAuthenticated", "true");
         console.log("Login response from the action : ", response);
         return response;

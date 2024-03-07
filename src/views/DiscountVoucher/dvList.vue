@@ -7,7 +7,7 @@
         <div class="main">
           <div class="co-img">
             <img
-            src="https://scontent.ftun1-2.fna.fbcdn.net/v/t39.30808-6/273207779_281563397405455_6026609381950187436_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=26EnkjS_GYAAX8CbJMx&_nc_ht=scontent.ftun1-2.fna&oh=00_AfBbrPlvqH4XTf7b_6wE7yulTvNn2Et4sp60m3Gz02WYQQ&oe=65E99861"
+            src="https://www.tunisietravail.net/uploads/2021/08/artfin-200x200.png"
             alt="brand logo"
             />
           </div>
@@ -115,6 +115,48 @@ computed: {
   }
 },
   methods: {
+    showSwal(type, index) {
+  if (type === "warning-message-and-cancel") {
+    this.$swal({
+      title: "Es-tu sûr?",
+      text: "Vous ne pourrez pas revenir en arrière!",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonText: "Annuler",
+      confirmButtonText: "Oui, supprimez-le!",
+      customClass: {
+        confirmButton: "btn bg-gradient-success",
+        cancelButton: "btn bg-gradient-danger",
+      },
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) { // Check if user confirmed the action
+        const id = this.items[index].id;
+        console.log("id in deletion:", id);
+        this.items.splice(index, 1); // Delete the item from the array
+        this.$store.dispatch('dvNS/deleteDv', {id})
+          .then(() => {
+            this.$store.dispatch('dvNS/fetchdv');
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        this.$swal({ // Show success message
+          title: "Supprimé!",
+          text: "Votre bon a été supprimé.",
+          icon: "success",
+          customClass: {
+            confirmButton: "btn bg-gradient-success",
+          },
+          buttonsStyling: false,
+        });
+        this.cancelEdit(); // Close the edit modal if open for the deleted item
+      } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+        this.$swal.dismiss; // Dismiss the swal modal if user cancels
+      }
+    });
+  }
+},
     fillItems() {
     this.$store.dispatch('dvNS/fetchdv')
       .then(() => {
@@ -180,20 +222,9 @@ computed: {
       this.editedItem.dvType = '';
     },
     deleteItem(index) {
-      if (confirm('Are you sure you want to delete this item?')) {
-        const id = this.items[index].id;
-        console.log("id in deletion:", id);
-        this.items.splice(index, 1);
-        this.$store.dispatch('dvNS/deleteDv', {id})
-        .then(() => {
-          this.$store.dispatch('dvNS/fetchdv');
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-        this.cancelEdit(); // Close the edit modal if open for the deleted item
-      }
-    }
+  this.showSwal("warning-message-and-cancel", index); // Show confirmation dialog
+},
+
   },
   beforeMount() {
     this.$store.state.layout = "default";

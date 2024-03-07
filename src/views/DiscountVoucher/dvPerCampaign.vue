@@ -630,7 +630,7 @@
   /* import setNavPills from "@/assets/js/nav-pills.js"; */
   
   export default {
-    name: "DiscountVoucher",
+    name: "dvPerCampaign",
     components: {
       ComplexProjectCard,
       /* PlaceholderCard, */

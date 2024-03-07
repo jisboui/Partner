@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Landing from "../views/dashboards/Landing.vue";
-import Default from "../views/dashboards/Default.vue";
+/* import ProductsList from "../views/ecommerce/ProductsList.vue"; */
+/* import Landing from "../views/dashboards/Landing.vue";
 import Automotive from "../views/dashboards/Automotive.vue";
 import SmartHome from "../views/dashboards/SmartHome.vue";
 import VRDefault from "../views/dashboards/vr/VRDefault.vue";
@@ -10,7 +10,6 @@ import Overview from "../views/pages/profile/Overview.vue";
 import Teams from "../views/pages/profile/Teams.vue";
 import Projects from "../views/pages/profile/Projects.vue";
 import General from "../views/pages/projects/General.vue";
-import CampaignHistory from "../views/Campaign/CampaignHistory.vue";
 import NewProject from "../views/pages/projects/NewProject.vue";
 import Pricing from "../views/pages/Pricing.vue";
 import RTL from "../views/pages/Rtl.vue";
@@ -26,7 +25,6 @@ import EcommerceOverview from "../views/ecommerce/overview/Overview.vue";
 import NewProduct from "../views/ecommerce/products/NewProduct.vue";
 import EditProduct from "../views/ecommerce/EditProduct.vue";
 import ProductPage from "../views/ecommerce/ProductPage.vue";
-/* import ProductsList from "../views/ecommerce/ProductsList.vue"; */
 import OrderDetails from "../views/ecommerce/Orders/OrderDetails";
 import OrderList from "../views/ecommerce/Orders/OrderList";
 import Referral from "../views/ecommerce/Referral";
@@ -39,7 +37,6 @@ import Security from "../views/pages/Account/Security.vue";
 import Widgets from "../views/pages/Widgets.vue";
 import Basic from "../views/auth/signin/Basic.vue";
 import Cover from "../views/auth/signin/Cover.vue";
-import Illustration from "../views/auth/signin/Illustration.vue";
 import ResetBasic from "../views/auth/reset/Basic.vue";
 import ResetCover from "../views/auth/reset/Cover.vue";
 import ResetIllustration from "../views/auth/reset/Illustration.vue";
@@ -53,7 +50,10 @@ import Error404 from "../views/auth/error/Error404.vue";
 import Error500 from "../views/auth/error/Error500.vue";
 import lockBasic from "../views/auth/lock/Basic.vue";
 import lockCover from "../views/auth/lock/Cover.vue";
-import lockIllustration from "../views/auth/lock/Illustration.vue";
+import lockIllustration from "../views/auth/lock/Illustration.vue"; */
+import Default from "../views/dashboards/Default.vue";
+import Illustration from "../views/auth/signin/Illustration.vue";
+import CampaignHistory from "../views/Campaign/CampaignHistory.vue";
 import AddCampaign from "../views/Campaign/AddCampaign.vue";
 import ManageProfil from "../views/ManageProfil/ManageProfil.vue";
 import ProductList from "../views/Produits/ProductList.vue";
@@ -63,7 +63,7 @@ import NewAd from "../views/EspaceAds/NewAd.vue";
 import AdsList from "../views/EspaceAds/AdsList.vue";
 import EditAd from "../views/EspaceAds/EditAd.vue";
 import Sondage from "../views/Survey/Sondage.vue";
-import DiscountVoucher from "../views/DiscountVoucher/DiscountVoucher.vue";
+import dvPerCampaign from "../views/DiscountVoucher/dvPerCampaign.vue";
 import dvDetails from "../views/DiscountVoucher/dvDetails.vue";
 import dvValidation from "../views/DiscountVoucher/dvValidation.vue";
 import editCampaign from "../views/Campaign/editCampaign.vue";
@@ -73,12 +73,6 @@ import Request from "../views/Request/Request.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "/",
-    redirect: "/dashboards/dashboard-default",
- 
-  },
-  {
     path: "/dashboards/dashboard-default",
     name: "Default",
     component: Default,
@@ -87,6 +81,14 @@ const routes = [
   }
   },
   {
+    path: "/authentication/signin/illustration",
+    name: "Signin Illustration",
+    component: Illustration,
+  meta: {
+    requiresAuth: true
+  }
+  },
+ /*  {
     path: "/dashboards/landing",
     name: "Landing",
     component: Landing,
@@ -295,14 +297,14 @@ const routes = [
     requiresAuth: true
   }
   },
- /*  {
+  {
     path: "/ecommerce/products/products-list",
     name: "Products List",
     component: ProductsList,
   meta: {
     requiresAuth: true
   }
-  }, */
+  },
   {
     path: "/ecommerce/Orders/order-details",
     name: "Order Details",
@@ -387,14 +389,6 @@ const routes = [
     path: "/authentication/signin/cover",
     name: "Signin Cover",
     component: Cover,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/signin/illustration",
-    name: "Signin Illustration",
-    component: Illustration,
   meta: {
     requiresAuth: true
   }
@@ -510,7 +504,7 @@ const routes = [
   meta: {
     requiresAuth: true
   }
-  },
+  }, */
   /** route de company */
   {
     path: "/campaign/add-campaign",
@@ -593,9 +587,9 @@ const routes = [
   }
   },
   {
-    path: "/DiscountVoucher/discount-voucher",
-    name: "DiscountVoucher", 
-    component: DiscountVoucher,
+    path: "/DiscountVoucher/dv-Per-Campaign",
+    name: "dvPerCampaign", 
+    component: dvPerCampaign,
   meta: {
     requiresAuth: true
   }

@@ -20,8 +20,8 @@
             >
               <div class="card card-plain">
                 <div class="pb-0 card-header text-start">
-                  <h4 class="font-weight-bolder">Sign In</h4>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <h4 class="font-weight-bolder">Se connecter</h4>
+                  <p class="mb-0">Entrez votre email et votre mot de passe pour vous connecter</p>
                 </div>
                 <div class="card-body">
                   <form role="form"   @submit.prevent="loginclick">
@@ -39,7 +39,7 @@
                       <argon-input
                         id="password"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Mot de passe"
                         name="password"
                         size="lg"
                         @input="user.password = $event.target.value"
@@ -152,8 +152,8 @@ export default {
         this.navigateToDashboard();
       } catch (error) {
         console.error(error);
-        this.errorMessage = "Email or password are wrong, please try again!";
-        this.$forceUpdate();
+        this.errorMessage = "L'e-mail ou le mot de passe sont erronés, veuillez réessayer!";
+        /* this.$forceUpdate(); */  
       }
     },
     navigateToDashboard() {
