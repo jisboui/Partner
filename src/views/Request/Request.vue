@@ -11,11 +11,11 @@
               <strong>Date:</strong> {{ formatDateTime(request.requestDate) }}
             </p>
             <p class="status">
-              <strong>Status:</strong> {{ request.requestStatus }}
+              <strong>Status:</strong> {{ request.requestStatus == 'PENDING' ? 'En attente' : 'Confirmé' }}
             </p>
             <p class="description">
               <strong>Description:</strong>
-              {{ request.partnerDescription || "No description" }}
+              {{ request.partnerDescription || "Pas de description" }}
             </p>
             <div v-if="request.requestedChanges">
               <p class="changes-title">
@@ -24,7 +24,7 @@
               <ul class="changes-list">
                 <li v-if="request.requestedChanges.active !== undefined">
                   <strong>Active:</strong>
-                  {{ request.requestedChanges.active ? "Yes" : "No" }}
+                  {{ request.requestedChanges.active ? "Oui" : "Non" }}
                 </li>
                 <li v-if="request.requestedChanges.addedDate">
                   <strong>Date d'ajout :</strong>

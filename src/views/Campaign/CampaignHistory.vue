@@ -446,6 +446,7 @@ export default {
     /* setNavPills(); */
   },
   beforeMount() {
+    
     this.$store.state.layout = "custom";
     this.$store.state.showFooter = true;
   },

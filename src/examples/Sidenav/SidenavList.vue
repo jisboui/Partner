@@ -149,7 +149,7 @@
             <sidenav-item 
                     :to="{ name: 'Request' }" 
                     mini-icon="Req" 
-                    text="Mes demandes"
+                    text="Toutes mes demandes"
             >
               <template #icon>
                 <i class="fa-solid fa-rotate-right text-sm" style="color : tomato"></i>

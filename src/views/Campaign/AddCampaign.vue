@@ -48,6 +48,7 @@
                 class="form-control datetimepicker"
                 placeholder="Please select start date"
                 :config="config"
+                @change="console.log('date:', date)"
               ></flat-pickr>
             </div>
             <div class="col-6">
@@ -56,10 +57,12 @@
                 id="choices-category"
                 class="form-control"
                 name="choices-category"
+                v-model="selectedPeriod"
+                @change="console.log('selectedPeriod:', selectedPeriod)"
               >
-                <option value="Choice 1" selected="">7</option>
-                <option value="Choice 2">14</option>
-                <option value="Choice 3">21</option>
+                <option value="7" selected="">7</option>
+                <option value="14">14</option>
+                <option value="21">21</option>
               </select>
             </div>
           </div>
@@ -170,18 +173,21 @@ export default {
   },
   data() {
     return {
+      selectedPeriod: "7",
       selectedDv: null,
       selectedGift: '',
       selectedGame: "",
-      date: "",
+      date: null,
       endDate: "",
       config: {
         allowInput: true,
+        defaultDate: null,
       },
       showDiv: false,
     };
   },
   async created() {
+    console.log('date : ' + this.date);
     // try {
       // const response = await this.$store.dispatch('gameNS/fetchGames');
       this.$store.dispatch('prodNS/fetchprod')

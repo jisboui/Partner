@@ -153,7 +153,7 @@
         <div class="col-6">
           <label class="form-label mt-2">Votre site web</label>
           <argon-input
-            id="location"
+            id="website"
             type="text"
             placeholder="https://www.dopawin.tn/"
           />
@@ -176,19 +176,19 @@
         <div class="col-6">
           <label class="form-label mt-2">Réseaux sociaux</label>
           <argon-input
-            id="phone"
+            id="FB"
             type="text"
             placeholder="https://www.facebook.com/dopawinapp"
           />
           <label class="form-label mt-2"></label>
           <argon-input
-            id="phone"
+            id="IG"
             type="text"
             placeholder="https://www.instagram.com/dopawin_/"
           />
           <label class="form-label mt-2"></label>
           <argon-input
-            id="phone"
+            id="X"
             type="text"
             placeholder="https://twitter.com/Dopawin_App"
           />
@@ -269,9 +269,10 @@
       <h5>Changer de mot de passe</h5>
     </div>
     <div class="card-body pt-0">
+     <form>
       <label class="form-label">Mot de passe actuel</label>
       <argon-input
-        id="password"
+        id="Current Password"
         type="password"
         placeholder="Current Password"
       />
@@ -312,6 +313,7 @@
         size="sm"
         >Mettre à jour le mot de passe</argon-button
       >
+    </form>
     </div>
   </div>
   <!-- <div id="accounts" class="card mt-4">

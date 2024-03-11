@@ -150,12 +150,20 @@ computed: {
           },
           buttonsStyling: false,
         });
-        this.cancelEdit(); // Close the edit modal if open for the deleted item
+        /* this.cancelEdit(); */ // Close the edit modal if open for the deleted item
       } else if (result.dismiss === this.$swal.DismissReason.cancel) {
         this.$swal.dismiss; // Dismiss the swal modal if user cancels
       }
     });
   }
+  else if (type === "basic") {
+        this.$swal({
+          icon: "basic",
+          title: "Veuillez entrer tous les champs.",
+          text: "Les champs ne doivent pas être vides!",
+          type: type,
+        });
+      }
 },
     fillItems() {
     this.$store.dispatch('dvNS/fetchdv')
@@ -189,21 +197,22 @@ computed: {
         this.dvP.discountType = '';
         this.dvP.dvType = '';   */  
     } else {
-      alert('Veuillez entrer tous les champs.');
+      this.showSwal("basic");
     }
   },
 
-    editItem(index) {
+    editItem(index) { 
       this.editIndex = index;
       this.editedItem.dvType = this.items[index].dvType;
       this.editedItem.discountType = this.items[index].discountType;
       this.editedItem.validityInDays = this.items[index].validityInDays;
       this.editedItem.discountValue = this.items[index].discountValue;    
     },
-     saveEdit() {
+     saveEdit() { 
       this.items[this.editIndex].discountValue = this.editedItem.discountValue;
       this.items[this.editIndex].validityInDays = this.editedItem.validityInDays;
       this.items[this.editIndex].dvType = this.editedItem.dvType; 
+      this.items[this.editIndex].discountType = this.editedItem.discountType;
       const id = this.items[this.editIndex].id;
       console.log("id in edition:", id);
        this.$store.dispatch('dvNS/updateDv', {id ,dvPU : this.editedItem})
@@ -220,11 +229,11 @@ computed: {
       this.editedItem.discountValue = '';
       this.editedItem.validityInDays = '';
       this.editedItem.dvType = '';
+      this.editedItem.discountType = '';
     },
     deleteItem(index) {
-  this.showSwal("warning-message-and-cancel", index); // Show confirmation dialog
-},
-
+      this.showSwal("warning-message-and-cancel", index);
+    },
   },
   beforeMount() {
     this.$store.state.layout = "default";
@@ -376,7 +385,7 @@ computed: {
 
   .card {
   width: 500px;
-  height: 235px;
+  height: 230px;
   border-radius: 5px;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
   background-color: beige;

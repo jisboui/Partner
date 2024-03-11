@@ -144,7 +144,7 @@ export default {
       const productNameObj = {};
       const descriptionObj = {};
 
-      this.langs.data.forEach((lang) => {
+      this.langs.data.forEach((lang) => {  // here i'm creating an object for the productName and description properties of the prod object for each language to be able to pass it to the EditProd route
         productNameObj[lang.languageCode] = productName[lang.languageCode];
         descriptionObj[lang.languageCode] = description[lang.languageCode];
       });

@@ -41,8 +41,11 @@ export default {
 data() {
     return {};
 },
-async created() {
+created() {
     this.$store.dispatch('historicNS/fetchHist');
+},
+beforeMount() {
+    this.$store.state.layout = "default";
 },
 computed: {
     historics() {

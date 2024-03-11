@@ -149,13 +149,52 @@ export default {
     },
   },
   methods: {
-    handleFileUpload(event) { 
-      const file = event.target.files[0]; // this makes it possible to handle file upload 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.prod.itemImage = e.target.result; // and here is the assignment of the uploaded image to the product's itemImage property
-      };
-      reader.readAsDataURL(file);
+    showSwal(type, maxWidth, maxHeight) {
+      if (type === "basic") {
+        this.$swal({
+          icon: "basic",
+          title: "Veuillez choisir une autre image",
+          text: `Les dimensions de l'image téléchargée ne doivent pas dépasser ${maxWidth}x${maxHeight}`,
+          type: type,
+        });
+      }
+    },
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      // check if the file exceeds maxWidth or maxHeight
+      const maxWidth = 1400; 
+      const maxHeight = 1400;
+      // Check if a file is selected to avoid error (cannot read property 'type' of undefined)
+      if (file) {
+        console.log("file:", file); 
+
+      if (file.type &&file.type.startsWith('image/')) {
+        const img = new Image();
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          img.onload = () => {
+            if (img.width > maxWidth || img.height > maxHeight) {
+              // display an error message or take appropriate action
+              this.showSwal("basic", maxWidth, maxHeight);
+              // clear the file input
+              event.target.value = "";
+            } else {
+              // assign the uploaded image to the product's itemImage property
+              this.prod.itemImage = e.target.result;
+            }
+          };
+          img.src = e.target.result; // this will trigger the onload event of the img object above
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // handle non-image file types 
+        console.error("Invalid file type. Please upload an image.");
+        // clear the file input
+        event.target.value = "";
+      }
+    } else {
+      console.error("No file selected");
+    }
     },
     setCurrentLanguage(language) {
       this.currentLanguage = language;
