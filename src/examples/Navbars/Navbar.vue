@@ -62,7 +62,7 @@
             
               <span v-if="!isLoggedIn" class="d-sm-inline d-none">Tu n'es pas connecté, connecte toi pour continuer à utiliser votre Dashboard</span>
            
-              <button class="logout-button" @click="logoutclick" v-if="isLoggedIn"> <span>Déconnexion</span></button>
+              <button class="logout-button" @click="logoutclick" v-if="isLoggedIn"> <i class="fa-solid fa-power-off"></i> Déconnexion</button>
            
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -163,7 +163,7 @@ export default {
 
 <style scoped>
 .logout-button {
-  background-color: #3498db;
+  background-color: rgb(233, 80, 80);
   color: #ffffff;
   padding: 6px 12px; 
   border: none;
@@ -176,7 +176,7 @@ export default {
 }
 
 .logout-button:hover {
-  background-color: #2980b9;
+  background-color: red;
 }
 
 .logout-button:active {

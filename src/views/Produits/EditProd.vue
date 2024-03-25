@@ -3,9 +3,6 @@
     <div class="row">
       <div class="col-lg-6">
       </div>
-      <div class="text-right col-lg-6 d-flex flex-column justify-content-center">
-          <span class="mt-2 mb-0 btn btn-outline-white ms-lg-10 me-lg-0 me-auto mt-lg-0" @click="save()">Enregistrer</span>
-      </div>
     </div>
     <div class="mt-4 row">
       <div class="col-lg-4">
@@ -78,7 +75,10 @@
                   <option value="Others">Others</option>
                 </select>
               </div>
-
+              <div class="col-12 col-sm-6">
+                <br>
+                  <span class="mb-0 btn bg-gradient-success btn-sm me-2 w-100 py-3" @click="save()">Enregistrer</span>
+              </div>
               <!-- <div class="col-12 col-sm-6">
                 <label class="col-12 col-sm-6">Tier</label>
                 <select id="choices-tier" class="form-control" name="choices-tier" v-model="prod.productTier">
@@ -166,11 +166,10 @@ export default {
       const maxHeight = 1400;
       // Check if a file is selected to avoid error (cannot read property 'type' of undefined)
       if (file) {
-        console.log("file:", file); 
-
-      if (file.type &&file.type.startsWith('image/')) {
-        const img = new Image();
-        const reader = new FileReader();
+        /* console.log("file:", file); */ 
+      if (file.type && file.type.startsWith('image/')) {
+        const img = new Image(); //
+        const reader = new FileReader(); // here i'm creating a new FileReader object to read the file and then assign it to the img object
         reader.onload = (e) => {
           img.onload = () => {
             if (img.width > maxWidth || img.height > maxHeight) {
@@ -201,7 +200,7 @@ export default {
     },
     save() {
       const id = this.$route.params.id;
-      console.log("id in edition:", id);
+      console.log("id in prod edition:", id);
       this.$store.dispatch("prodNS/updateProd", { id, prodPU: this.prod })
       .then(() => {
       this.$router.push('/produits/product-list');

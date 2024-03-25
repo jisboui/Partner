@@ -34,8 +34,8 @@
                 </colgroup>
                 <thead class="thead-light">
                   <tr>
-                    <th>Product</th>
-                    <th>Category</th>
+                    <th>Produit</th>
+                    <th>Catégorie</th>
                     <!-- <th>Tier</th> -->
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->
@@ -86,15 +86,14 @@
                       </a> -->
                       <br><br>
                       <button @click="editProduct(prod.productName, prod.category, prod.description, prod.id, prod.itemImage)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
-
-                        <button @click="deleteProd(prod.id); console.log('id  : ',prod.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
+                      <button @click="deleteProd(prod.id); console.log('id  : ',prod.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
                     </td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Product</th>
-                    <th>Category</th>
+                    <th>Produit</th>
+                    <th>Catégorie</th>
                     <!-- <th>Tier</th> -->
                     <th>Description</th>
                     <!-- <th>Quantity</th> -->

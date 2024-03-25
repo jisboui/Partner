@@ -82,11 +82,11 @@ export default {
   data() {
     return {
       ad:{
-  "imageUrl": "",
-  "idRoom": "65e1b1d91fc1e501dbdc4487",
-  "startDate": "2024-03-05T15:30:15.0", // startDate payload of post "Ad" isn't reading instead it's being auto filled in the backend
-  "partnerDescription": ""
-}
+        imageUrl: "",
+        idRoom: "65e1b1d91fc1e501dbdc4487", // idRoom has to be hardcoded which must be changed
+        startDate:"", /* "2024-03-05T15:30:15.0", */ // startDate payload of post "Ad" isn't reading instead it's being auto filled in the backend
+        partnerDescription: "",
+      }
     };
   },
   mounted() {

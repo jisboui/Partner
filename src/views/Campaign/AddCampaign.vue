@@ -46,7 +46,7 @@
               <flat-pickr
                 v-model="date"
                 class="form-control datetimepicker"
-                placeholder="Please select start date"
+                placeholder="Veuillez choisir une date de début"
                 :config="config"
                 @change="console.log('date:', date)"
               ></flat-pickr>
@@ -122,9 +122,7 @@
               </div>
             </div>
           </div>
-          
            <br />
-
           <!-- <label class="mt-4 form-label">Project Tags</label>
             <select
               id="choices-multiple-remove-button"
@@ -137,7 +135,6 @@
               <option value="Choice 3">Choice 3</option>
               <option value="Choice 4">Choice 4</option>
             </select> -->
-
           <div class="mt-4 d-flex justify-content-end">
             <router-link 
             to="/campaign/campaign-history"
@@ -187,16 +184,9 @@ export default {
     };
   },
   async created() {
-    console.log('date : ' + this.date);
-    // try {
-      // const response = await this.$store.dispatch('gameNS/fetchGames');
       this.$store.dispatch('prodNS/fetchprod')
       this.$store.dispatch('gameNS/fetchGames')
       this.$store.dispatch('dvNS/fetchdv')
-    //   console.log('Games response in the component:', response);
-    // } catch (error) {
-    //   console.error('Error fetching games:', error);
-    // }
   },
   computed: {
     prods() {

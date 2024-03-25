@@ -8,7 +8,7 @@
         <div class="request-card">
           <div class="request-details">
             <p class="date">
-              <strong>Date:</strong> {{ formatDateTime(request.requestDate) }}
+              <strong>Date de la demande:</strong> {{ formatDateTime(request.requestDate) }}
             </p>
             <p class="status">
               <strong>Status:</strong> {{ request.requestStatus == 'PENDING' ? 'En attente' : 'Confirmé' }}
@@ -67,27 +67,30 @@ export default {
       return this.$store.state.requestNS.requests;
     },
   },
+  beforeMount() {
+    this.$store.state.layout = "default";
+},
   methods: {
     updateCardHeights() {  // Update the height of all cards to match the height of the tallest card
-  this.$nextTick(() => {
-    const cardContainers = document.querySelectorAll(".request-card");
-    let maxCardHeight = 0;
+        this.$nextTick(() => {
+          const cardContainers = document.querySelectorAll(".request-card");
+          let maxCardHeight = 0;
 
-    // First iteration to find the maximum card height
-    cardContainers.forEach((container) => {
-      const cardHeight = container.getBoundingClientRect().height;
-      maxCardHeight = Math.max(maxCardHeight, cardHeight);
-    });
+          // First iteration to find the maximum card height
+          cardContainers.forEach((container) => {
+            const cardHeight = container.getBoundingClientRect().height;
+            maxCardHeight = Math.max(maxCardHeight, cardHeight);
+          });
 
-    // Second iteration to set the height of all cards
-    cardContainers.forEach((container) => {
-      container.style.height = `${maxCardHeight}px`;
-    });
-  });
-},
-
+          // Second iteration to set the height of all cards
+          cardContainers.forEach((container) => {
+            container.style.height = `${maxCardHeight}px`;
+          });
+      });
+    },
     deleteRequest(id) {
-      this.$store.dispatch("requestNS/deleteRequest", { id }).then(() => {
+      this.$store.dispatch("requestNS/deleteRequest", { id })
+      .then(() => {
         this.$store.dispatch("requestNS/fetchRequests");
       });
     },
@@ -97,7 +100,7 @@ export default {
   },
   created() {
     this.$store.dispatch("requestNS/fetchRequests");
-      this.updateCardHeights();
+    this.updateCardHeights();
   },
 };
 </script>

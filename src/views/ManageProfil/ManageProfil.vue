@@ -28,5 +28,8 @@ export default {
     SideNav,
     SideNavItem,
   },
+  beforeMount() {
+    this.$store.state.layout = "custom";
+},
 };
 </script>

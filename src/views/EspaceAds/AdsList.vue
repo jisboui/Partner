@@ -44,33 +44,32 @@
                   </tr>
                 </thead>
                 <tbody >
-                  <tr v-for="(ad) in ads.adsList" :key="ad.id" :value="ad.id">
+                  <tr v-for="(ad) in ads.data" :key="ad.id" :value="ad.id">
                     <td>
                       <div class="d-flex">
-                        <img
+                        <!-- <img
                           class=" ms-3"
                           style="width: 140px; height: 130px;"
-                          :src="ad.imageUrl"
+                          :src="ad.adsList.imageUrl"
                           alt="ad"
-                        />
-                        <h6 class="my-auto ms-3">{{ad}}</h6>
+                        /> -->
                       </div>
                     </td>
-                    <td class="text-sm">{{ad.impressionCount}}</td>
-                    <td class="text-sm">{{ad.startDate}}</td>
-                    <td class="text-sm">{{ad.endDate}}</td>
-                    <td class="text-sm" >{{ad.addedDate}}</td>
-                    <td class="text-sm" >{{ad.active}}</td>
+                    <!-- <td class="text-sm">{{ad.adsList.impressionCount}}</td>
+                    <td class="text-sm">{{ad.adsList.startDate}}</td>
+                    <td class="text-sm">{{ad.adsList.endDate}}</td>
+                    <td class="text-sm" >{{ad.adsList.addedDate}}</td>
+                    <td class="text-sm" >{{ad.adsList.active}}</td> -->
                     <td class="text-sm">
-                      <a
+                      <!-- <a
                         href="javascript:;"
                         data-bs-toggle="tooltip"
                         data-bs-original-title="Preview aduct"
                       >
                         <i class="fas fa-eye text-secondary"></i>
-                      </a>
-                      <!-- <button @click="editAd(ad, ad, ad,ad)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
-                        <button @click="deleteAd(ad.id); console.log('id  : ',ad.id); " data-action="delete" class="fas fa-trash text-secondary"></button> -->
+                      </a> -->
+                      <button @click="editAd(ad.partnerRequestList.partnerDescription, ad.adsList.startDate,ad.adsList.id, ad.adsList.imageUrl)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
+                        <button @click="deleteAd(ad.adsList.id); console.log('id  : ',ad.adsList.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
                     </td>
                   </tr>
                 </tbody>
@@ -121,15 +120,15 @@ export default {
     next();
   }, */
   methods: {
-    editAd(aductName, category, description,id) {
-    this.$router.push({ name: 'EditAd', params: { aductName, category, description,id} });
+    editAd(description, startDate,id,image) {
+    this.$router.push({ name: 'EditAd', params: {description, startDate,id,image} });
   },
     deleteAd(id) {
     this.$store.dispatch('adNS/deleteAd', { id })
     .then(() => {
       return this.$store.dispatch('adNS/fetchad');
     })
-    .then(() => {
+    /* .then(() => {
       this.$nextTick(() => {
         if (this.dataTableSearch) {
           this.dataTableSearch.refresh();
@@ -138,7 +137,7 @@ export default {
     })
     .catch((error) => {
       console.error("Error:", error);
-    });
+    }); */
 },
     setupDataTable() {
       if (document.getElementById("ad-list")) {

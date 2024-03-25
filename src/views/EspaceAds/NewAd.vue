@@ -123,4 +123,4 @@
   }
     },
   };
-  </script>./components/AdInfo.vue
+  </script>
