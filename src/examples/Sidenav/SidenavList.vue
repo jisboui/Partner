@@ -141,6 +141,13 @@
                 text="Nouvelle Ad"
               />
               </li>
+              <li class="nav-item">
+              <sidenav-item
+                :to="{ name: 'AdsRequest' }"
+                mini-icon="AR"
+                text="Demandes Ads"
+              />
+              </li>
             </ul>
           </template>
         </sidenav-collapse>

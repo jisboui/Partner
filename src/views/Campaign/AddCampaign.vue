@@ -118,7 +118,7 @@
                   </span> <br>                 
                   <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Achat" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}                 
                 </div>
-                <input type="radio" :value="dv.id" v-model="selectedDv" @change="console.log('id:', selectedDv)" />
+                <input type="radio" :value="dv.id" v-model="selectedDv"/>
               </div>
             </div>
           </div>

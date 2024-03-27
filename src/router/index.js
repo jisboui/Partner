@@ -70,6 +70,7 @@ import editCampaign from "../views/Campaign/editCampaign.vue";
 import dvList from "../views/DiscountVoucher/dvList.vue";
 import Historic from "../views/Historic/Historic.vue";
 import Request from "../views/Request/Request.vue";
+import AdsRequest from "../views/EspaceAds/AdsRequest.vue";
 
 const routes = [
   {
@@ -638,6 +639,14 @@ const routes = [
     path: "/Request/request",
     name: "Request", 
     component: Request,
+  meta: {
+    requiresAuth: true
+  }
+  },
+  {
+    path: "/AdsRequest/adsrequest",
+    name: "AdsRequest", 
+    component: AdsRequest,
   meta: {
     requiresAuth: true
   }

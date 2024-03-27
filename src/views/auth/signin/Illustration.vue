@@ -56,7 +56,7 @@
                         full-width
                         size="lg"
                        type="submit"
-                        >Sign in</argon-button
+                        >s'identifier</argon-button
                       >
                       <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
                     </div>
