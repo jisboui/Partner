@@ -70,11 +70,13 @@
                     </td>
                     <td class="text-sm">{{prod.category}}</td>
                     <!-- <td class="text-sm">{{ prod.productTier }}</td> -->
-                    <div>
-                      <div v-for="lang in langs.data" :key="lang.id">
+                    <td>
+                      <div class="description-container">
+                      <div v-for="lang in langs.data" :key="lang.id" >
                         {{ lang.languageCode }}: {{ prod.description[lang.languageCode] }}
                       </div>
-                  </div>
+                    </div>
+                    </td>
                     <!--       <td class="text-sm">0</td>-->
                     <td class="text-sm">
                       <!-- <a
@@ -204,3 +206,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.description-container {
+  max-width: 608px; 
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+</style>
