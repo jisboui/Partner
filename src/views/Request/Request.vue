@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <h2 class="header">Liste de mes demandes</h2>
+    <h2 class="header">Toutes mes demandes</h2>
     <br />
     <ul class="request-list">
       <li v-for="request in requests.data" :key="request.id">

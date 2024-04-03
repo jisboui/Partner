@@ -1,7 +1,7 @@
 <template>
     <div>
       <br>
-      <h2 class="header">Liste de mes demandes Ads</h2>
+      <h2 class="header">Mes demandes Ads</h2>
       <br />
       <ul v-if="ads && ads.data && ads.data.partnerRequestList" class="request-list">
         <li v-for="ad in ads.data.partnerRequestList" :key="ad.id">

@@ -75,9 +75,10 @@
                   <option value="Others">Others</option>
                 </select>
               </div>
-              <div class="col-12 col-sm-6">
+              <div class="col-12 col-sm-6 d-flex justify-content-between">
                 <br>
-                  <span class="mb-0 btn bg-gradient-success btn-sm me-2 w-100 py-3" @click="save()">Enregistrer</span>
+                  <span class="mb-0 btn bg-gradient-success btn-sm me-2 w-100 py-3 mt-4 custom-btn" @click="save()">Enregistrer</span>
+                  <span class="mb-0 btn bg-gradient-success btn-sm me-2 w-100 py-3 mt-4 custom-btn" @click="cancel()">Annuler</span>
               </div>
               <!-- <div class="col-12 col-sm-6">
                 <label class="col-12 col-sm-6">Tier</label>
@@ -206,6 +207,20 @@ export default {
       this.$router.push('/produits/product-list');
     });
     },
+    cancel() {
+      this.$router.push('/produits/product-list');
+    },
   },
 };
 </script>
+
+<style scoped>
+
+.custom-btn {
+  height: 50px; /* adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+</style>
