@@ -51,6 +51,7 @@ import Error500 from "../views/auth/error/Error500.vue";
 import lockBasic from "../views/auth/lock/Basic.vue";
 import lockCover from "../views/auth/lock/Cover.vue";
 import lockIllustration from "../views/auth/lock/Illustration.vue"; */
+import store from '../store'; 
 import Default from "../views/dashboards/Default.vue";
 import Illustration from "../views/auth/signin/Illustration.vue";
 import CampaignHistory from "../views/Campaign/CampaignHistory.vue";
@@ -654,14 +655,16 @@ const routes = [
 
 
 ];
-const isAuthenticated = () => localStorage.getItem("isAuthenticated") === "true";
+const isAuthenticated = () => {
+  return store.state.loginNS.token !== null;
+};
 const router = createRouter({
   history: createWebHistory(),
   routes,
   linkActiveClass: "active"
 });
 router.beforeEach((to, from, next) => {
-  // Allow access to "/authentication/signin/illustration" regardless of authentication status
+  // Allow access to "/authentication/signin/illustration" regardless of authentication status (TO BE REMOVED)
   if (to.path === "/authentication/signin/illustration") {
     next();
   } else if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -671,7 +674,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    // Continue to the route
+    // Continue to the route if the route does not require authentication
     next();
   }
 });

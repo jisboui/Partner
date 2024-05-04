@@ -87,8 +87,8 @@
                         <i class="fas fa-eye text-secondary"></i>
                       </a> -->
                       <br><br>
-                      <button @click="editProduct(prod.productName, prod.category, prod.description, prod.id, prod.itemImage)" data-action="tooltip" class="fas fa-user-edit text-secondary"></button>
-                      <button @click="deleteProd(prod.id); console.log('id  : ',prod.id); " data-action="delete" class="fas fa-trash text-secondary"></button>
+                      <button @click="editProduct(prod.productName, prod.category, prod.description, prod.id, prod.itemImage)" data-action="tooltip" class="mb-0 btn bg-gradient-success btn-sm me-2 w-47">Modifier</button>
+                      <button @click="deleteProd(prod.id); console.log('id  : ',prod.id); " data-action="delete" class="mb-0 btn bg-gradient-danger btn-sm me-2 w-47">Supprimer</button>
                     </td>
                   </tr>
                 </tbody>
@@ -141,6 +141,50 @@ export default {
     next();
   }, */
   methods: {
+    showSwal(type, id) {
+    if (type === "warning-message-and-cancel") {
+      this.$swal({
+        title: "Es-tu sûr?",
+        text: "Vous ne pourrez pas revenir en arrière!",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "Annuler",
+        confirmButtonText: "Oui, supprimez-le!",
+        customClass: {
+          confirmButton: "btn bg-gradient-success",
+          cancelButton: "btn bg-gradient-danger",
+        },
+        buttonsStyling: false,
+      }).then((result) => {
+        if (result.isConfirmed) { // Check if user confirmed the action
+          this.$store.dispatch('prodNS/deleteProd', { id })
+          .then(() => {
+            return this.$store.dispatch('prodNS/fetchprod');
+          })
+          this.$swal({ // Show success message
+            title: "Supprimé!",
+            text: "Votre bon a été supprimé.",
+            icon: "success",
+            customClass: {
+              confirmButton: "btn bg-gradient-success",
+            },
+            buttonsStyling: false,
+          });
+          /* this.cancelEdit(); */ // Close the edit modal if open for the deleted item
+        } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+          this.$swal.dismiss; // Dismiss the swal modal if user cancels
+        }
+      });
+    }
+    else if (type === "basic") {
+        this.$swal({
+          icon: "basic",
+          title: "Veuillez entrer tous les champs.",
+          text: "Les champs ne doivent pas être vides!",
+          type: type,
+        });
+      }
+  },
     editProduct(productName, category, description, id, image) {
       const productNameObj = {};
       const descriptionObj = {};
@@ -166,10 +210,9 @@ export default {
       });
     },
     deleteProd(id) {
-    this.$store.dispatch('prodNS/deleteProd', { id })
-    .then(() => {
-      return this.$store.dispatch('prodNS/fetchprod');
-    })/* 
+      this.showSwal("warning-message-and-cancel", id);
+    
+    /* 
     .then(() => {
       this.$nextTick(() => {
         if (this.dataTableSearch) {
@@ -210,7 +253,7 @@ export default {
 <style scoped>
 
 .description-container {
-  max-width: 608px; 
+  max-width: 438px; 
   overflow-x: auto;
   white-space: nowrap;
 }

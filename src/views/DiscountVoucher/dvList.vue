@@ -114,49 +114,49 @@ computed: {
     return this.dvP.discountType == 'PERCENTAGE' ? '%' : 'Dt';
   }
 },
-  methods: {
-    showSwal(type, index) {
-  if (type === "warning-message-and-cancel") {
-    this.$swal({
-      title: "Es-tu sûr?",
-      text: "Vous ne pourrez pas revenir en arrière!",
-      icon: "warning",
-      showCancelButton: true,
-      cancelButtonText: "Annuler",
-      confirmButtonText: "Oui, supprimez-le!",
-      customClass: {
-        confirmButton: "btn bg-gradient-success",
-        cancelButton: "btn bg-gradient-danger",
-      },
-      buttonsStyling: false,
-    }).then((result) => {
-      if (result.isConfirmed) { // Check if user confirmed the action
-        const id = this.items[index].id;
-        console.log("id in deletion:", id);
-        this.items.splice(index, 1); // Delete the item from the array
-        this.$store.dispatch('dvNS/deleteDv', {id})
-          .then(() => {
-            this.$store.dispatch('dvNS/fetchdv');
-          })
-          .catch((error) => {
-            console.error("Error:", error);
+methods: {
+  showSwal(type, index) {
+    if (type === "warning-message-and-cancel") {
+      this.$swal({
+        title: "Es-tu sûr?",
+        text: "Vous ne pourrez pas revenir en arrière!",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "Annuler",
+        confirmButtonText: "Oui, supprimez-le!",
+        customClass: {
+          confirmButton: "btn bg-gradient-success",
+          cancelButton: "btn bg-gradient-danger",
+        },
+        buttonsStyling: false,
+      }).then((result) => {
+        if (result.isConfirmed) { // Check if user confirmed the action
+          const id = this.items[index].id;
+          console.log("id in deletion:", id);
+          this.items.splice(index, 1); // Delete the item from the array
+          this.$store.dispatch('dvNS/deleteDv', {id})
+            .then(() => {
+              this.$store.dispatch('dvNS/fetchdv');
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+          this.$swal({ // Show success message
+            title: "Supprimé!",
+            text: "Votre bon a été supprimé.",
+            icon: "success",
+            customClass: {
+              confirmButton: "btn bg-gradient-success",
+            },
+            buttonsStyling: false,
           });
-        this.$swal({ // Show success message
-          title: "Supprimé!",
-          text: "Votre bon a été supprimé.",
-          icon: "success",
-          customClass: {
-            confirmButton: "btn bg-gradient-success",
-          },
-          buttonsStyling: false,
-        });
-        /* this.cancelEdit(); */ // Close the edit modal if open for the deleted item
-      } else if (result.dismiss === this.$swal.DismissReason.cancel) {
-        this.$swal.dismiss; // Dismiss the swal modal if user cancels
-      }
-    });
-  }
-  else if (type === "basic") {
+          /* this.cancelEdit(); */ // Close the edit modal if open for the deleted item
+        } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+          this.$swal.dismiss; // Dismiss the swal modal if user cancels
+        }
+      });
+    }
+    else if (type === "basic") {
         this.$swal({
           icon: "basic",
           title: "Veuillez entrer tous les champs.",
@@ -164,7 +164,7 @@ computed: {
           type: type,
         });
       }
-},
+  },
     fillItems() {
     this.$store.dispatch('dvNS/fetchdv')
       .then(() => {

@@ -120,8 +120,12 @@ export default {
     };
   },
   computed: {
-    isAuthenticated() { // returns the authentication state from the store and is used to conditionally render the logout button by the isLoggedIn method just below
-      return this.$store.state.loginNS.isAuthenticated;
+    isAuthenticated() { // returns the authentication state and is used to conditionally render the logout button by the isLoggedIn method just below
+      if( this.$store.state.loginNS.token !== null) {
+        return true;
+      } else {
+        return false;
+      }
     },
     isLoggedIn() {
       return this.isAuthenticated;

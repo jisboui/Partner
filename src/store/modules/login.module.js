@@ -1,18 +1,16 @@
 import { serviceLogin } from "@/services/login.service";
 
-const isAuthenticated = localStorage.getItem("isAuthenticated");
 
 export default {
  namespaced: true,
  state : {
-  isAuthenticated: isAuthenticated,
-  user: null,
+ token: localStorage.getItem("token") || null,
+  /* user: null, */
 },
 
  mutations : {
-  SET_AUTHENTICATION(state, isAuthenticated) {
-    state.isAuthenticated = isAuthenticated;
-    console.log("Authenticated state :", isAuthenticated);
+  SET_TOKEN(state, token) {
+    state.token = token;
   },
   /* SET_USER(state, user) {
     state.user = user;
@@ -21,11 +19,11 @@ export default {
 },
 
  actions : {
-  login(_, user) {
+  login({commit}, user) {
     return serviceLogin(user)
       .then(response => {
         /* commit('SET_USER', { username: user.username }); */  // not needed as of now
-        localStorage.setItem("isAuthenticated", "true");
+        commit('SET_TOKEN', response.data.token);
         console.log("Login response from the action : ", response);
         return response;
       })
@@ -35,15 +33,15 @@ export default {
       });
   },
 
-  logout({ commit }, router) {
+  logout({commit}, router) {
     return new Promise((resolve, reject) => {
       try {
         if (router) {
           let route = router.resolve({ name: 'Signin Illustration' });
-          window.open(route.href, '_blank'); // to take to a new tab
+          window.location.href = route.href; // redirect to login page after logout
         }
-        localStorage.setItem("isAuthenticated", "false");
-        commit('SET_AUTHENTICATION', false);
+        localStorage.removeItem("token");
+        commit('SET_TOKEN', null);
         resolve();
       } catch (error) {
         console.error("Logout error:", error);

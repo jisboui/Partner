@@ -127,16 +127,10 @@ export default {
       errorMessage: "",
     }
   },
-  computed: {
-    /* ...mapState("loginNS", ["isAuthenticated"]), */
-  },
  async created() {
     this.$store.state.hideConfigButton = true;
     this.toggleDefaultLayout();
     body.classList.remove("bg-gray-100");
-    
-   /*  const isAuthenticated = localStorage.getItem("isAuthenticated");
-    console.log("isAuthenticated = ",isAuthenticated); */
     },
   beforeUnmount() {
     this.$store.state.hideConfigButton = false;
