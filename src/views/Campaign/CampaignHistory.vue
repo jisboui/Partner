@@ -439,7 +439,11 @@ export default {
     }, */
   },
   created() {
-    this.$store.dispatch('requestNS/fetchRequests')
+    this.$store.dispatch('roomNS/fetchroom')
+    /* this.$store.dispatch('roomNS/fetchroomGetCalendar') */
+   /*  const id="65e1b1d91fc1e501dbdc4487"
+    this.$store.dispatch('roomNS/fetchroomGetID', {id}) */
+
   },
   mounted() {
     this.$store.state.isAbsolute = true;

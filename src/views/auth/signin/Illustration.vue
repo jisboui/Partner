@@ -20,7 +20,7 @@
             >
               <div class="card card-plain">
                 <div class="pb-0 card-header text-start">
-                  <h4 class="font-weight-bolder">Se connecter</h4>
+                  <h4 class="font-weight-bolder">Connectez vous</h4>
                   <p class="mb-0">Entrez votre email et votre mot de passe pour vous connecter</p>
                 </div>
                 <div class="card-body">
@@ -56,7 +56,7 @@
                         full-width
                         size="lg"
                        type="submit"
-                        >s'identifier</argon-button
+                        >Se Connecter</argon-button
                       >
                       <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
                     </div>

@@ -106,7 +106,7 @@ export default {
         itemImage:"",
         category: "",
         idPartner: "",
-        productTier: "T1",
+        /* productTier: "T1", */
       },
     };
   },

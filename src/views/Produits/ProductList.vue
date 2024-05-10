@@ -163,7 +163,7 @@ export default {
           })
           this.$swal({ // Show success message
             title: "Supprimé!",
-            text: "Votre bon a été supprimé.",
+            text: "Votre produit a été supprimé.",
             icon: "success",
             customClass: {
               confirmButton: "btn bg-gradient-success",

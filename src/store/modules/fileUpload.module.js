@@ -4,6 +4,16 @@ export default {
   namespaced: true,
  state : {
   fileUpload: null,
+  fileUploads: {
+    woodad: null,
+    tvad: null,
+    carre: null,
+    hrec: null,
+    ovniad: null,
+    circle: null,
+    poster: null,
+    vrec: null
+  },
 },
 
  mutations : {
@@ -11,6 +21,9 @@ export default {
     console.log('setting fileUpload in state:', fileUpload.data);
     state.fileUpload = fileUpload.data;
   },
+  setFileUploads(state, { propName, fileUploads }) {
+    state.fileUploads[propName] = fileUploads;
+  }
 },
 
  actions : {
@@ -19,6 +32,17 @@ export default {
       .then(response => {
         commit('setFileUpload', response);
         console.log("fileupload response from the action : ", response);
+        return response;
+      })
+      .catch(error => {
+        console.error("fileupload error:", error);
+        throw error;
+      });
+  },
+  a_serviceFileUploads({ commit }, { propName, file }) {
+    return serviceFileUpload(file)
+      .then(response => {
+        commit('setFileUploads', { propName, fileUploads: response.data });
         return response;
       })
       .catch(error => {

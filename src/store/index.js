@@ -10,6 +10,7 @@ import langModule from './modules/lang.module';
 import fileUpload from './modules/fileUpload.module';
 import historicModule from './modules/historic.module';
 import requestModule from './modules/request.module';
+import roomModule from './modules/room.module';
 
 export default createStore({
   state: {
@@ -40,6 +41,7 @@ export default createStore({
     fileUploadNS : fileUpload,
     historicNS : historicModule,
     requestNS : requestModule,
+    roomNS : roomModule,
   },
   mutations: {
     toggleConfigurator(state) {

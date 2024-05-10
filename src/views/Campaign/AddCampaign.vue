@@ -26,15 +26,16 @@
                 class="form-control"
                 name="choices-category"
                 @change="updateSelectedGame"
+                v-model="room.idGame"
               >
-                <option value="" selected disabled>Selectionner un jeu</option>
+                <option value="Selectionner un jeu" selected disabled>Selectionner un jeu</option>
                 <option v-for="game in games.data" :key="game.id" :value="game.id">{{ game.nameGame }}</option>
               </select>
             </div>
             <div class="col-6">
               <label for="product">Choisir un cadeau</label>
-              <select id="product" class="form-control" name="choices-category" @change="updateSelectedGift">
-                <option value="" selected disabled>Selectionner un produit</option>
+              <select v-model="room.idProduct" id="product" class="form-control" name="choices-category" @change="updateSelectedGift">
+                <option value="Selectionner un produit" selected disabled>Selectionner un produit</option>
                 <option v-for="prod in prods.data" :key="prod.id" :value="prod.id">{{ prod.productName.EN }}</option>
               </select>
             </div>
@@ -44,11 +45,11 @@
             <div class="col-6">
               <label class="form-label">Date Début</label>
               <flat-pickr
-                v-model="date"
+                v-model="room.startingDate"
                 class="form-control datetimepicker"
                 placeholder="Veuillez choisir une date de début"
                 :config="config"
-                @change="console.log('date:', date)"
+                @change="console.log('date:', toTimestamp(room.startingDate))"
               ></flat-pickr>
             </div>
             <div class="col-6">
@@ -57,8 +58,7 @@
                 id="choices-category"
                 class="form-control"
                 name="choices-category"
-                v-model="selectedPeriod"
-                @change="console.log('selectedPeriod:', selectedPeriod)"
+                v-model="room.periodInDays"
               >
                 <option value="7" selected="">7</option>
                 <option value="14">14</option>
@@ -66,25 +66,36 @@
               </select>
             </div>
           </div>
+          <br>
+          <div class="row">
+              <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Ecrire la description de votre domaine ici! Ce que vous voulez que les joueurs voient, comme ce que vous offrez, etc."
+                  v-model="room.partnerDescription"
+                ></textarea>
+              </div>
+          </div>
           <br />
           <div v-show="selectedGame === 'GoBowi'">
-            <label class="mt-4 form-label"
-              >Ajouter les éléments graphique à afficher à l'intérieur de GoBowi
-              (pro+)</label
-            >
-            <form
-              id="dropzone1"
-              action="/file-upload"
-              class="form-control dropzone"
-            >
-              <div class="fallback">
-                <input name="file" type="file" multiple />
-              </div>
-            </form>
+            <div v-for="(value, key) in room.details" :key="key">
+              <label class="mt-4 form-label">Ajouter les éléments graphiques pour {{ key }}</label>
+              <form
+                :id="'dropzone_' + key"
+                action="/file-upload"
+                class="form-control dropzone"
+              >
+                <div class="fallback">
+                  <input name="file" type="file" multiple />
+                </div>
+              </form>
+            </div>
           </div>
           <div v-show="selectedGame === 'QuizUp'">
             <label class="mt-4 form-label"
-              >Ajouter le fichier.csv pour les questions de QuiUp (pro+)</label
+              >Ajouter l'image pour afficher dans le niveau bonus :</label
             >
             <form
               id="dropzone2"
@@ -146,12 +157,7 @@
             <router-link 
             to="/campaign/campaign-history"
             >
-            <button
-                  class="m-0 btn bg-gradient-success ms-2"
-                  @click="showSwal('success-message')"
-                >
-                Créer une campagne
-                </button>
+            <button class="m-0 btn bg-gradient-success ms-2" @click="onButtonClick"> Créer une campagne </button>
             </router-link>
           </div>
         </div>
@@ -170,7 +176,23 @@ export default {
   },
   data() {
     return {
-      selectedPeriod: "7",
+     room : {
+      "startingDate": "",
+      "periodInDays": "7",
+      "idProduct": "Selectionner un produit",
+      "idGame": "Selectionner un jeu",
+      "details": {
+        "woodad": [],
+        "tvad": [],
+        "carre": [],
+        "hrec": [],
+        "ovniad": [],
+        "circle": [],
+        "poster": [],
+        "vrec": []
+      },
+      "partnerDescription": ""
+    },
       selectedDv: null,
       selectedGift: '',
       selectedGame: "",
@@ -203,6 +225,10 @@ export default {
     },
   },
   methods : {
+    toTimestamp(dateOnly) {
+    const date = new Date(dateOnly);
+    return date.toISOString();
+    },
     updateSelectedGame() {
       const select = document.getElementById("games");
       const selectedOption = select.options[select.selectedIndex];
@@ -215,7 +241,7 @@ export default {
     toggleDiv() {
       this.showDiv = !this.showDiv;
     },
-    showSwal(type) { 
+    showSwal(type, maxWidth, maxHeight) { 
        if (type === "success-message") {
         this.$swal({
           icon: "success",
@@ -223,34 +249,82 @@ export default {
           text: "Veuillez attendre la validation de votre campagne par l'administrateur, vous receverez un mail de confirmation une fois la campagne validée.",
           type: type,
         });
+      } else if (type === "basic") {
+        this.$swal({
+          icon: "basic",
+          title: "Veuillez choisir une autre image",
+          text: `Les dimensions de l'image téléchargée ne doivent pas dépasser ${maxWidth}x${maxHeight}`,
+          type: type,
+        });
       }
+    },
+    onButtonClick() {
+      this.room.startingDate = this.toTimestamp(this.room.startingDate);
+      this.showSwal('success-message');
+      let details = {};
+      if (this.selectedGame === 'QuizUp') {
+        details = {
+          "bonusLevel": this.$store.state.fileUploadNS.fileUpload, 
+        };
+      } else if (this.selectedGame === 'GoBowi') {
+        details = {};
+    // Loop through each property of the details object
+    for (const prop in this.room.details) {
+      details[prop] = this.$store.state.fileUploadNS.fileUploads[prop];
+    }
+      }
+      this.room.details = details; 
+      this.$store.dispatch('roomNS/postroom', this.room)
     },
   },
   mounted() {
-    var drop1 = document.getElementById("dropzone1");
-    var drop2 = document.getElementById("dropzone2");
-    var myDropzone =new Dropzone(drop1, {
+  const vueComponent = this; // Store the Vue component instance
+
+  // Iterate over each property in room.details
+  for (const prop in this.room.details) {
+    const dropzoneId = `dropzone_${prop}`;
+    const dropzoneElement = document.getElementById(dropzoneId);
+
+    // Create a Dropzone instance for each property
+    const dropzone = new Dropzone(dropzoneElement, {
       url: "/file/post",
-      maxFiles: 1,
       acceptedFiles: 'image/*',
       addRemoveLinks: true,
+      autoProcessQueue: false, // Prevent Dropzone from automatically uploading the file
     });
-    var myDropzone2 =new Dropzone(drop2, {
-      url: "/file/post",
-      acceptedFiles: '.csv',
-      addRemoveLinks: true,
+
+    // Handle events for the current Dropzone instance
+    dropzone.on("removedfile", function() {
+      vueComponent.$store.commit("fileUploadNS/setFileUploads", { propName: prop, fileUpload: null });
     });
-    myDropzone.on("addedfile", function() {
-      if (this.files.length > 1) {
+    dropzone.on("addedfile", function(file) {
+      if (this.files.length > 1) {   // If the user adds more than one file, remove the first one and add or keep the new one
         this.removeFile(this.files[0]);
       }
+      vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUploads", { propName: prop, file });
     });
-    myDropzone2.on("addedfile", function() {
-      if (this.files.length > 1) {
-        this.removeFile(this.files[0]);
-      }
-    });
-  },
+  }
+  
+  // Handling Dropzone for bonusLevel
+  const dropzoneBonusLevel = new Dropzone("#dropzone2", {
+    url: "/file/post",
+    acceptedFiles: 'image/*',
+    addRemoveLinks: true,
+    autoProcessQueue: false, // Prevent Dropzone from automatically uploading the file
+  });
+
+  dropzoneBonusLevel.on("removedfile", function() {
+    vueComponent.room.details.bonusLevel = null;
+  });
+  dropzoneBonusLevel.on("addedfile", function(file) {
+    if (this.files.length > 1) {   // If the user adds more than one file, remove the first one and add or keep the new one
+      this.removeFile(this.files[0]);
+    }
+    vueComponent.room.details.bonusLevel = file;
+    vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUpload", file);
+  });
+},
+
   beforeMount() {
     this.$store.state.layout = "custom2";
   },  
