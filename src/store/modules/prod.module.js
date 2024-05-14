@@ -6,7 +6,7 @@ export default {
  state : {
   prod: [],
   prodP: null,
-  prodPu: null,
+  prodPUT: null,
 },
 
  mutations : {
@@ -52,8 +52,8 @@ export default {
       });
   },
 
-  updateProd(_, { id, prodPU }) {
-    return updateProduct(id, prodPU)
+  updateProd(_, { id, prodPUT }) {
+    return updateProduct(id, prodPUT)
       .then(response => {
         console.log("Update prodP action response: ", response);
       })

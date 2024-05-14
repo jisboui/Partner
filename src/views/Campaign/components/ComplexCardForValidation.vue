@@ -42,7 +42,7 @@
           </div>
         </div>
         <p class="mt-3 text-sm">
-          {{ "Jeu : " + description }}
+          {{ "Jeu : " + game }}
         </p>
         <hr class="horizontal dark" />
         <div class="row">
@@ -75,7 +75,7 @@ export default {
       type: String,
       default: "",
     },
-    description: {
+    game: {
       type: String,
       default: "",
     },

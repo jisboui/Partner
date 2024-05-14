@@ -125,7 +125,7 @@ export default {
         itemImage: this.$route.params.image,
         category: this.$route.params.category,
         idPartner: "",
-        productTier: "T1",
+        /* productTier: "T1", */
       },
     };
   },
@@ -202,7 +202,7 @@ export default {
     save() {
       const id = this.$route.params.id;
       console.log("id in prod edition:", id);
-      this.$store.dispatch("prodNS/updateProd", { id, prodPU: this.prod })
+      this.$store.dispatch("prodNS/updateProd", { id, prodPUT: this.prod })
       .then(() => {
       this.$router.push('/produits/product-list');
     });

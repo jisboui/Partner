@@ -253,7 +253,7 @@ export default {
 <style scoped>
 
 .description-container {
-  max-width: 438px; 
+  max-width: 421px; 
   overflow-x: auto;
   white-space: nowrap;
 }

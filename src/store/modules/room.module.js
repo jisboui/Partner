@@ -6,7 +6,7 @@ export default {
  state : {
   room: [],
   roomP: null,
-  roomPu: null,
+  roomPUT: null,
   calendar: [],
 },
 
@@ -57,8 +57,8 @@ export default {
       });
   },
 
-  updateroom(_, { id, roomPU }) {
-    return updateRoom(id, roomPU)
+  updateroom(_, { id, roomPUT }) {
+    return updateRoom(id, roomPUT)
       .then(response => {
         console.log("Update room action response: ", response);
       })

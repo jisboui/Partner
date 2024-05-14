@@ -31,86 +31,29 @@
         </div>
       </div>
       <div class="mt-2 row mt-lg-4">
-        <div class="mb-4 col-lg-4 col-md-6">
+        <div v-if="rooms && rooms.data && rooms.data.roomList.length > 0">
+        <div class="mb-4 col-lg-4 col-md-6"  v-for="room in rooms.data.roomList" :key="room.id">
           <complex-project-card
-            :logo="slackLogo"
-            title="Laptop Victus HP"
-            description="GoBowi"
-            date-time="02.03.22"
+            :logo="room.product.itemImage"
+            :title="room.product.productName.EN" 
+            :game="room.game.nameGame"
+            :date-time="formatDateTime(room.finishDate)"
             terminated="en cours, terminera le"
-            :members="[team3, team4, team2, team3, team4]"
+            :members="room.registerFeeCoin"
             :dropdown="[
               {
-                label: 'campagne en cours, aucune option disponible',
+                label: 'campagne en cours, aucune option disponible', //mais bizarrement jai api delete et update qui devraient exister que pour campagnes en cours de validation
                 route: 'javascript:;',
               },
             ]"
-          />
-        </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
-            :logo="spotifyLogo"
-            title="Msi Gaming Laptop"
-            description="DimaWin"
-            date-time="22.11.21"
-            terminated="en cours, terminera le"
-            :members="[team4, team3, team2]"
-            :dropdown="[
-              {
-                label: 'campagne en cours, aucune option disponible',
-                route: 'javascript:;',
-              },
+            :actions="[
+              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
+              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign(room.id,room.product.productName.EN, room.game.nameGame, room.finishDate)  },
             ]"
+            @delete-cardForValidation="deletecardForValidation(room.id)"
           />
         </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
-            :logo="xdLogo"
-            title="Lenovo Legion"
-            description="QuizUp"
-            date-time="06.03.20"
-            terminated="en cours, terminera le"
-            :members="[team4, team2, team3, team4]"
-            :dropdown="[
-              {
-                label: 'campagne en cours, aucune option disponible',
-                route: 'javascript:;',
-              },
-            ]"
-          />
-        </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
-            :logo="asanaLogo"
-            title="Hp Omen"
-            description="HitSoumek"
-            date-time="14.03.24"
-            terminated="en cours, terminera le"
-            :members="[team3, team4, team2, team3, team4, team2]"
-            :dropdown="[
-              {
-                label: 'campagne en cours, aucune option disponible',
-                route: 'javascript:;',
-              },
-            ]"
-          />
-        </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <complex-project-card
-            :logo="invisionLogo"
-            title="Nvidea Geforce"
-            description="QuizUp"
-            date-time="16.01.22"
-            terminated="en cours, terminera le"
-            :members="[team4, team3, team2, team4]"
-            :dropdown="[
-              {
-                label: 'campagne en cours, aucune option disponible',
-                route: 'javascript:;',
-              },
-            ]"
-          />
-        </div>
+      </div>
         <div class="mb-4 col-lg-4 col-md-6">
           <router-link to="/campaign/add-campaign">
             <placeholder-card
@@ -149,70 +92,24 @@
         </div>
       </div>
       <div class="mt-2 row mt-lg-4">
-        <div class="mb-4 col-lg-4 col-md-6">
-          <ComplexCardForValidation
-            :logo="slackLogo"
-            title="Laptop Victus HP"
-            description="GoBowi"
-            date-time="02.03.22"
-            terminated="en cours de validation, prévu pour débuter le"
-            :actions="[
-              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Laptop Victus HP', 'GoBowi', '02.03.22')  },
-            ]"
-            @delete-card="deleteCard(index)"
-          />
-        </div>
-        <div class="mb-4 col-lg-4 col-md-6" v-for="(card, index) in cards" :key="index">
-          <ComplexCardForValidation 
-            :logo="card.logo"
-            :title="card.title"
-            :description="card.description"
-            :date-time="card.dateTime"
-            :terminated="card.terminated"
-            :actions="card.actions"
-            @delete-card="deleteCard(index)" 
-          />
-        </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <ComplexCardForValidation
-            :logo="xdLogo"
-            title="Lenovo Legion"
-            description="QuizUp"
-            date-time="06.03.20"
-            terminated="en cours de validation, prévu pour débuter le"
-            :actions="[
-              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Lenovo Legion', 'QuizUp', '02.03.22')  },
-            ]"
-          />
-        </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <ComplexCardForValidation
-            :logo="asanaLogo"
-            title="Hp Omen"
-            description="HitSoumek"
-            date-time="14.03.24"
-            terminated="en cours de validation, prévu pour débuter le"
-            :actions="[
+          <div v-if="rooms && rooms.data && rooms.data.partnerRequestList.length > 0">
+            <div  class="mb-4 col-lg-4 col-md-6" v-for="room in rooms.data.partnerRequestList" :key="room.id">
+              <div v-if="room.requestType=='ROOM'"  >
+                <ComplexCardForValidation 
+                  :logo="room.logo"
+                  :title="room.systemDescription"
+                  :game="room.partnerDescription"
+                  :date-time="room.dateTime"
+                  :terminated="room.terminated"
+                  :actions="[
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
               { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Hp Omen', 'HitSoumek', '02.03.22')  },
             ]"
-          />
-        </div>
-        <div class="mb-4 col-lg-4 col-md-6">
-          <ComplexCardForValidation
-            :logo="invisionLogo"
-            title="Nvidea Geforce"
-            description="QuizUp"
-            date-time="16.01.22"
-            terminated="en cours de validation, prévu pour débuter le"
-            :actions="[
-              { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
-              { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Nvidea Geforce', 'QuizUp', '02.03.22')  },
-            ]"
-          />
-        </div>
+                  @delete-card="deleteCard(room.id)" 
+                />
+              </div>
+            </div>
+          </div>
         <div class="mb-4 col-lg-4 col-md-6">
           <router-link to="/campaign/add-campaign">
             <placeholder-card
@@ -255,11 +152,11 @@
       </div>
 
       <div class="mt-2 row mt-lg-4">
-        <div class="mb-4 col-lg-4 col-md-6">
+        <!-- <div class="mb-4 col-lg-4 col-md-6">
           <complex-project-card
             :logo="slackLogo"
             title="Laptop Victus HP"
-            description="GoBowi"
+            game="GoBowi"
             date-time="02.03.22"
             terminated="terminé le"
             :members="[team3, team4, team2, team3, team4]"
@@ -280,7 +177,7 @@
           <complex-project-card
             :logo="spotifyLogo"
             title="Msi Gaming Laptop"
-            description="DimaWin"
+            game="DimaWin"
             date-time="22.11.21"
             terminated="terminé le"
             :members="[team4, team3, team2]"
@@ -301,7 +198,7 @@
           <complex-project-card
             :logo="xdLogo"
             title="Lenovo Legion"
-            description="QuizUp"
+            game="QuizUp"
             date-time="06.03.20"
             terminated="terminé le"
             :members="[team4, team2, team3, team4]"
@@ -322,7 +219,7 @@
           <complex-project-card
             :logo="asanaLogo"
             title="Hp Omen"
-            description="HitSoumek"
+            game="HitSoumek"
             date-time="14.03.24"
             terminated="terminé le"
             :members="[team3, team4, team2, team3, team4, team2]"
@@ -343,7 +240,7 @@
           <complex-project-card
             :logo="invisionLogo"
             title="Nvidea Geforce"
-            description="QuizUp"
+            game="QuizUp"
             date-time="16.01.22"
             terminated="terminé le"
             :members="[team4, team3, team2, team4]"
@@ -359,7 +256,7 @@
               },
             ]"
           />
-        </div>
+        </div> -->
         <div class="mb-4 col-lg-4 col-md-6">
           <router-link to="/campaign/add-campaign">
             <placeholder-card
@@ -398,11 +295,11 @@ export default {
   },
   data() {
     return {
-      cards: [
+      /* cards: [
         {
           logo: spotifyLogo,
           title: 'Msi Gaming Laptop',
-          description: 'DimaWin',
+          game: 'DimaWin',
           dateTime: '22.11.21',
           terminated: 'en cours de validation, prévu pour débuter le',
           actions: [
@@ -411,7 +308,7 @@ export default {
           ],
         },
         // Repeat the structure for other cards...
-      ],
+      ], */
       showMenu: false,
       team1,
       team2,
@@ -425,13 +322,30 @@ export default {
       asanaLogo,
     };
   },
-  methods: {
-    deleteCard(index) {
-      this.cards.splice(index, 1);
+  computed: {
+    rooms() {
+      return this.$store.state.roomNS.room;    
     },
-    editCampaign(title, description, dateTime) {
-    this.$router.push({ name: 'editCampaign', params: { title, 
-    description, 
+  },
+  methods: {
+    formatDateTime(dateTimeString) {
+      return new Date(dateTimeString).toLocaleString("fr-FR");
+    },
+    deleteCard(id) {
+      this.$store.dispatch("requestNS/deleteRequest", { id })
+      .then(() => {
+          this.$store.dispatch("roomNS/selectRoom");
+        });
+    },
+    deletecardForValidation(id) {
+      this.$store.dispatch("roomNS/deleteroom", { id })
+      .then(() => {
+          this.$store.dispatch("roomNS/selectRoom");
+        });
+    },
+    editCampaign(id,product, game, dateTime) {
+    this.$router.push({ name: 'editCampaign', params: {id, product, 
+    game, 
     dateTime } });
   },
     /* callShowSwal() {
