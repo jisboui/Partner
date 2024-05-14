@@ -1,4 +1,4 @@
-import  {serviceDv,serviceDvDe,serviceDvP,serviceDvPU}  from "@/services/dv.service";
+import  {getDv,deleteDv,addDv,updateDv}  from "@/services/dv.service";
 
 export default {
   namespaced: true,
@@ -16,8 +16,8 @@ export default {
 },
 
  actions : {
-  fetchdv({ commit }) {
-    return serviceDv()
+  selectDv({ commit }) {
+    return getDv()
       .then(response => {
         commit('setDv', response);
         console.log("Dv response from the action : ", response);
@@ -30,7 +30,7 @@ export default {
   },
 
   postdvP(_, dvP) {
-    return serviceDvP(dvP)
+    return addDv(dvP)
       .then(response => {
         console.log("dvP response from the action : ", response);
       })
@@ -41,7 +41,7 @@ export default {
   },
 
   deleteDv(_, { id }) {
-    return serviceDvDe(id)
+    return deleteDv(id)
       .then(response => {
         console.log("Delete dvP action response: ", response);
       })
@@ -52,7 +52,7 @@ export default {
   },
 
   updateDv(_, { id, dvPU }) {
-    return serviceDvPU(id, dvPU)
+    return updateDv(id, dvPU)
       .then(response => {
         console.log("Update dvP action response: ", response);
         // You can return the response if needed

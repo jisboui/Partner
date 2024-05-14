@@ -14,7 +14,7 @@ export default {
 },
 
  actions : {
-  fetchHist({ commit }) {
+  selectHist({ commit }) {
     return getHistoric()
       .then(response => {
         commit('setHist', response);

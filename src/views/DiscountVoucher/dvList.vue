@@ -136,7 +136,7 @@ methods: {
           this.items.splice(index, 1); // Delete the item from the array
           this.$store.dispatch('dvNS/deleteDv', {id})
             .then(() => {
-              this.$store.dispatch('dvNS/fetchdv');
+              this.$store.dispatch('dvNS/selectDv');
             })
             .catch((error) => {
               console.error("Error:", error);
@@ -166,7 +166,7 @@ methods: {
       }
   },
     fillItems() {
-    this.$store.dispatch('dvNS/fetchdv')
+    this.$store.dispatch('dvNS/selectDv')
       .then(() => {
         this.items = this.dvs.data.map((dv) => ({
           discountValue: dv.discountValue,
@@ -185,7 +185,7 @@ methods: {
     if (this.dvP.dvType && this.dvP.discountType && this.dvP.validityInDays && this.dvP.discountValue !== '') {
       this.$store.dispatch('dvNS/postdvP', this.dvP)
       .then(() => {
-        this.$store.dispatch('dvNS/fetchdv');
+        this.$store.dispatch('dvNS/selectDv');
         this.fillItems();
       })
       .catch((error) => {
@@ -217,7 +217,7 @@ methods: {
       console.log("id in edition:", id);
        this.$store.dispatch('dvNS/updateDv', {id ,dvPU : this.editedItem})
        .then(() => {
-        this.$store.dispatch('dvNS/fetchdv');
+        this.$store.dispatch('dvNS/selectDv');
       })
       .catch((error) => {
         console.error("Error:", error);

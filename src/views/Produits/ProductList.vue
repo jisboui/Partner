@@ -119,10 +119,10 @@ import setTooltip from "@/assets/js/tooltip.js";
 export default {
   name: "ProductList",
     created() {
-     this.$store.dispatch("langNS/fetchLangs");
+     this.$store.dispatch("langNS/selectLangs");
   },
     mounted() {
-    this.$store.dispatch("prodNS/fetchprod")
+    this.$store.dispatch("prodNS/selectProduct")
       /* this.setupDataTable(); */
   },
   computed: {
@@ -159,7 +159,7 @@ export default {
         if (result.isConfirmed) { // Check if user confirmed the action
           this.$store.dispatch('prodNS/deleteProd', { id })
           .then(() => {
-            return this.$store.dispatch('prodNS/fetchprod');
+            return this.$store.dispatch('prodNS/selectProduct');
           })
           this.$swal({ // Show success message
             title: "Supprimé!",

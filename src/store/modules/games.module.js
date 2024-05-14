@@ -1,4 +1,4 @@
-import { serviceGames } from "@/services/games.service";
+import { getListGames } from "@/services/games.service";
 
 export default {
   namespaced: true,
@@ -14,8 +14,8 @@ export default {
 },
 
  actions : {
-  fetchGames({ commit }) {
-    return serviceGames()
+  selectGame({ commit }) {
+    return getListGames()
       .then(response => {
         commit('setGames', response);
         console.log("Games response from the action : ", response);

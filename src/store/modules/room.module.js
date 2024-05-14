@@ -1,4 +1,4 @@
-import  { serviceroom, serviceroomP, serviceroomPU, serviceroomDe, serviceroomGetID, serviceroomGetCalendar }  from "@/services/room.service";
+import  { getRoom, addRoom, updateRoom, deleteRoom, getRoomById, getRoomCalendar }  from "@/services/room.service";
 
 
 export default {
@@ -22,8 +22,8 @@ export default {
 },
 
  actions : {
-  fetchroom({ commit }) {
-    return serviceroom()
+  selectRoom({ commit }) {
+    return getRoom()
       .then(response => {
         commit('setroom', response);
         console.log("room response from the action : ", response);
@@ -35,8 +35,8 @@ export default {
       });
   },
 
-  postroom(_, roomP) {
-    return serviceroomP(roomP)
+  createRoom(_, roomP) {
+    return addRoom(roomP)
       .then(response => {
         console.log("post room response from the action : ", response);
       })
@@ -47,7 +47,7 @@ export default {
   },
 
   deleteroom(_, { id }) {
-    return serviceroomDe(id)
+    return deleteRoom(id)
       .then(response => {
         console.log("Delete room action response: ", response);
       })
@@ -58,7 +58,7 @@ export default {
   },
 
   updateroom(_, { id, roomPU }) {
-    return serviceroomPU(id, roomPU)
+    return updateRoom(id, roomPU)
       .then(response => {
         console.log("Update room action response: ", response);
       })
@@ -67,8 +67,8 @@ export default {
         return Promise.reject(error);
       });
   },
-    fetchroomGetID(_, { id }) {
-        return serviceroomGetID(id)
+    selectRoomById(_, { id }) {
+        return getRoomById(id)
         .then(response => {
             console.log("roomGetID response from the action : ", response);
             return response;
@@ -78,8 +78,8 @@ export default {
             return Promise.reject(error);
         });
     },
-    fetchroomGetCalendar({commit}) {
-        return serviceroomGetCalendar()
+    selectRoomCalendar({commit}) {
+        return getRoomCalendar()
         .then(response => {
             commit('setroomCalendar', response);
             console.log("roomGetCalendar response from the action : ", response);

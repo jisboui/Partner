@@ -14,7 +14,7 @@ export default {
 },
 
  actions : {
-  fetchLangs({ commit }) {
+  selectLangs({ commit }) {
     return getLang()
       .then(response => {
         commit('setLangs', response);

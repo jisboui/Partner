@@ -1,4 +1,4 @@
-import { serviceAd,serviceAdP,serviceAdPU,serviceAdDe,serviceAdI } from "@/services/ad.service";
+import { getAd,addAd,updateAd,deleteAd,getAdById } from "@/services/ad.service";
 export default {
 namespaced: true,
  state : {
@@ -15,8 +15,8 @@ namespaced: true,
 },
 
  actions : {
-  fetchad({ commit }) {
-    return serviceAd()
+  selectAd({ commit }) {
+    return getAd()
       .then(response => {
         commit('setAd', response);
         console.log("Ad response from the action : ", response);
@@ -27,8 +27,8 @@ namespaced: true,
         throw error;
       });
   },
-  fetchadI(_, { id }) {
-    return serviceAdI(id)
+  selectAdById(_, { id }) {
+    return getAdById(id)
       .then(response => {
         console.log("adI response from the action : ", response);
         return response;
@@ -38,8 +38,8 @@ namespaced: true,
         throw error;
       });
   },
-  postadP(_, adP) {
-    return serviceAdP(adP)
+  createAd(_, adP) {
+    return addAd(adP)
       .then(response => {
         console.log("adP response from the action : ", response);
       })
@@ -49,7 +49,7 @@ namespaced: true,
       });
   },
   deleteAd(_, { id }) {
-    return serviceAdDe(id)
+    return deleteAd(id)
       .then(response => {
         console.log("Delete adP action response: ", response);
         return response; 
@@ -60,7 +60,7 @@ namespaced: true,
       });
   },
   updateAd(_, { id, adPU }) {
-    return serviceAdPU(id, adPU)
+    return updateAd(id, adPU)
       .then(response => {
         console.log("Update adP action response: ", response);
         return response; 

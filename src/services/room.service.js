@@ -21,7 +21,7 @@ const authHeaders = {
   'Content-Type': 'application/json'
 };
 
-export const serviceroom = () => {
+export const getRoom = () => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -39,7 +39,7 @@ export const serviceroom = () => {
       });
   };
 
-  export const serviceroomP = (room) => {
+  export const addRoom = (room) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -58,7 +58,7 @@ export const serviceroom = () => {
       });
   };
 
-  export const serviceroomPU = (id, room) => {
+  export const updateRoom = (id, room) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -78,7 +78,7 @@ export const serviceroom = () => {
       });
   };
 
-  export const serviceroomDe = (id) => {
+  export const deleteRoom = (id) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -97,7 +97,7 @@ export const serviceroom = () => {
       });
   };
 
-  export const serviceroomGetID = (id) => {
+  export const getRoomById = (id) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -116,7 +116,7 @@ export const serviceroom = () => {
       });
   };
 
-  export const serviceroomGetCalendar = () => {
+  export const getRoomCalendar = () => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;

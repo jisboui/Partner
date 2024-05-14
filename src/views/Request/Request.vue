@@ -91,7 +91,7 @@ export default {
     deleteRequest(id) {
       this.$store.dispatch("requestNS/deleteRequest", { id })
       .then(() => {
-        this.$store.dispatch("requestNS/fetchRequests");
+        this.$store.dispatch("requestNS/selectRequests");
       });
     },
     formatDateTime(dateTimeString) {
@@ -99,7 +99,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("requestNS/fetchRequests");
+    this.$store.dispatch("requestNS/selectRequests");
     this.updateCardHeights();
   },
 };

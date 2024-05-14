@@ -130,7 +130,7 @@ export default {
     };
   },
   async created() {
-    await this.$store.dispatch("langNS/fetchLangs");
+    await this.$store.dispatch("langNS/selectLangs");
     const partnerId = localStorage.getItem("partnerId");
     this.prod.idPartner = partnerId;
     this.langs.data.forEach((lang) => {

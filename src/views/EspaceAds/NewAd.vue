@@ -110,7 +110,7 @@
       } else {
         this.ad.imageUrl = this.$store.state.fileUploadNS.fileUpload;
         console.log("ad fel newad : " , this.ad);
-        this.$store.dispatch('adNS/postadP', this.ad)
+        this.$store.dispatch('adNS/createAd', this.ad)
         // If at the last step, navigate to a different path
         this.$router.push('/espaceads/ads-list'); 
       }

@@ -22,7 +22,7 @@ const authHeaders = {
   'Content-Type': 'application/json'
 };
 
-export const serviceDv=()=> {
+export const getDv=()=> {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -40,7 +40,7 @@ export const serviceDv=()=> {
       });
   };
 
-  export const serviceDvDe=(id)=> {
+  export const deleteDv=(id)=> {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -57,7 +57,7 @@ export const serviceDv=()=> {
       });
   };
 
-  export const serviceDvP=(dv)=> {
+  export const addDv=(dv)=> {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -74,7 +74,7 @@ export const serviceDv=()=> {
       });
   };
 
-  export const serviceDvPU=(id, dv)=> {
+  export const updateDv=(id, dv)=> {
         const url = `${API_URL}/${id}`;
         const data = JSON.stringify(dv);
         return axios.put(url, data, { headers: authHeaders })

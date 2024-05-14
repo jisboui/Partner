@@ -9,7 +9,7 @@ const API_URL = dev.host + base_URL;
   API_URL = production.host + base_URL;
 } */
 
-export const serviceGames = () => {
+export const getListGames = () => {
     return new Promise((resolve, reject) => {
       const authToken = localStorage.getItem('token');
 

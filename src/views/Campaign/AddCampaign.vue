@@ -206,9 +206,9 @@ export default {
     };
   },
   async created() {
-      this.$store.dispatch('prodNS/fetchprod')
-      this.$store.dispatch('gameNS/fetchGames')
-      this.$store.dispatch('dvNS/fetchdv')
+      this.$store.dispatch('prodNS/selectProduct')
+      this.$store.dispatch('gameNS/selectGame')
+      this.$store.dispatch('dvNS/selectDv')
   },
   computed: {
     prods() {
@@ -274,7 +274,7 @@ export default {
     }
       }
       this.room.details = details; 
-      this.$store.dispatch('roomNS/postroom', this.room)
+      this.$store.dispatch('roomNS/createRoom', this.room)
     },
   },
   mounted() {
@@ -292,7 +292,13 @@ export default {
       addRemoveLinks: true,
       autoProcessQueue: false, // Prevent Dropzone from automatically uploading the file
     });
-
+    dropzone.on("thumbnail", function(file) { // this checks the dimensions of the image to not exceed the maximum width and height
+      if (file.width > maxWidth || file.height > maxHeight) { 
+        // Display an error message or take appropriate action
+        vueComponent.showSwal("basic", maxWidth, maxHeight);
+        this.removeFile(file); // Remove the file from Dropzone
+      }
+    });
     // Handle events for the current Dropzone instance
     dropzone.on("removedfile", function() {
       vueComponent.$store.commit("fileUploadNS/setFileUploads", { propName: prop, fileUpload: null });
@@ -312,17 +318,25 @@ export default {
     addRemoveLinks: true,
     autoProcessQueue: false, // Prevent Dropzone from automatically uploading the file
   });
-
+  dropzoneBonusLevel.on("thumbnail", function(file) { // this checks the dimensions of the image to not exceed the maximum width and height
+      if (file.width > maxWidth || file.height > maxHeight) {
+        // Display an error message or take appropriate action
+        vueComponent.showSwal("basic", maxWidth, maxHeight);
+        this.removeFile(file); // Remove the file from Dropzone
+      }
+    });
   dropzoneBonusLevel.on("removedfile", function() {
     vueComponent.room.details.bonusLevel = null;
   });
   dropzoneBonusLevel.on("addedfile", function(file) {
-    if (this.files.length > 1) {   // If the user adds more than one file, remove the first one and add or keep the new one
+    if (this.files.length > 1) {   
       this.removeFile(this.files[0]);
     }
     vueComponent.room.details.bonusLevel = file;
     vueComponent.$store.dispatch("fileUploadNS/a_serviceFileUpload", file);
   });
+    var maxWidth = 1400;
+    var maxHeight = 1400;
 },
 
   beforeMount() {

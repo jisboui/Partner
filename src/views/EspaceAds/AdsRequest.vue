@@ -3,7 +3,7 @@
       <br>
       <h2 class="header">Mes demandes Ads</h2>
       <br />
-      <ul v-if="ads && ads.data && ads.data.partnerRequestList" class="request-list">
+      <ul v-if="ads && ads.data && ads.data.partnerRequestList.length > 0" class="request-list">
         <li v-for="ad in ads.data.partnerRequestList" :key="ad.id">
           <div class="request-card">
             <div class="request-details">
@@ -64,6 +64,7 @@
           </div>
         </li>
       </ul>
+      <p v-else class="no-ads-message">Il n'y a pas de demandes d'annonces.</p>
     </div>
   </template>
   
@@ -99,7 +100,7 @@
       deleteRequest(id) {
         this.$store.dispatch("requestNS/deleteRequest", { id })
         .then(() => {
-          this.$store.dispatch("adNS/fetchad");
+          this.$store.dispatch("adNS/selectAd");
         });
       },
       formatDateTime(dateTimeString) {
@@ -107,7 +108,7 @@
       },
     },
     created() {
-      this.$store.dispatch("adNS/fetchad");
+      this.$store.dispatch("adNS/selectAd");
       this.updateCardHeights();
     },
   };
@@ -194,5 +195,14 @@
   .requested-image:hover {
     transform: scale(1.1);
   }
+  .no-ads-message {
+  color: red;
+  font-size: 24px;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+}
   </style>
   

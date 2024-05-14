@@ -21,7 +21,7 @@ const authHeaders = {
   'Content-Type': 'application/json'
 };
 
-export const serviceProd = () => {
+export const getProduct = () => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -39,7 +39,7 @@ export const serviceProd = () => {
       });
   };
 
-  export const serviceProdP = (prod) => {
+  export const addProduct = (prod) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -58,7 +58,7 @@ export const serviceProd = () => {
       });
   };
 
-  export const serviceProdPU = (id, prod) => {
+  export const updateProduct = (id, prod) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -78,7 +78,7 @@ export const serviceProd = () => {
       });
   };
 
-  export const serviceProdDe = (id) => {
+  export const deleteProduct = (id) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;

@@ -42,7 +42,7 @@ data() {
     return {};
 },
 created() {
-    this.$store.dispatch('historicNS/fetchHist');
+    this.$store.dispatch('historicNS/selectHist');
 },
 beforeMount() {
     this.$store.state.layout = "default";

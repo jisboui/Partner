@@ -22,7 +22,7 @@ const authHeaders = {
   'Content-Type': 'application/json'
 };
 
-export const serviceAd=() =>{
+export const getAd=() =>{
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -39,7 +39,7 @@ export const serviceAd=() =>{
         return Promise.reject(error);
       });
   };
-  export const serviceAdI=(id)=> {
+  export const getAdById=(id)=> {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -57,7 +57,7 @@ export const serviceAd=() =>{
         return Promise.reject(error);
       });
   };
-  export const serviceAdP=(ad)=> {
+  export const addAd=(ad)=> {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -75,7 +75,7 @@ export const serviceAd=() =>{
         return Promise.reject(error);
       });
   };
-  export const serviceAdPU=(id, ad) =>{
+  export const updateAd=(id, ad) =>{
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;
@@ -94,7 +94,7 @@ export const serviceAd=() =>{
         return Promise.reject(error);
       });
   };
-  export const serviceAdDe=(id)=> {
+  export const deleteAd=(id)=> {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;

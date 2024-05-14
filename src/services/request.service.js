@@ -39,7 +39,7 @@ const authHeaders = {
         return Promise.reject(error);
       });
   };
-  export const getRequestID = (id) => {
+  export const getRequestById = (id) => {
     return authToken()
       .then((token) => {
         authHeaders.Authorization = `Bearer ${token}`;

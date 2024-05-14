@@ -1,4 +1,4 @@
-import { getRequest,getRequestID,deleteRequest } from '@/services/request.service';
+import { getRequest,getRequestById,deleteRequest } from '@/services/request.service';
 
 export default {
   namespaced: true,
@@ -14,7 +14,7 @@ export default {
 },
 
  actions : {
-  fetchRequests({ commit }) {
+  selectRequests({ commit }) {
     return getRequest()
       .then(response => {
         commit('setRequests', response);
@@ -26,8 +26,8 @@ export default {
         throw error;
       });
   },
-  fetchRequestID (_, { id }) {
-    return getRequestID(id)
+  selectRequestById (_, { id }) {
+    return getRequestById(id)
       .then(response => {
         console.log("RequestID response from the action : ", response);
         return response;

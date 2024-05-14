@@ -1,4 +1,4 @@
-import  { serviceProd, serviceProdP, serviceProdPU, serviceProdDe }  from "@/services/prod.service";
+import  { getProduct, addProduct, updateProduct, deleteProduct }  from "@/services/prod.service";
 
 
 export default {
@@ -17,8 +17,8 @@ export default {
 },
 
  actions : {
-  fetchprod({ commit }) {
-    return serviceProd()
+  selectProduct({ commit }) {
+    return getProduct()
       .then(response => {
         commit('setProd', response);
         console.log("Prod response from the action : ", response);
@@ -30,8 +30,8 @@ export default {
       });
   },
 
-  postprodP(_, prodP) {
-    return serviceProdP(prodP)
+  createProduct(_, prodP) {
+    return addProduct(prodP)
       .then(response => {
         console.log("prodP response from the action : ", response);
       })
@@ -42,7 +42,7 @@ export default {
   },
 
   deleteProd(_, { id }) {
-    return serviceProdDe(id)
+    return deleteProduct(id)
       .then(response => {
         console.log("Delete prodP action response: ", response);
       })
@@ -53,7 +53,7 @@ export default {
   },
 
   updateProd(_, { id, prodPU }) {
-    return serviceProdPU(id, prodPU)
+    return updateProduct(id, prodPU)
       .then(response => {
         console.log("Update prodP action response: ", response);
       })

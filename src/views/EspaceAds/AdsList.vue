@@ -104,7 +104,7 @@ export default {
     
   }, */
   mounted() {
-    this.$store.dispatch("adNS/fetchad");
+    this.$store.dispatch("adNS/selectAd");
       /* this.setupDataTable(); */
   },
   computed: {
@@ -126,7 +126,7 @@ export default {
     deleteAd(id) {
     this.$store.dispatch('adNS/deleteAd', { id })
     .then(() => {
-      return this.$store.dispatch('adNS/fetchad');
+      return this.$store.dispatch('adNS/selectAd');
     })
     /* .then(() => {
       this.$nextTick(() => {

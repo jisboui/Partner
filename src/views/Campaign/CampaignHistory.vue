@@ -439,10 +439,10 @@ export default {
     }, */
   },
   created() {
-    this.$store.dispatch('roomNS/fetchroom')
-    /* this.$store.dispatch('roomNS/fetchroomGetCalendar') */
+    this.$store.dispatch('roomNS/selectRoom')
+    /* this.$store.dispatch('roomNS/selectRoomCalendar') */
    /*  const id="65e1b1d91fc1e501dbdc4487"
-    this.$store.dispatch('roomNS/fetchroomGetID', {id}) */
+    this.$store.dispatch('roomNS/selectRoomById', {id}) */
 
   },
   mounted() {
