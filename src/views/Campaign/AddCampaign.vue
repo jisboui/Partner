@@ -79,7 +79,7 @@
               </div>
           </div>
           <br />
-          <div v-show="selectedGame === 'GoBowi'">
+          <div v-show="selectedGame === 'GoBowi' && abonnement==='pro'">
             <div v-for="(value, key) in room.details" :key="key">
               <label class="mt-4 form-label">Ajouter les éléments graphiques pour {{ key }}</label>
               <form
@@ -93,7 +93,7 @@
               </form>
             </div>
           </div>
-          <div v-show="selectedGame === 'QuizUp'">
+          <div v-show="selectedGame === 'QuizUp' && abonnement==='pro'">
             <label class="mt-4 form-label"
               >Ajouter l'image pour afficher dans le niveau bonus :</label
             >
@@ -196,6 +196,7 @@ export default {
       selectedDv: null,
       selectedGift: '',
       selectedGame: "",
+      abonnement : "pro",
       date: null,
       endDate: "",
       config: {
@@ -279,11 +280,25 @@ export default {
   },
   mounted() {
   const vueComponent = this; // Store the Vue component instance
+  
+  const dimensions = {
+      woodad: { maxWidth: 171, maxHeight: 200 },
+      tvad: { maxWidth: 372, maxHeight: 200 },
+      carre: { maxWidth: 200, maxHeight: 200 },
+      hrec: { maxWidth: 764, maxHeight: 250 },
+      ovniad: { maxWidth: 648, maxHeight: 100 },
+      circle: { maxWidth: 200, maxHeight: 200 },
+      poster: { maxWidth: 200, maxHeight: 281 },
+      vrec: { maxWidth: 250, maxHeight: 704 }
+    };
 
   // Iterate over each property in room.details
   for (const prop in this.room.details) {
     const dropzoneId = `dropzone_${prop}`;
     const dropzoneElement = document.getElementById(dropzoneId);
+
+    // Get the dimensions for the current prop
+    const { maxWidth, maxHeight } = dimensions[prop] || { maxWidth: 1400, maxHeight: 1400 };
 
     // Create a Dropzone instance for each property
     const dropzone = new Dropzone(dropzoneElement, {
