@@ -3,7 +3,7 @@
     <div class="p-3 card-body">
       <div class="d-flex">
         <div class="p-2 avatar avatar-xl bg-gradient-dark border-radius-md">
-          <img :src="logo" :alt="title" />
+          <img :src="logo" alt="" />
         </div>
         <div class="my-auto ms-3">
           <h6>{{ title }}</h6>

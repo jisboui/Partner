@@ -50,7 +50,7 @@
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
               { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign(room.id,room.product.productName.EN, room.game.nameGame, room.finishDate)  },
             ]"
-            @delete-cardForValidation="deletecardForValidation(room.id)"
+            @delete-cardForValidation="deleteCard(room.id)"
           />
         </div>
       </div>
@@ -105,7 +105,7 @@
               { label: 'Supprimer', route: 'javascript:;', class: 'text-danger text-gradient px-3 mb-0', icon: 'far fa-trash-alt' },
               { label: 'Modifier', route: 'edit-campaign', class: 'btn btn-link text-dark px-3 mb-0', icon: 'fas fa-pencil-alt text-dark' , action: () => editCampaign('Hp Omen', 'HitSoumek', '02.03.22')  },
             ]"
-                  @delete-card="deleteCard(room.id)" 
+                  @delete-card="deletecardForValidation(room.id)" 
                 />
               </div>
             </div>
@@ -331,13 +331,13 @@ export default {
     formatDateTime(dateTimeString) {
       return new Date(dateTimeString).toLocaleString("fr-FR");
     },
-    deleteCard(id) {
+    deletecardForValidation(id) {
       this.$store.dispatch("requestNS/deleteRequest", { id })
       .then(() => {
           this.$store.dispatch("roomNS/selectRoom");
         });
     },
-    deletecardForValidation(id) {
+    deleteCard(id) {
       this.$store.dispatch("roomNS/deleteroom", { id })
       .then(() => {
           this.$store.dispatch("roomNS/selectRoom");
