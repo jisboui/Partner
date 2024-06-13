@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <br>
+  <div class="mt-12">
+    <br />
     <h2 class="header">Toutes mes demandes</h2>
     <br />
     <ul class="request-list">
@@ -8,10 +8,14 @@
         <div class="request-card">
           <div class="request-details">
             <p class="date">
-              <strong>Date de la demande:</strong> {{ formatDateTime(request.requestDate) }}
+              <strong>Date de la demande:</strong>
+              {{ formatDateTime(request.requestDate) }}
             </p>
             <p class="status">
-              <strong>Status:</strong> {{ request.requestStatus == 'PENDING' ? 'En attente' : 'Confirmé' }}
+              <strong>Status:</strong>
+              {{
+                request.requestStatus == "PENDING" ? "En attente" : "Confirmé"
+              }}
             </p>
             <p class="description">
               <strong>Description:</strong>
@@ -69,30 +73,72 @@ export default {
   },
   beforeMount() {
     this.$store.state.layout = "default";
-},
+  },
   methods: {
-    updateCardHeights() {  // Update the height of all cards to match the height of the tallest card
-        this.$nextTick(() => {
-          const cardContainers = document.querySelectorAll(".request-card");
-          let maxCardHeight = 0;
+    showSwal(type, id) {
+      if (type === "warning-message-and-cancel") {
+        this.$swal({
+          title: "Es-tu sûr?",
+          text: "Vous ne pourrez pas revenir en arrière!",
+          icon: "warning",
+          showCancelButton: true,
+          cancelButtonText: "Annuler",
+          confirmButtonText: "Oui, supprimez-le!",
+          customClass: {
+            confirmButton: "btn bg-gradient-success",
+            cancelButton: "btn bg-gradient-danger",
+          },
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Check if user confirmed the action
+            this.$store.dispatch("requestNS/deleteRequest", { id }).then(() => {
+              return this.$store.dispatch("requestNS/selectRequests");
+            });
+            this.$swal({
+              // Show success message
+              title: "Supprimé!",
+              text: "Votre demande a été supprimé.",
+              icon: "success",
+              customClass: {
+                confirmButton: "btn bg-gradient-success",
+              },
+              buttonsStyling: false,
+            });
+            /* this.cancelEdit(); */ // Close the edit modal if open for the deleted item
+          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+            this.$swal.dismiss; // Dismiss the swal modal if user cancels
+          }
+        });
+      } else if (type === "basic") {
+        this.$swal({
+          icon: "basic",
+          title: "Veuillez entrer tous les champs.",
+          text: "Les champs ne doivent pas être vides!",
+          type: type,
+        });
+      }
+    },
+    updateCardHeights() {
+      // Update the height of all cards to match the height of the tallest card
+      this.$nextTick(() => {
+        const cardContainers = document.querySelectorAll(".request-card");
+        let maxCardHeight = 0;
 
-          // First iteration to find the maximum card height
-          cardContainers.forEach((container) => {
-            const cardHeight = container.getBoundingClientRect().height;
-            maxCardHeight = Math.max(maxCardHeight, cardHeight);
-          });
+        // First iteration to find the maximum card height
+        cardContainers.forEach((container) => {
+          const cardHeight = container.getBoundingClientRect().height;
+          maxCardHeight = Math.max(maxCardHeight, cardHeight);
+        });
 
-          // Second iteration to set the height of all cards
-          cardContainers.forEach((container) => {
-            container.style.height = `${maxCardHeight}px`;
-          });
+        // Second iteration to set the height of all cards
+        cardContainers.forEach((container) => {
+          container.style.height = `${maxCardHeight}px`;
+        });
       });
     },
     deleteRequest(id) {
-      this.$store.dispatch("requestNS/deleteRequest", { id })
-      .then(() => {
-        this.$store.dispatch("requestNS/selectRequests");
-      });
+      this.showSwal("warning-message-and-cancel", id);
     },
     formatDateTime(dateTimeString) {
       return new Date(dateTimeString).toLocaleString("fr-FR");
@@ -106,7 +152,6 @@ export default {
 </script>
 
 <style scoped>
-
 .header {
   font-size: 2em;
   margin-bottom: 20px;
@@ -147,7 +192,7 @@ export default {
 .description,
 .changes-title {
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   color: #555;
 }
 

@@ -1,51 +1,91 @@
 <template>
   <div id="app">
     <h1>Bibliothèque des bons</h1>
-    <br>
-    <div id="DV" class="container" style="display: flex; justify-content: center; align-items: center;">
+    <br />
+    <div
+      id="DV"
+      class="container"
+      style="display: flex; justify-content: center; align-items: center"
+    >
       <div class="card">
         <div class="main">
           <div class="co-img">
             <img
-            src="https://www.tunisietravail.net/uploads/2021/08/artfin-200x200.png"
-            alt="brand logo"
+              src="https://www.tunisietravail.net/uploads/2021/08/artfin-200x200.png"
+              alt="brand logo"
             />
           </div>
           <div class="vertical"></div>
           <div class="content">
-          <div>
-          <div>
-            <label for="dvType">Le bon se porte sur un :</label>
-            <select id="dvType"  class="form-control" style="width: 200px; margin-left: 85px;" v-model="dvP.dvType">
-              <option value="PRODUCT">Produit</option>
-              <option value="PURCHASE">Achat</option>
-            </select>
-          </div>
-          </div>
-          <br>
+            <div>
+              <div>
+                <label for="dvType">Le bon se porte sur un :</label>
+                <select
+                  id="dvType"
+                  class="form-control"
+                  style="width: 200px; margin-left: 85px"
+                  v-model="dvP.dvType"
+                >
+                  <option value="PRODUCT">Produit</option>
+                  <option value="PURCHASE">Achat</option>
+                </select>
+              </div>
+            </div>
+            <br />
             <h1>
-              <input v-model="dvP.discountValue" dvType="text" class="editable-input">{{ discountSign }}
-                <select class="editable-input" v-model="dvP.discountType">
+              <input
+                v-model="dvP.discountValue"
+                dvType="text"
+                class="editable-input"
+              />{{ discountSign }}
+              <select class="editable-input" v-model="dvP.discountType">
                 <option value="PERCENTAGE">Bon de réduction</option>
                 <option value="FLAT_AMOUNT">Bon d'achat</option>
-                </select>
+              </select>
             </h1>
-            <p>Valable <input v-model="dvP.validityInDays" dvType="text" class="long-input"/> jours</p> 
+            <p>
+              Valable
+              <input
+                v-model="dvP.validityInDays"
+                dvType="text"
+                class="long-input"
+              />
+              jours
+            </p>
           </div>
         </div>
-        <br>
-      <button @click="addItem" class="add-button">Ajouter le bon</button>
+        <br />
+        <button @click="addItem" class="add-button">Ajouter le bon</button>
       </div>
     </div>
-      <br> <br>
-    <div v-if="items.length" class="items-container" >
-      <div class="item" v-for="(dv,index) in dvs.data" :key="dv.id" :value="dv.id">
-        <div class="item-details" >
-          <strong>{{ dv.discountValue }}{{ dv.discountType == 'PERCENTAGE' ? '%' : 'Dt' }} réduction</strong> - {{ dv.validityInDays }} jours - {{ dv.dvType == 'PRODUCT' ? "Produit" : "Achat" }} - {{ dv.discountType == 'PERCENTAGE' ? 'Bon de réduction' : 'Bon dachat' }}
+    <br />
+    <br />
+    <div v-if="items.length" class="items-container">
+      <div
+        class="item"
+        v-for="(dv, index) in dvs.data"
+        :key="dv.id"
+        :value="dv.id"
+      >
+        <div class="item-details">
+          <strong
+            >{{ dv.discountValue
+            }}{{
+              dv.discountType == "PERCENTAGE" ? "%" : "Dt"
+            }}
+            réduction</strong
+          >
+          - {{ dv.validityInDays }} jours -
+          {{ dv.dvType == "PRODUCT" ? "Produit" : "Achat" }} -
+          {{
+            dv.discountType == "PERCENTAGE" ? "Bon de réduction" : "Bon dachat"
+          }}
         </div>
         <div class="item-actions">
           <button @click="editItem(index)" class="edit-button">Modifier</button>
-          <button @click="deleteItem(index)" class="delete-button">Supprimer</button>
+          <button @click="deleteItem(index)" class="delete-button" >
+            Supprimer
+          </button>
         </div>
       </div>
     </div>
@@ -57,18 +97,26 @@
     <div v-if="editIndex !== null" class="modal">
       <div class="modal-content">
         <h2>Modifier le bon</h2>
-        <input v-model="editedItem.discountValue" placeholder="% réduction" class="input-field">
-        <input v-model="editedItem.validityInDays" placeholder="date d'expiration" class="input-field">
-            <select v-model="editedItem.dvType" class="input-field">
-              <option value="" selected disabled>Select Option</option>
-              <option value="PRODUCT">Produit</option>
-              <option value="PURCHASE">Achat</option>
-            </select>
-            <select v-model="editedItem.discountType" class="input-field">
-              <option value="" selected disabled>Select Option</option>
-              <option value="PERCENTAGE">Bon de réduction</option>
-              <option value="FLAT_AMOUNT">Bon d'achat</option>
-            </select>
+        <input
+          v-model="editedItem.discountValue"
+          placeholder="% réduction"
+          class="input-field"
+        />
+        <input
+          v-model="editedItem.validityInDays"
+          placeholder="date d'expiration"
+          class="input-field"
+        />
+        <select v-model="editedItem.dvType" class="input-field">
+          <option value="" selected disabled>Select Option</option>
+          <option value="PRODUCT">Produit</option>
+          <option value="PURCHASE">Achat</option>
+        </select>
+        <select v-model="editedItem.discountType" class="input-field">
+          <option value="" selected disabled>Select Option</option>
+          <option value="PERCENTAGE">Bon de réduction</option>
+          <option value="FLAT_AMOUNT">Bon d'achat</option>
+        </select>
         <div class="modal-buttons">
           <button @click="saveEdit" class="save-button">Save</button>
           <button @click="cancelEdit" class="cancel-button">Cancel</button>
@@ -80,83 +128,86 @@
 
 <script>
 export default {
-  name: 'dvList',
+  name: "dvList",
   data() {
     return {
-      dvP : {
+      dvP: {
         dvType: "PRODUCT",
         discountType: "PERCENTAGE",
-        validityInDays: '30',
-        discountValue: '10',
-      },/* 
+        validityInDays: "30",
+        discountValue: "10",
+      } /* 
       newdiscountValue: '',
       newvalidityInDays: '',
-      newItemtype: '', */
-      items: [], 
+      newItemtype: '', */,
+      items: [],
       editIndex: null,
       editedItem: {
         dvType: "",
         discountType: "",
-        validityInDays: '',
-        discountValue: '',
-      }
+        validityInDays: "",
+        discountValue: "",
+      },
     };
   },
-async created() {
-  this.fillItems();
-},
-computed: {
-  dvs() {
-    const dvs = this.$store.state.dvNS.dv;
-    return dvs;
+  async created() {
+    this.fillItems();
   },
-  discountSign() { // Return the sign of the discount type (percentage or flat amount) depending on the selected discount type
-    return this.dvP.discountType == 'PERCENTAGE' ? '%' : 'Dt';
-  }
-},
-methods: {
-  showSwal(type, index) {
-    if (type === "warning-message-and-cancel") {
-      this.$swal({
-        title: "Es-tu sûr?",
-        text: "Vous ne pourrez pas revenir en arrière!",
-        icon: "warning",
-        showCancelButton: true,
-        cancelButtonText: "Annuler",
-        confirmButtonText: "Oui, supprimez-le!",
-        customClass: {
-          confirmButton: "btn bg-gradient-success",
-          cancelButton: "btn bg-gradient-danger",
-        },
-        buttonsStyling: false,
-      }).then((result) => {
-        if (result.isConfirmed) { // Check if user confirmed the action
-          const id = this.items[index].id;
-          console.log("id in deletion:", id);
-          this.items.splice(index, 1); // Delete the item from the array
-          this.$store.dispatch('dvNS/deleteDv', {id})
-            .then(() => {
-              this.$store.dispatch('dvNS/selectDv');
-            })
-            .catch((error) => {
-              console.error("Error:", error);
+  computed: {
+    dvs() {
+      const dvs = this.$store.state.dvNS.dv;
+      return dvs;
+    },
+    discountSign() {
+      // Return the sign of the discount type (percentage or flat amount) depending on the selected discount type
+      return this.dvP.discountType == "PERCENTAGE" ? "%" : "Dt";
+    },
+  },
+  methods: {
+    showSwal(type, index) {
+      if (type === "warning-message-and-cancel") {
+        this.$swal({
+          title: "Es-tu sûr?",
+          text: "Vous ne pourrez pas revenir en arrière!",
+          icon: "warning",
+          showCancelButton: true,
+          cancelButtonText: "Annuler",
+          confirmButtonText: "Oui, supprimez-le!",
+          customClass: {
+            confirmButton: "btn bg-gradient-success",
+            cancelButton: "btn bg-gradient-danger",
+          },
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Check if user confirmed the action
+            const id = this.items[index].id;
+            console.log("id in deletion:", id);
+            this.items.splice(index, 1); // Delete the item from the array
+            this.$store
+              .dispatch("dvNS/deleteDv", { id })
+              .then(() => {
+                this.$store.dispatch("dvNS/selectDv");
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+            this.$swal({
+              // Show success message
+              title: "Supprimé!",
+              text: "Votre bon a été supprimé.",
+              icon: "success",
+              customClass: {
+                confirmButton: "btn bg-gradient-success",
+              },
+              buttonsStyling: false,
             });
-          this.$swal({ // Show success message
-            title: "Supprimé!",
-            text: "Votre bon a été supprimé.",
-            icon: "success",
-            customClass: {
-              confirmButton: "btn bg-gradient-success",
-            },
-            buttonsStyling: false,
-          });
-          /* this.cancelEdit(); */ // Close the edit modal if open for the deleted item
-        } else if (result.dismiss === this.$swal.DismissReason.cancel) {
-          this.$swal.dismiss; // Dismiss the swal modal if user cancels
-        }
-      });
-    }
-    else if (type === "basic") {
+            /* this.cancelEdit(); */ // Close the edit modal if open for the deleted item
+          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+            this.$swal.dismiss; // Dismiss the swal modal if user cancels
+          }
+        });
+      } else if (type === "basic") {
         this.$swal({
           icon: "basic",
           title: "Veuillez entrer tous les champs.",
@@ -164,72 +215,81 @@ methods: {
           type: type,
         });
       }
-  },
+    },
     fillItems() {
-    this.$store.dispatch('dvNS/selectDv')
-      .then(() => {
-        this.items = this.dvs.data.map((dv) => ({
-          discountValue: dv.discountValue,
-          validityInDays: dv.validityInDays,
-          dvType: dv.dvType,
-          discountType : dv.discountType,
-          id: dv.id
-        }));
-        console.log("Items:", this.items);
-      })
-      .catch((error) => {
-        console.error("Error fetching dv:", error);
-      });
-  },
-  addItem() {
-    if (this.dvP.dvType && this.dvP.discountType && this.dvP.validityInDays && this.dvP.discountValue !== '') {
-      this.$store.dispatch('dvNS/postdvP', this.dvP)
-      .then(() => {
-        this.$store.dispatch('dvNS/selectDv');
-        this.fillItems();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-      // Clear input fields after adding item
+      this.$store
+        .dispatch("dvNS/selectDv")
+        .then(() => {
+          this.items = this.dvs.data.map((dv) => ({
+            discountValue: dv.discountValue,
+            validityInDays: dv.validityInDays,
+            dvType: dv.dvType,
+            discountType: dv.discountType,
+            id: dv.id,
+          }));
+          console.log("Items:", this.items);
+        })
+        .catch((error) => {
+          console.error("Error fetching dv:", error);
+        });
+    },
+    addItem() {
+      if (
+        this.dvP.dvType &&
+        this.dvP.discountType &&
+        this.dvP.validityInDays &&
+        this.dvP.discountValue !== ""
+      ) {
+        this.$store
+          .dispatch("dvNS/postdvP", this.dvP)
+          .then(() => {
+            this.$store.dispatch("dvNS/selectDv");
+            this.fillItems();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        // Clear input fields after adding item
         /* this.dvP.discountValue = "";
         this.dvP.validityInDays = "";
         this.dvP.discountType = '';
-        this.dvP.dvType = '';   */  
-    } else {
-      this.showSwal("basic");
-    }
-  },
+        this.dvP.dvType = '';   */
+      } else {
+        this.showSwal("basic");
+      }
+    },
 
-    editItem(index) { 
+    editItem(index) {
       this.editIndex = index;
       this.editedItem.dvType = this.items[index].dvType;
       this.editedItem.discountType = this.items[index].discountType;
       this.editedItem.validityInDays = this.items[index].validityInDays;
-      this.editedItem.discountValue = this.items[index].discountValue;    
+      this.editedItem.discountValue = this.items[index].discountValue;
     },
-     saveEdit() { 
+    saveEdit() {
       this.items[this.editIndex].discountValue = this.editedItem.discountValue;
-      this.items[this.editIndex].validityInDays = this.editedItem.validityInDays;
-      this.items[this.editIndex].dvType = this.editedItem.dvType; 
+      this.items[this.editIndex].validityInDays =
+        this.editedItem.validityInDays;
+      this.items[this.editIndex].dvType = this.editedItem.dvType;
       this.items[this.editIndex].discountType = this.editedItem.discountType;
       const id = this.items[this.editIndex].id;
       console.log("id in edition:", id);
-       this.$store.dispatch('dvNS/updateDv', {id ,dvPU : this.editedItem})
-       .then(() => {
-        this.$store.dispatch('dvNS/selectDv');
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      this.$store
+        .dispatch("dvNS/updateDv", { id, dvPU: this.editedItem })
+        .then(() => {
+          this.$store.dispatch("dvNS/selectDv");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
       this.cancelEdit();
-    }, 
+    },
     cancelEdit() {
       this.editIndex = null;
-      this.editedItem.discountValue = '';
-      this.editedItem.validityInDays = '';
-      this.editedItem.dvType = '';
-      this.editedItem.discountType = '';
+      this.editedItem.discountValue = "";
+      this.editedItem.validityInDays = "";
+      this.editedItem.dvType = "";
+      this.editedItem.discountType = "";
     },
     deleteItem(index) {
       this.showSwal("warning-message-and-cancel", index);
@@ -237,7 +297,7 @@ methods: {
   },
   beforeMount() {
     this.$store.state.layout = "default";
-  },  
+  },
 };
 </script>
 
@@ -279,7 +339,8 @@ methods: {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 300px;
+  width: 550px;
+  height: 150px;
   border-radius: 5px;
 }
 
@@ -358,127 +419,127 @@ methods: {
 /* for the dv */
 #DV {
   .editable-input {
-  background: none;
-  font-size: 1em;
-  font-weight: 1000;
-  width: 50px;
+    background: none;
+    font-size: 1em;
+    font-weight: 1000;
+    width: 50px;
   }
 
   .long-input {
-  width: 40px; /* Adjust this value to suit your needs */
+    width: 40px; /* Adjust this value to suit your needs */
   }
   * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
   }
 
   .container {
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  background-color: #6bcc8b;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #6bcc8b;
   }
 
   .card {
-  width: 500px;
-  height: 230px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
-  background-color: beige;
-  padding: 10px 20px;
-  position: relative;
+    width: 500px;
+    height: 230px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: beige;
+    padding: 10px 20px;
+    position: relative;
   }
 
   .main {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    align-items: center;
   }
   .card::after {
-  position: absolute;
-  content: "";
-  height: 40px;
-  right: -20px;
-  border-radius: 40px;
-  z-index: 1;
-  top: 80px;
-  background-color: #2dce89;
-  width: 40px;
+    position: absolute;
+    content: "";
+    height: 40px;
+    right: -20px;
+    border-radius: 40px;
+    z-index: 1;
+    top: 80px;
+    background-color: beige;
+    width: 40px;
   }
 
   .card::before {
-  position: absolute;
-  content: "";
-  height: 40px;
-  left: -20px;
-  border-radius: 40px;
-  z-index: 1;
-  top: 80px;
-  background-color: #2dce89;
-  width: 40px;
+    position: absolute;
+    content: "";
+    height: 40px;
+    left: -20px;
+    border-radius: 40px;
+    z-index: 1;
+    top: 80px;
+    background-color: beige;
+    width: 40px;
   }
 
   .co-img img {
-  width: 100px;
-  height: 100px;
-  }
-  .vertical {
-  border-left: 5px dotted black;
-  height: 170px;
-  position: absolute;
-  left: 35%;
-  }
-
-  .content h1 {
-  font-size: 35px;
-  margin-left: -20px;
-  color: #565656;
-  padding-left: 95px; 
-  }
-
-  .content h1 select {
-  font-size: 17px;
-  color: #565656;
-  width: 170px;
-  }
-  .content h2 {
-  font-size: 18px;
-  margin-left: -20px;
-  color: #565656;
-  text-transform: uppercase;
-  padding-left: 100px; 
-  }
-
-  .content p {
-  font-size: 16px;
-  color: #696969;
-  margin-left: -20px;
-  padding-left: 100px; 
-  }
-
-@media (max-width: 600px) {
-  .content h1 {
-    font-size: 25px; /* reduce the font size on small screens */
-  }
-
-  .content h2 {
-    font-size: 14px; 
-  }
-
-  .content p {
-    font-size: 12px; 
+    width: 100px;
+    height: 100px;
   }
   .vertical {
     border-left: 5px dotted black;
-    height: 100px;
+    height: 170px;
     position: absolute;
-    left: 40%;
+    left: 35%;
+  }
+
+  .content h1 {
+    font-size: 35px;
+    margin-left: -20px;
+    color: #565656;
+    padding-left: 95px;
+  }
+
+  .content h1 select {
+    font-size: 17px;
+    color: #565656;
+    width: 170px;
+  }
+  .content h2 {
+    font-size: 18px;
+    margin-left: -20px;
+    color: #565656;
+    text-transform: uppercase;
+    padding-left: 100px;
+  }
+
+  .content p {
+    font-size: 16px;
+    color: #696969;
+    margin-left: -20px;
+    padding-left: 100px;
+  }
+
+  @media (max-width: 600px) {
+    .content h1 {
+      font-size: 25px; /* reduce the font size on small screens */
     }
-}
+
+    .content h2 {
+      font-size: 14px;
+    }
+
+    .content p {
+      font-size: 12px;
+    }
+    .vertical {
+      border-left: 5px dotted black;
+      height: 100px;
+      position: absolute;
+      left: 40%;
+    }
+  }
 }
 </style>
