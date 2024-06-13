@@ -143,7 +143,8 @@ export default {
     async logoutclick() {
     /* try { */
      /*  await this.$store.dispatch("loginNS/logout", this.$router); */
-      this.$store.dispatch("loginNS/logout", this.$router);
+      this.$store.dispatch("loginNS/logout");
+      this.$router.push("/");
     /* } catch (error) {
       console.error(error);
     } */
