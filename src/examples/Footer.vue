@@ -1,5 +1,6 @@
 <template>
-  <footer class="py-3 footer">
+  <!-- py-3 footer -->
+  <footer class="py-0 foote">
     <div class="container-fluid">
       <div class="row align-items-center justify-content-lg-between">
         <div class="mb-4 col-lg-6 mb-lg-0">
@@ -18,7 +19,7 @@
             >
           </div>
         </div>
-       <!--  <div class="col-lg-6">
+        <!--  <div class="col-lg-6">
           <ul
             class="nav nav-footer justify-content-center justify-content-lg-end"
           >
@@ -60,7 +61,16 @@
     </div>
   </footer>
 </template>
-
+<style>
+.foote {
+  color: rgb(248, 240, 240);
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+</style>
 <script>
 export default {
   name: "AppFooter",
