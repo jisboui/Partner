@@ -76,16 +76,17 @@ import AdsRequest from "../views/EspaceAds/AdsRequest.vue";
 const routes = [
   {
     path: "/",
-    name: "/",
+    name: "Default",
     redirect: "/authentication/signin/illustration",
   },
   {
     path: "/dashboards/dashboard-default",
-    name: "Default",
-    component: Default,
+    name: "Default", component: Default,
     meta: {
       requiresAuth: true
     }
+
+    //meta: { requiresAuth: true },
   },
   {
     //

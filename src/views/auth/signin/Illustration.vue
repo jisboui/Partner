@@ -21,10 +21,12 @@
               <div class="card card-plain">
                 <div class="pb-0 card-header text-start">
                   <h4 class="font-weight-bolder">Connectez vous</h4>
-                  <p class="mb-0">Entrez votre email et votre mot de passe pour vous connecter</p>
+                  <p class="mb-0">
+                    Entrez votre email et votre mot de passe pour vous connecter
+                  </p>
                 </div>
                 <div class="card-body">
-                  <form role="form"   @submit.prevent="loginclick">
+                  <form role="form" @submit.prevent="loginclick">
                     <div class="mb-3">
                       <argon-input
                         id="email"
@@ -55,10 +57,12 @@
                         color="success"
                         full-width
                         size="lg"
-                       type="submit"
+                        type="submit"
                         >Se Connecter</argon-button
                       >
-                      <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+                      <p v-if="errorMessage" style="color: red">
+                        {{ errorMessage }}
+                      </p>
                     </div>
                   </form>
                 </div>
@@ -80,8 +84,9 @@
               <div
                 class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 :style="{
-                  backgroundImage: 'url(' + require('@/assets/img/our-partner.png') + ')',
-                  backgroundSize: 'cover'
+                  backgroundImage:
+                    'url(' + require('@/assets/img/our-partner.png') + ')',
+                  backgroundSize: 'cover',
                 }"
               >
                 <span class="mask bg-gradient-success opacity-6"></span>
@@ -92,7 +97,8 @@
                   Dopawin
                 </h4>
                 <p class="text-white position-relative">
-                  The Platform That Lets You Win Amazing Products From Top Brands!
+                  The Platform That Lets You Win Amazing Products From Top
+                  Brands!
                 </p>
               </div>
             </div>
@@ -121,17 +127,17 @@ export default {
   data() {
     return {
       user: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
       errorMessage: "",
-    }
+    };
   },
- async created() {
+  async created() {
     this.$store.state.hideConfigButton = true;
     this.toggleDefaultLayout();
     body.classList.remove("bg-gray-100");
-    },
+  },
   beforeUnmount() {
     this.$store.state.hideConfigButton = false;
     this.toggleDefaultLayout();
@@ -146,15 +152,14 @@ export default {
         this.navigateToDashboard();
       } catch (error) {
         console.error(error);
-        this.errorMessage = "L'e-mail ou le mot de passe sont erronés, veuillez réessayer!";
-        /* this.$forceUpdate(); */  
+        this.errorMessage =
+          "L'e-mail ou le mot de passe sont erronés, veuillez réessayer!";
+        /* this.$forceUpdate(); */
       }
     },
     navigateToDashboard() {
-      this.$router.push({ name: 'Default' });
+      this.$router.push("/dashboards/dashboard-default");
     },
   },
 };
 </script>
-
-

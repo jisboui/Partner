@@ -144,7 +144,7 @@ export default {
     /* try { */
      /*  await this.$store.dispatch("loginNS/logout", this.$router); */
       this.$store.dispatch("loginNS/logout");
-      this.$router.push("/");
+      this.$router.push("/authentication/signin/illustration");
     /* } catch (error) {
       console.error(error);
     } */
