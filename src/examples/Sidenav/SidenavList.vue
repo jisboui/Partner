@@ -32,7 +32,9 @@
           :class="getRoute() === 'dashboards' ? 'active' : ''"
         >
           <template #icon>
-            <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+            <i
+              class="fa fa-light fa-ranking-star text-warning text-sm opacity-10"
+            ></i>
           </template>
           <template #list>
             <ul class="nav ms-4">
@@ -61,7 +63,7 @@
           :class="getRoute() === 'ecommerce' ? 'active' : ''"
         >
           <template #icon>
-            <i class="ni ni-archive-2 text-success text-sm opacity-10"></i>
+            <i class="fa fa-percent text-success text-sm opacity-10"></i>
           </template>
           <template #list>
             <ul class="nav ms-4">
@@ -86,7 +88,7 @@
           :class="getRoute() === 'pages' ? 'active' : ''"
         >
           <template #icon>
-            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+            <i class="fa fa-gift text-primary text-sm opacity-10"></i>
           </template>
           <template #list>
             <ul class="nav ms-4">
@@ -111,10 +113,9 @@
                   text="Modifier un produit"
                 />
               </li> -->
-              </ul>
+            </ul>
           </template>
         </sidenav-collapse>
-        
       </li>
       <li class="nav-item">
         <sidenav-collapse
@@ -123,80 +124,91 @@
           :class="getRoute() === 'applications' ? 'active' : ''"
         >
           <template #icon>
-            <i class="ni ni-ui-04 text-info text-sm opacity-10"></i>
+            <i class="fas fa-ad text-info text-sm opacity-10"></i>
           </template>
           <template #list>
             <ul class="nav ms-4">
               <li class="nav-item">
-              <sidenav-item
-                :to="{ name: 'AdsList' }"
-                mini-icon="BA"
-                text="Bibliothèque Ads"
-              />
+                <sidenav-item
+                  :to="{ name: 'AdsList' }"
+                  mini-icon="BA"
+                  text="Bibliothèque Ads"
+                />
               </li>
               <li class="nav-item">
-              <sidenav-item
-                :to="{ name: 'NewAd' }"
-                mini-icon="NA"
-                text="Nouvelle Ad"
-              />
+                <sidenav-item
+                  :to="{ name: 'NewAd' }"
+                  mini-icon="NA"
+                  text="Nouvelle Ad"
+                />
               </li>
               <li class="nav-item">
-              <sidenav-item
-                :to="{ name: 'AdsRequest' }"
-                mini-icon="AR"
-                text="Demandes Ads"
-              />
+                <sidenav-item
+                  :to="{ name: 'AdsRequest' }"
+                  mini-icon="AR"
+                  text="Demandes Ads"
+                />
               </li>
             </ul>
           </template>
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-            <sidenav-item 
-                    :to="{ name: 'Request' }" 
-                    mini-icon="Req" 
-                    text="Toutes mes demandes"
-            >
-              <template #icon>
-                <i class="fa-solid fa-rotate-right text-sm" style="color : tomato"></i>
-              </template>
-            </sidenav-item>
+        <sidenav-item
+          :to="{ name: 'Request' }"
+          mini-icon="Req"
+          text="Toutes mes demandes"
+        >
+          <template #icon>
+            <i
+              class="fa-solid fa-list-alt fa-rotate-right text-sm"
+              style="color: tomato"
+            ></i>
+          </template>
+        </sidenav-item>
       </li>
       <li class="nav-item">
         <sidenav-item
-                    :to="{ name: 'Sondage' }"
-                    mini-icon="ES"
-                    text="Espace sondage"
+          :to="{ name: 'Sondage' }"
+          mini-icon="ES"
+          text="Espace sondage"
         >
-              <template #icon>
-                <i class="fa-solid fa-square-poll-vertical text-sm" style="color : green"></i>
-              </template>
-            </sidenav-item>
+          <template #icon>
+            <i
+              class="fa-solid fa-square-poll-vertical text-sm"
+              style="color: green"
+            ></i>
+          </template>
+        </sidenav-item>
       </li>
       <li class="nav-item">
         <sidenav-item
-                    :to="{ name: 'Historic' }"
-                    mini-icon="HA"
-                    text="Historique d'actions"
+          :to="{ name: 'Historic' }"
+          mini-icon="HA"
+          text="Historique d'actions"
         >
-              <template #icon>
-                <i class="fa-solid fa-clock-rotate-left text-sm" style="color : blue"></i>
-              </template>
-            </sidenav-item>
+          <template #icon>
+            <i
+              class="fa-solid fa-clock-rotate-left text-sm"
+              style="color: blue"
+            ></i>
+          </template>
+        </sidenav-item>
       </li>
       <li class="nav-item">
         <sidenav-item
-                    :to="{ name: 'ManageProfil' }"
-                    mini-icon="EP"
-                    text="Espace profil"
+          :to="{ name: 'ManageProfil' }"
+          mini-icon="EP"
+          text="Espace profil"
         >
-              <template #icon>
-                <i class="fa-solid fa-user text-sm" style="color : brown"></i>
-              </template>
-            </sidenav-item>
+          <template #icon>
+            <i class="fa-solid fa-user text-sm" style="color: brown"></i>
+          </template>
+        </sidenav-item>
       </li>
-<!--       <li class="nav-item">
+     
+
+      <!--       <li class="nav-item">
         <sidenav-collapse
           collapse-ref="dashboardsExamples"
           nav-text="Dashboards"
@@ -257,7 +269,7 @@
         ></h6>
       </li> -->
 
-     <!--  <li class="nav-item">
+      <!--  <li class="nav-item">
         <sidenav-collapse
           collapse-ref="pagesExamples"
           nav-text="Pages"
@@ -551,7 +563,7 @@
           DOCS
         </h6>
       </li> -->
-     <!--  <li class="nav-item">
+      <!--  <li class="nav-item">
         <sidenav-collapse
           collapse-ref="basicExamples"
           nav-text="Basic"
@@ -864,7 +876,7 @@
           </template>
         </sidenav-collapse>
       </li> -->
-     <!--  <li class="nav-item">
+      <!--  <li class="nav-item">
         <sidenav-collapse
           nav-text="Changelog"
           :collapse="false"
@@ -921,7 +933,7 @@ export default {
   components: {
     SidenavItem,
     SidenavCollapse,
-   /*  SidenavCard, */
+    /*  SidenavCard, */
     /* SidenavCollapseItem, */
   },
   methods: {
@@ -932,3 +944,14 @@ export default {
   },
 };
 </script>
+<style>
+.navbar-vertical .navbar-nav .nav-link .icon {
+  padding: 10px;
+  margin-left: -9px;
+}
+.navbar-vertical.navbar-expand-xs .navbar-nav .nav-link {
+  padding-top: 0.675rem !important;
+  padding-bottom: 0.675rem !important;
+  margin: 10px 0.5rem !important;
+}
+</style>
