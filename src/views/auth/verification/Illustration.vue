@@ -90,7 +90,7 @@
                 class="position-relative bg-warning h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 style="
                   background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/verification-ill.jpg');
-                  background-size: cover;
+                  background-size: inherit;
                 "
               >
                 <span class="mask bg-warning opacity-6"></span>

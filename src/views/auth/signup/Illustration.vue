@@ -91,7 +91,7 @@
                 class="position-relative bg-gradient-success h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 :style="{
     backgroundImage: 'url(' + require('@/assets/img/section-1.png') + ')',
-    backgroundSize: 'cover'
+    backgroundSize: 'inherit'
   }"
               >
                 <span class="mask bg-success opacity-4"></span>

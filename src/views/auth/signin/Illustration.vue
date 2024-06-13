@@ -86,7 +86,7 @@
                 :style="{
                   backgroundImage:
                     'url(' + require('@/assets/img/our-partner.png') + ')',
-                  backgroundSize: 'cover',
+                  backgroundSize: 'inherit',
                 }"
               >
                 <span class="mask bg-gradient-success opacity-6"></span>
