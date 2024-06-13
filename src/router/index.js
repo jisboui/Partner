@@ -51,7 +51,7 @@ import Error500 from "../views/auth/error/Error500.vue";
 import lockBasic from "../views/auth/lock/Basic.vue";
 import lockCover from "../views/auth/lock/Cover.vue";
 import lockIllustration from "../views/auth/lock/Illustration.vue"; */
-import store from '../store'; 
+import store from '../store';
 import Default from "../views/dashboards/Default.vue";
 import Illustration from "../views/auth/signin/Illustration.vue";
 import CampaignHistory from "../views/Campaign/CampaignHistory.vue";
@@ -75,546 +75,552 @@ import AdsRequest from "../views/EspaceAds/AdsRequest.vue";
 
 const routes = [
   {
+    path: "/",
+    name: "/",
+    redirect: "/authentication/signin/illustration",
+  },
+  {
     path: "/dashboards/dashboard-default",
     name: "Default",
     component: Default,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
+    //
     path: "/authentication/signin/illustration",
     name: "Signin Illustration",
     component: Illustration,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
- /*  {
-    path: "/dashboards/landing",
-    name: "Landing",
-    component: Landing,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/dashboards/automotive",
-    name: "Automotive",
-    component: Automotive,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/dashboards/smart-home",
-    name: "Smart Home",
-    component: SmartHome,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/dashboards/vr/vr-default",
-    name: "VR Default",
-    component: VRDefault,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/dashboards/vr/vr-info",
-    name: "VR Info",
-    component: VRInfo,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/dashboards/crm",
-    name: "CRM",
-    component: CRM,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/profile/overview",
-    name: "Profile Overview",
-    component: Overview,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/profile/teams",
-    name: "Teams",
-    component: Teams,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/profile/projects",
-    name: "All Projects",
-    component: Projects,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/projects/general",
-    name: "General",
-    component: General,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  
-  {
-    path: "/pages/projects/new-project",
-    name: "New Project",
-    component: NewProject,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/pricing-page",
-    name: "Pricing Page",
-    component: Pricing,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/rtl-page",
-    name: "RTL",
-    component: RTL,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/charts",
-    name: "Charts",
-    component: Charts,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/widgets",
-    name: "Widgets",
-    component: Widgets,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/sweet-alerts",
-    name: "Sweet Alerts",
-    component: SweetAlerts,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/notifications",
-    name: "Notifications",
-    component: Notifications,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/applications/kanban",
-    name: "Kanban",
-    component: Kanban,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/applications/wizard",
-    name: "Wizard",
-    component: Wizard,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/applications/data-tables",
-    name: "Data Tables",
-    component: DataTables,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/applications/calendar",
-    name: "Calendar",
-    component: Calendar,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/applications/analytics",
-    name: "Analytics",
-    component: Analytics,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/overview",
-    name: "Overview",
-    component: EcommerceOverview,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/products/new-product",
-    name: "New Product",
-    component: NewProduct,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/products/edit-product",
-    name: "Edit Product",
-    component: EditProduct,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/products/product-page",
-    name: "Product Page",
-    component: ProductPage,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/products/products-list",
-    name: "Products List",
-    component: ProductsList,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/Orders/order-details",
-    name: "Order Details",
-    component: OrderDetails,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/Orders/order-list",
-    name: "Order List",
-    component: OrderList,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/ecommerce/referral",
-    name: "Referral",
-    component: Referral,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/users/reports",
-    name: "Reports",
-    component: Reports,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/users/new-user",
-    name: "New User",
-    component: NewUser,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/account/settings",
-    name: "Settings",
-    component: Settings,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/account/billing",
-    name: "Billing",
-    component: Billing,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/account/invoice",
-    name: "Invoice",
-    component: Invoice,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/pages/account/Security",
-    name: "Security",
-    component: Security,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/signin/basic",
-    name: "Signin Basic",
-    component: Basic,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/signin/cover",
-    name: "Signin Cover",
-    component: Cover,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/reset/basic",
-    name: "Reset Basic",
-    component: ResetBasic,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/reset/cover",
-    name: "Reset Cover",
-    component: ResetCover,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/reset/illustration",
-    name: "Reset Illustration",
-    component: ResetIllustration,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/lock/basic",
-    name: "Lock Basic",
-    component: lockBasic,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/lock/cover",
-    name: "Lock Cover",
-    component: lockCover,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/lock/illustration",
-    name: "Lock Illustration",
-    component: lockIllustration,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/verification/basic",
-    name: "Verification Basic",
-    component: VerificationBasic,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/verification/cover",
-    name: "Verification Cover",
-    component: VerificationCover,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/verification/illustration",
-    name: "Verification Illustration",
-    component: VerificationIllustration,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/signup/basic",
-    name: "Signup Basic",
-    component: SignupBasic,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/signup/cover",
-    name: "Signup Cover",
-    component: SignupCover,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/signup/illustration",
-    name: "Signup Illustration",
-    component: SignupIllustration,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/error/error404",
-    name: "Error Error404",
-    component: Error404,
-  meta: {
-    requiresAuth: true
-  }
-  },
-  {
-    path: "/authentication/error/error500",
-    name: "Error Error500",
-    component: Error500,
-  meta: {
-    requiresAuth: true
-  }
-  }, */
+  /*  {
+     path: "/dashboards/landing",
+     name: "Landing",
+     component: Landing,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/dashboards/automotive",
+     name: "Automotive",
+     component: Automotive,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/dashboards/smart-home",
+     name: "Smart Home",
+     component: SmartHome,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/dashboards/vr/vr-default",
+     name: "VR Default",
+     component: VRDefault,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/dashboards/vr/vr-info",
+     name: "VR Info",
+     component: VRInfo,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/dashboards/crm",
+     name: "CRM",
+     component: CRM,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/profile/overview",
+     name: "Profile Overview",
+     component: Overview,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/profile/teams",
+     name: "Teams",
+     component: Teams,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/profile/projects",
+     name: "All Projects",
+     component: Projects,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/projects/general",
+     name: "General",
+     component: General,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   
+   {
+     path: "/pages/projects/new-project",
+     name: "New Project",
+     component: NewProject,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/pricing-page",
+     name: "Pricing Page",
+     component: Pricing,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/rtl-page",
+     name: "RTL",
+     component: RTL,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/charts",
+     name: "Charts",
+     component: Charts,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/widgets",
+     name: "Widgets",
+     component: Widgets,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/sweet-alerts",
+     name: "Sweet Alerts",
+     component: SweetAlerts,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/notifications",
+     name: "Notifications",
+     component: Notifications,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/applications/kanban",
+     name: "Kanban",
+     component: Kanban,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/applications/wizard",
+     name: "Wizard",
+     component: Wizard,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/applications/data-tables",
+     name: "Data Tables",
+     component: DataTables,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/applications/calendar",
+     name: "Calendar",
+     component: Calendar,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/applications/analytics",
+     name: "Analytics",
+     component: Analytics,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/overview",
+     name: "Overview",
+     component: EcommerceOverview,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/products/new-product",
+     name: "New Product",
+     component: NewProduct,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/products/edit-product",
+     name: "Edit Product",
+     component: EditProduct,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/products/product-page",
+     name: "Product Page",
+     component: ProductPage,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/products/products-list",
+     name: "Products List",
+     component: ProductsList,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/Orders/order-details",
+     name: "Order Details",
+     component: OrderDetails,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/Orders/order-list",
+     name: "Order List",
+     component: OrderList,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/ecommerce/referral",
+     name: "Referral",
+     component: Referral,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/users/reports",
+     name: "Reports",
+     component: Reports,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/users/new-user",
+     name: "New User",
+     component: NewUser,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/account/settings",
+     name: "Settings",
+     component: Settings,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/account/billing",
+     name: "Billing",
+     component: Billing,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/account/invoice",
+     name: "Invoice",
+     component: Invoice,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/pages/account/Security",
+     name: "Security",
+     component: Security,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/signin/basic",
+     name: "Signin Basic",
+     component: Basic,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/signin/cover",
+     name: "Signin Cover",
+     component: Cover,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/reset/basic",
+     name: "Reset Basic",
+     component: ResetBasic,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/reset/cover",
+     name: "Reset Cover",
+     component: ResetCover,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/reset/illustration",
+     name: "Reset Illustration",
+     component: ResetIllustration,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/lock/basic",
+     name: "Lock Basic",
+     component: lockBasic,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/lock/cover",
+     name: "Lock Cover",
+     component: lockCover,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/lock/illustration",
+     name: "Lock Illustration",
+     component: lockIllustration,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/verification/basic",
+     name: "Verification Basic",
+     component: VerificationBasic,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/verification/cover",
+     name: "Verification Cover",
+     component: VerificationCover,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/verification/illustration",
+     name: "Verification Illustration",
+     component: VerificationIllustration,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/signup/basic",
+     name: "Signup Basic",
+     component: SignupBasic,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/signup/cover",
+     name: "Signup Cover",
+     component: SignupCover,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/signup/illustration",
+     name: "Signup Illustration",
+     component: SignupIllustration,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/error/error404",
+     name: "Error Error404",
+     component: Error404,
+   meta: {
+     requiresAuth: true
+   }
+   },
+   {
+     path: "/authentication/error/error500",
+     name: "Error Error500",
+     component: Error500,
+   meta: {
+     requiresAuth: true
+   }
+   }, */
   /** route de company */
   {
     path: "/campaign/add-campaign",
-    name: "AddCampaign", 
+    name: "AddCampaign",
     component: AddCampaign,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/campaign/campaign-history",
-    name: "CampaignHistory", 
+    name: "CampaignHistory",
     component: CampaignHistory,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/manageprofil/manage-profil",
-    name: "ManageProfil", 
+    name: "ManageProfil",
     component: ManageProfil,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/produits/product-list",
-    name: "ProductList", 
+    name: "ProductList",
     component: ProductList,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/produits/new-prod",
-    name: "NewProd", 
+    name: "NewProd",
     component: NewProd,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/produits/edit-prod",
-    name: "EditProd", 
+    name: "EditProd",
     component: EditProd,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/espaceads/ajouter-ad",
-    name: "NewAd", 
+    name: "NewAd",
     component: NewAd,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/espaceads/ads-list",
-    name: "AdsList", 
+    name: "AdsList",
     component: AdsList,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/espaceads/edit-ad",
-    name: "EditAd", 
+    name: "EditAd",
     component: EditAd,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/survey/sondage",
-    name: "Sondage", 
+    name: "Sondage",
     component: Sondage,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/DiscountVoucher/dv-Per-Campaign",
-    name: "dvPerCampaign", 
+    name: "dvPerCampaign",
     component: dvPerCampaign,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/DiscountVoucher/dv-details",
-    name: "dvDetails", 
+    name: "dvDetails",
     component: dvDetails,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/DiscountVoucher/dv-validation",
-    name: "dvValidation", 
+    name: "dvValidation",
     component: dvValidation,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/campaign/edit-campaign",
-    name: "editCampaign", 
+    name: "editCampaign",
     component: editCampaign,
     meta: {
       requiresAuth: true
@@ -622,35 +628,35 @@ const routes = [
   },
   {
     path: "/DiscountVoucher/dv-list",
-    name: "dvList", 
+    name: "dvList",
     component: dvList,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/Historic/historic",
-    name: "Historic", 
+    name: "Historic",
     component: Historic,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/Request/request",
-    name: "Request", 
+    name: "Request",
     component: Request,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/AdsRequest/adsrequest",
-    name: "AdsRequest", 
+    name: "AdsRequest",
     component: AdsRequest,
-  meta: {
-    requiresAuth: true
-  }
+    meta: {
+      requiresAuth: true
+    }
   },
 
 
