@@ -109,6 +109,7 @@ export default {
         this.prod.itemImage = this.$store.state.fileUploadNS.fileUpload;
         this.$store.dispatch('prodNS/createProduct', this.prod)
         this.$router.push("/produits/product-list");
+        this.$store.dispatch('prodNS/selectProduct')
       }
     },
     prevStep() {
